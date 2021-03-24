@@ -1,0 +1,106 @@
+{
+    "folders": [
+        {
+            "path": "IFCDissertationCode/src/"
+        }
+    ],
+    "settings": {
+        "java.dependency.packagePresentation": "hierarchical",
+        "java.project.referencedLibraries": [
+            "/Users/GripGlebe/OneDrive/MyWork/IFCDissertation/src/apache-log4j-2.14.0-bin/log4j-api-2.14.0.jar",
+            "/Users/GripGlebe/OneDrive/MyWork/IFCDissertation/src/apache-log4j-2.14.0-bin/log4j-core-2.14.0.jar",
+            "/Users/GripGlebe/.jdeveloper/guava-30.1-jre.jar",
+            "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCDissertationCode/apache-log4j-2.14.0-bin/log4j-1.2-api-2.14.0.jar",
+            "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCDissertationCode/apache-log4j-2.14.0-bin/log4j-core-2.14.0.jar"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+        
+            {
+                "type": "java",
+                "name": "Launch Current File",
+                "request": "launch",
+                "mainClass": "${file}"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCDissertationTestMain",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.IFCDissertationTestMain",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCPolicy",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.IFCPolicy",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCRunnableObject",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.IFCRunnableObject",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch OSCommands",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.OSCommands",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch FileCopyException",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.exceptions.FileCopyException",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCLoggerException",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.exceptions.IFCLoggerException",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCPropertiesException",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.exceptions.IFCPropertiesException",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch PropertyFileReaderException",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.exceptions.PropertyFileReaderException",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch RestructureHTMLTextException",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.exceptions.RestructureHTMLTextException",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch GetCommandLineArguments",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.utilities.GetCommandLineArguments",
+                "projectName": "src_75f283ea"
+            },
+            {
+                "type": "java",
+                "name": "Launch IFCLogger",
+                "request": "launch",
+                "mainClass": "org.ifcparaclete.utilities.IFCLogger",
+                "projectName": "src_75f283ea"
+            }
+        ]
+    }
+}
