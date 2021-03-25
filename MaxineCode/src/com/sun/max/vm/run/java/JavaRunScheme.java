@@ -238,6 +238,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
      */
     @Override
     public void initialize(MaxineVM.Phase phase) {
+        
         switch (phase) {
             case BOOTSTRAPPING: {
                 if (MaxineVM.isHosted()) {

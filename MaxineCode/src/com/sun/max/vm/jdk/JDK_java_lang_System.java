@@ -456,6 +456,11 @@ public final class JDK_java_lang_System {
      * @return a string representing the path of the Java home
      */
     private static String findJavaHome() {
+        thisIFC.ifcCheckMayOp(Thread.currentThread()
+                                    .getStackTrace()[2]
+                                    .getClassName(), org.ifcparaclete
+                                                        .IFCStatics
+                                                        .IFC_OP_ACCESS);
         switch (platform().os) {
         case MAXVE:
         case SOLARIS:
