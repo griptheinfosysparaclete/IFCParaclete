@@ -87,6 +87,7 @@
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
+                  <string v="-classes/org/ifcparaclete/"/>
                   <string v="+**"/>
                </list>
                <list n="url-path">
