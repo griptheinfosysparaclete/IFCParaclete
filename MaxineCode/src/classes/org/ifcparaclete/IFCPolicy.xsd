@@ -1,0 +1,99 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+            targetNamespace="http://ifcparaclete.org" xmlns="http://ifcparaclete.org"
+            xmlns:ifc="http://ifcparaclete.org">
+    <xsd:element name="IFCPolicy">
+        <xsd:annotation>
+            <xsd:documentation>Schema for Information Flow Control Policies</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="RunnableObject" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Name">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="^[A-Za-z0-9\._]+"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="ID">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="[0-9]+"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="SecurityLevel">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="F"/>
+                                        <xsd:enumeration value="H"/>
+                                        <xsd:enumeration value="P"/>
+                                        <xsd:enumeration value="U"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="Category">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="A"/>
+                                        <xsd:enumeration value="S"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="Type">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="I"/>
+                                        <xsd:enumeration value="T"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="ActiveIFOPS">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:enumeration value="e"/>
+                                                    <xsd:enumeration value="o"/>
+                                                    <xsd:enumeration value="c"/>
+                                                    <xsd:enumeration value="l"/>
+                                                    <xsd:enumeration value="w"/>
+                                                    <xsd:enumeration value="r"/>
+                                                    <xsd:enumeration value="d"/>
+                                                    <xsd:enumeration value="f"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="PassiveIFOPS">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:string">
+                                                    <xsd:enumeration value="e"/>
+                                                    <xsd:enumeration value="o"/>
+                                                    <xsd:enumeration value="c"/>
+                                                    <xsd:enumeration value="l"/>
+                                                    <xsd:enumeration value="w"/>
+                                                    <xsd:enumeration value="r"/>
+                                                    <xsd:enumeration value="d"/>
+                                                    <xsd:enumeration value="f"/>
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

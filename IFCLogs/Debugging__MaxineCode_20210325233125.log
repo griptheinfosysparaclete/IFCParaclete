@@ -1,0 +1,15 @@
+/Users/GripGlebe/jdeveloper/mywork>
+/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java -server -agentlib:jdwp=transport=dt_socket,server=y,address=62244 -Dcom.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize=true -classpath "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/.adf:/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/classes:/Users/GripGlebe/.jdeveloper/guava-30.1-jre.jar:/Users/GripGlebe/.jdeveloper/asm-6.0-maxine.jar:/Users/GripGlebe/.jdeveloper/asm-util-6.0-maxine.jar:/Users/GripGlebe/.jdeveloper/junit-4.12.jar:/Users/GripGlebe/.jdeveloper/okra-1.9.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.9.1-bin/log4j-api-2.9.1.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.9.1-bin/log4j-core-2.9.1.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.9.1-bin/log4j-api-2.9.1-sources.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.9.1-bin/log4j-core-2.9.1-sources.jar:/Users/GripGlebe/Projects/JavaJDK/src copy/org:/Users/GripGlebe/Projects/JavaJDK/src copy/org.jar" -Djavax.net.ssl.trustStore=/var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/trustStore1326675164176643922.jks org.ifcparaclete.IFCPolicy
+Listening for transport dt_socket at address: 62244
+Debugger connected to local process.
+IFCName == null
+ifcID == null
+ifcSecurityLevel == null
+ifcCategory == null
+ifcType == null
+{}{}
+Source breakpoint: IFCRunnableObject.java:65
+Source breakpoint: IFCRunnableObject.java:69
+Exception breakpoint: IFCRunnableObject.java:70, java.lang.NullPointerException, 
+Process exited with exit code 0.
+Debugger disconnected from local process.

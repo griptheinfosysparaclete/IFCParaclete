@@ -7,7 +7,9 @@ import java.util.Map;
 
 public interface IFCStatics {
 
-    static public final String IFC_DEFAULT_POLICY_FILE = "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCDissertationCode/src/org/ifcparaclete/IFCPolicy.xml";
+    public static final String IFC_DEFAULT_POLICY_FILE =
+        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCPolicy.xml";
+    public static final String IFC_DEFAULT_APPLICATION = "test.output.HelloWorld";
     static final String IFC_RUNNABLE_OBJECT = "ifc:RunnableObject";
     static final String IFC_NAME = "ifc:Name";
     static final String IFC_ID = "ifc:ID";

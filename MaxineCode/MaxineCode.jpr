@@ -87,7 +87,103 @@
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
-                  <string v="-classes/org/ifcparaclete/"/>
+                  <string v="-com/oracle/graal/word/"/>
+                  <string v="-com/oracle/graal/visualizer/util/"/>
+                  <string v="-com/oracle/graal/visualizer/snapshots/"/>
+                  <string v="-com/oracle/graal/visualizer/sharedactions/"/>
+                  <string v="-com/oracle/graal/visualizer/outline/"/>
+                  <string v="-com/oracle/graal/visualizer/logviewer/"/>
+                  <string v="-com/oracle/graal/visualizer/editor/"/>
+                  <string v="-com/oracle/graal/virtual/phases/ea/"/>
+                  <string v="-com/oracle/graal/virtual/nodes/"/>
+                  <string v="-com/oracle/graal/truffle/"/>
+                  <string v="-com/oracle/graal/test/"/>
+                  <string v="-com/oracle/graal/sparc/"/>
+                  <string v="-com/oracle/graal/service/processor/"/>
+                  <string v="-com/oracle/graal/replacements/"/>
+                  <string v="-com/oracle/graal/ptx/"/>
+                  <string v="-com/oracle/graal/printer/"/>
+                  <string v="-com/oracle/graal/phases/"/>
+                  <string v="-com/oracle/graal/options/"/>
+                  <string v="-com/oracle/graal/nodes/"/>
+                  <string v="-com/oracle/graal/loop/"/>
+                  <string v="-com/oracle/graal/lir/"/>
+                  <string v="-com/oracle/graal/jtt/"/>
+                  <string v="-com/oracle/graal/java/"/>
+                  <string v="-com/oracle/graal/hsail/"/>
+                  <string v="-com/oracle/graal/hotspot/"/>
+                  <string v="-com/oracle/graal/graph/"/>
+                  <string v="-com/oracle/graal/debug/"/>
+                  <string v="-com/oracle/graal/compiler/"/>
+                  <string v="-com/oracle/graal/bytecode/"/>
+                  <string v="-com/oracle/graal/asm/"/>
+                  <string v="-com/oracle/graal/api/test/"/>
+                  <string v="-com/oracle/graal/api/runtime/"/>
+                  <string v="-com/oracle/graal/api/replacements/"/>
+                  <string v="-com/oracle/graal/api/meta/"/>
+                  <string v="-com/oracle/graal/api/code/"/>
+                  <string v="-com/oracle/graal/amd64/"/>
+                  <string v="-com/oracle/graal/alloc/"/>
+                  <string v="-8001183/"/>
+                  <string v="-8000311/"/>
+                  <string v="-7200264/"/>
+                  <string v="-7192963/"/>
+                  <string v="-7170638/"/>
+                  <string v="-7168848/"/>
+                  <string v="-7119644/"/>
+                  <string v="-7107135/"/>
+                  <string v="-7072527/"/>
+                  <string v="-7029152/"/>
+                  <string v="-7017746/"/>
+                  <string v="-6973329/"/>
+                  <string v="-6958485/"/>
+                  <string v="-6942326/"/>
+                  <string v="-6941923/"/>
+                  <string v="-6935535/"/>
+                  <string v="-6912517/"/>
+                  <string v="-6910618/"/>
+                  <string v="-6910605/"/>
+                  <string v="-6910484/"/>
+                  <string v="-6901572/"/>
+                  <string v="-6896727/"/>
+                  <string v="-6895383/"/>
+                  <string v="-6892265/"/>
+                  <string v="-6877254/"/>
+                  <string v="-6875866/"/>
+                  <string v="-6866651/"/>
+                  <string v="-6865031/"/>
+                  <string v="-6863420/"/>
+                  <string v="-6860469/"/>
+                  <string v="-6855164/"/>
+                  <string v="-6851282/"/>
+                  <string v="-6849574/"/>
+                  <string v="-6845368/"/>
+                  <string v="-6843752/"/>
+                  <string v="-6837094/"/>
+                  <string v="-6833129/"/>
+                  <string v="-6832293/"/>
+                  <string v="-6826736/"/>
+                  <string v="-6823453/"/>
+                  <string v="-6799693/"/>
+                  <string v="-6795161/"/>
+                  <string v="-6778657/"/>
+                  <string v="-6775880/"/>
+                  <string v="-6741738/"/>
+                  <string v="-6726999/"/>
+                  <string v="-6724218/"/>
+                  <string v="-6716441/"/>
+                  <string v="-6714694/"/>
+                  <string v="-6711117/"/>
+                  <string v="-6711100/"/>
+                  <string v="-6695810/"/>
+                  <string v="-6689060/"/>
+                  <string v="-6663848/"/>
+                  <string v="-6661247/"/>
+                  <string v="-6659207/"/>
+                  <string v="-6646019/"/>
+                  <string v="-6603011/"/>
+                  <string v="-6581734/"/>
+                  <string v="-6539464/"/>
                   <string v="+**"/>
                </list>
                <list n="url-path">
@@ -107,6 +203,24 @@
          <url n="content-folder-url" path="src/"/>
          <list n="url-path"/>
       </hash>
+   </hash>
+   <hash n="oracle.jdeveloper.runner.RunConfigurations">
+      <hash n="runConfigurationDefinitions">
+         <hash n="IFCCodeConfiguration">
+            <value n="compileBeforeRun" v="false"/>
+            <value n="custom" v="false"/>
+            <value n="name" v="IFCCodeConfiguration"/>
+            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
+               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
+            </hash>
+            <url n="runDirectoryURL" path="../../"/>
+            <url n="targetURL" path="src/org/ifcparaclete/IFCPolicy.java"/>
+         </hash>
+      </hash>
+      <list n="runConfigurationList">
+         <string v="Default"/>
+         <string v="IFCCodeConfiguration"/>
+      </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
@@ -144,6 +258,10 @@
          </hash>
          <hash>
             <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Org.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -230,6 +348,15 @@
                <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
                <value n="locked" v="true"/>
             </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../Projects/JavaJDK/src copy/org.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Org.jar"/>
+               <value n="id" v="Org.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
          </list>
       </hash>
       <hash n="jdkReference">
@@ -272,6 +399,10 @@
          </hash>
          <hash>
             <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Org.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

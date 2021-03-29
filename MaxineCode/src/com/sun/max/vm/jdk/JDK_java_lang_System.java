@@ -74,7 +74,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import static org.ifcparaclete.IFC.thisIFC;
+import static org.ifcparaclete.IFCEnforcer.thisIFC;
+
+import org.ifcparaclete.IFCStatics;
 
 import sun.misc.Launcher;
 import sun.misc.Perf;
@@ -118,9 +120,7 @@ public final class JDK_java_lang_System {
     private static void setIn0(InputStream is) {
         thisIFC.ifcCheckMayOp(Thread.currentThread()
                                     .getStackTrace()[2]
-                                    .getClassName(), org.ifcparaclete
-                                                        .IFCStatics
-                                                        .IFC_OP_OPEN);
+                                    .getClassName(), IFCStatics.IFC_OP_OPEN);
         in = is;
     }
 
@@ -135,9 +135,7 @@ public final class JDK_java_lang_System {
 
         thisIFC.ifcCheckMayOp(Thread.currentThread()
                                     .getStackTrace()[2]
-                                    .getClassName(), org.ifcparaclete
-                                                        .IFCStatics
-                                                        .IFC_OP_OPEN);
+                                    .getClassName(), IFCStatics.IFC_OP_OPEN);
         out = ps;
     }
 
@@ -458,9 +456,7 @@ public final class JDK_java_lang_System {
     private static String findJavaHome() {
         thisIFC.ifcCheckMayOp(Thread.currentThread()
                                     .getStackTrace()[2]
-                                    .getClassName(), org.ifcparaclete
-                                                        .IFCStatics
-                                                        .IFC_OP_ACCESS);
+                                    .getClassName(), IFCStatics.IFC_OP_ACCESS);
         switch (platform().os) {
         case MAXVE:
         case SOLARIS:

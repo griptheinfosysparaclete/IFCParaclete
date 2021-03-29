@@ -3,6 +3,8 @@ package org.ifcparaclete;
 import java.util.HashMap;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 class IFCRunnableObject implements IFCStatics {
 
@@ -41,7 +43,38 @@ class IFCRunnableObject implements IFCStatics {
         ifcType = ifcRunnableObjectElement.getElementsByTagName(IFC_TYPE)
                                           .item(0)
                                           .getTextContent();
+        ifcActiveIFOPS = initIFCOps(ifcRunnableObjectElement.getElementsByTagName(IFC_ACTIVE_IFOPS));
+        ifcPassiveIFOPS = initIFCOps(ifcRunnableObjectElement.getElementsByTagName(IFC_PASSIVE_IFOPS));
         System.out.println(this.toString());
+    }
+
+    private HashMap initIFCOps(NodeList ifcOpsList) {
+
+        HashMap<String, String> ifcOpsMap;
+        Node nNode;
+        NodeList nList;
+        NodeList opsList;
+        Element nElement;
+        String ifcOp;
+        nList = ifcOpsList;
+        ifcOpsMap = new HashMap<String, String>();
+        for (int temp = 0; temp < nList.getLength(); temp++) {
+
+            nNode = nList.item(temp);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                nElement = (Element) nNode;
+                opsList = nElement.getElementsByTagName(IFC_OP);
+                if (opsList != null) {
+                    if (opsList.item(0) != null) {
+                        ifcOp = opsList.item(0).getTextContent();
+                        ifcOpsMap.put(ifcOp, ifcOp);
+                    }
+                }
+            }
+        }
+        return ifcOpsMap;
     }
 
     protected String getName() {

@@ -84,7 +84,8 @@ import java.util.List;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import org.ifcparaclete.IFC;
+import org.ifcparaclete.IFCEnforcer;
+import org.ifcparaclete.IFCStatics;
 
 import sun.misc.Launcher;
 import sun.misc.Signal;
@@ -128,7 +129,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
     private static String mainClassName;
     protected static String[] args = new String[2];
 
-    protected IFC ifcEnforcer = null;
+    protected IFCEnforcer ifcEnforcer = null;
 
     @HOSTED_ONLY
     public JavaRunScheme() {
@@ -378,12 +379,9 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             vmConfig().initializeSchemes(MaxineVM.Phase.RUNNING);
             vm.phase = Phase.RUNNING;
             mainClassName = getMainClassName();
-            args[0] = "/Users/GripGlebe/jdeveloper/mywork/IFCDissertation";
-            args[1] = "false";
-            ifcEnforcer = new IFC(args);
-            ifcEnforcer.ifcCheckMayBeOped(mainClassName, org.ifcparaclete
-                                                        .IFCStatics
-                                                        .IFC_OP_LOAD);
+     
+            ifcEnforcer = new IFCEnforcer();
+            ifcEnforcer.ifcCheckMayBeOped(mainClassName, IFCStatics.IFC_OP_LOAD);
             VMTI.handler().vmInitialized();
             VMTI.handler().threadStart(VmThread.current());
             // load -javaagent agents

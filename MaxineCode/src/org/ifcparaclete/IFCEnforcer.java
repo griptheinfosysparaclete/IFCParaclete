@@ -3,34 +3,43 @@ package org.ifcparaclete;
 import java.util.HashMap;
 
 
-public class IFC implements IFCStatics {
+public class IFCEnforcer implements IFCStatics {
 
     
     
     @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
-    public static IFC thisIFC = new IFC();
+    public static IFCEnforcer thisIFC = new IFCEnforcer();
     private       HashMap[] runnableObjectsArray = null;
+    private       IFCRunnableObject ifcRO = null;
+    private       IFCRunnableObject mainApplication = null;
     
-    public IFC() {
+    public IFCEnforcer() {
         super();
-        runnableObjectsArray = IFCPolicy.loadIFCPolicy(org.ifcparaclete
-                                   .IFCStatics
-                                   .IFC_DEFAULT_POLICY_FILE);
+        runnableObjectsArray = IFCPolicy.loadIFCPolicy(IFCStatics.IFC_DEFAULT_POLICY_FILE);
+        
     }
 
-    public IFC(String[] argsIn) {
+    /**
+     * @param argsIn
+     */
+    public IFCEnforcer(String[] argsIn) {
         super();
 
         runnableObjectsArray = IFCPolicy.loadIFCPolicy(argsIn[0]);
     }
-    
-    
+
+
+    /**
+     * @param className
+     * @param ifcOp
+     * @return
+     */
     public boolean ifcCheckMayOp(String className, String ifcOp) {
   
       boolean mayOp = false;
      
       if (runnableObjectsArray[0].containsKey(className)) {
-          
+          ifcRO = (IFCRunnableObject) runnableObjectsArray[1].get(className);
           if (((IFCRunnableObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS().containsValue(ifcOp)) {
               mayOp = true;
           }
@@ -39,6 +48,11 @@ public class IFC implements IFCStatics {
       return mayOp;
     }
 
+    /**
+     * @param className
+     * @param ifcOp
+     * @return
+     */
     public boolean ifcCheckMayBeOped(String className, String ifcOp) {
         boolean mayBeOped = false;
         if (runnableObjectsArray[0].containsKey(className)) {
@@ -51,8 +65,12 @@ public class IFC implements IFCStatics {
         return mayBeOped;
     }
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
-        
-        IFC iFC = new IFC(args);
+
+        @SuppressWarnings("unused")
+        IFCEnforcer iFC = new IFCEnforcer(args);
     }
 }

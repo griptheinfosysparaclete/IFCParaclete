@@ -41,7 +41,8 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ifcparaclete.IFC;
+import org.ifcparaclete.IFCEnforcer;
+import org.ifcparaclete.IFCStatics;
 
 
 /**
@@ -54,7 +55,7 @@ public abstract class HostedClassLoader extends ClassLoader {
     protected Classpath classpath;
     protected static String[] args = new String[2];
 
-    protected IFC ifcEnforcer = null;
+    protected IFCEnforcer ifcEnforcer = null;
     protected boolean ifcBuildingImage = false;
     Throwable ifcThrowable = new Throwable();
 
@@ -70,7 +71,7 @@ public abstract class HostedClassLoader extends ClassLoader {
         args[1] = "true";
         ifcBuildingImage = true;
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFC(args);
+        ifcEnforcer = new IFCEnforcer(args);
     }
 
     protected HostedClassLoader(ClassLoader parent) {
@@ -82,7 +83,7 @@ public abstract class HostedClassLoader extends ClassLoader {
             args[1] = "false";
         }
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFC(args);
+        ifcEnforcer = new IFCEnforcer(args);
     }
 
     /**
@@ -268,9 +269,7 @@ public abstract class HostedClassLoader extends ClassLoader {
     protected synchronized Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
 
         if (!ifcBuildingImage) {
-            ifcEnforcer.ifcCheckMayBeOped(name, org.ifcparaclete
-                                                   .IFCStatics
-                                                   .IFC_OP_LOAD);
+            ifcEnforcer.ifcCheckMayBeOped(name, IFCStatics.IFC_OP_LOAD);
         }
 
         Class javaType = null;
