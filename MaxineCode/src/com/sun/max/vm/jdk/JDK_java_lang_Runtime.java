@@ -21,13 +21,10 @@
 package com.sun.max.vm.jdk;
 
 import com.sun.max.annotate.ALIAS;
-import com.sun.max.annotate.INTRINSIC;
 import com.sun.max.annotate.METHOD_SUBSTITUTIONS;
 import com.sun.max.annotate.SUBSTITUTE;
-import com.sun.max.vm.actor.holder.ClassActor;
 import com.sun.max.vm.heap.Heap;
 import com.sun.max.vm.heap.HeapScheme.GCRequest;
-import static com.sun.max.vm.intrinsics.MaxineIntrinsicIDs.UNSAFE_CAST;
 import com.sun.max.vm.profilers.tracing.numa.NUMAProfiler;
 
 import java.io.File;
@@ -384,39 +381,12 @@ public final class JDK_java_lang_Runtime {
     @SuppressWarnings("oracle.jdeveloper.java.tag-invalid-see-reference")
 
 
-    final private static class ProcessBuilderAlias {
-        
-        final ProcessBuilder pb =
-            (ProcessBuilder) Heap.createTuple(ClassActor.fromJava(ProcessBuilder.class).dynamicHub());
-        private ProcessBuilder thisPB = pb;
-
-        @ALIAS(declaringClass = ProcessBuilder.class, name = "<environment>")
-        private native ProcessBuilder environment(String[] envp);
-
-
-        @INTRINSIC(UNSAFE_CAST)
-        native static ProcessBuilderAlias asThis(ProcessBuilder pb);
-
-        public static Process createProcess(String[] cmdarray, String[] envp, File dir) throws IOException {
-            final ProcessBuilder thisPB = new ProcessBuilder(cmdarray);
-
-
-            ProcessBuilderAlias thisProcessBuilder = asThis(thisPB);
-
-            Process thisProcess = thisProcessBuilder.environment(envp)
-                                                    .directory(dir)
-                                                    .start();
-            return thisProcess;
-        }
-    }  
-
-
     @SUBSTITUTE
-    @SuppressWarnings("oracle.jdeveloper.java.semantic-warning")
     public Process exec(String[] cmdarray, String[] envp, File dir) throws IOException {
-      //  IFC.thisIFC.ifcCheckMayOp("java.lang.Runtime", org.ifcparaclete.IFCStatics.IFC_OP_EXECUTE);
-      
-         return ProcessBuilderAlias.createProcess(cmdarray, envp, dir);
+        //  IFC.thisIFC.ifcCheckMayOp("java.lang.Runtime", org.ifcparaclete.IFCStatics.IFC_OP_EXECUTE);
+
+        return JDK_java_lang_ProcessBuilder.createProcessBuilder(cmdarray, envp, dir);
+
     }
 
     /**

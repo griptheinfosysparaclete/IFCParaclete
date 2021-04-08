@@ -82,11 +82,73 @@
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
       <value n="webIANAEncoding" v="UTF-8"/>
    </hash>
+   <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
+      <hash n="profileDefinitions">
+         <hash n="IFC">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="org.ifcparaclete.IFCDissertationTestMain"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="org/"/>
+                              <value n="type" v="0"/>
+                           </hash>
+                           <hash>
+                              <value n="pattern" v="**"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/IFC.jar"/>
+            <hash n="libraryDependencies">
+               <list n="unselectedLibraries">
+                  <string v="Guava-30.1-jre.jar"/>
+                  <string v="Asm-6.0-maxine.jar"/>
+                  <string v="Asm-util-6.0-maxine.jar"/>
+                  <string v="Junit-4.12.jar"/>
+                  <string v="Okra-1.9.jar"/>
+                  <string v="Org.jar"/>
+                  <string v="Log4j-api-2.14.1-sources.jar"/>
+                  <string v="Log4j-core-2.14.1-sources.jar"/>
+                  <string v="Log4j-iostreams-2.14.1.jar"/>
+               </list>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
+            <value n="profileName" v="IFC"/>
+         </hash>
+      </hash>
+      <list n="profileList">
+         <string v="IFC"/>
+      </list>
+   </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
+                  <string v="-savedDeps/JavaProject/"/>
+                  <string v="-savedDeps/JARDistribution/"/>
+                  <string v="-org/ifcparaclete/utilities/IFCFileManager.java"/>
+                  <string v="-org/ifcparaclete/utilities/IFCFileAppender.java"/>
                   <string v="-com/oracle/graal/word/"/>
                   <string v="-com/oracle/graal/visualizer/util/"/>
                   <string v="-com/oracle/graal/visualizer/snapshots/"/>
@@ -206,6 +268,29 @@
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">
       <hash n="runConfigurationDefinitions">
+         <hash n="Copy of HelloWorldConfiguration">
+            <value n="compileBeforeRun" v="false"/>
+            <value n="custom" v="false"/>
+            <value n="name" v="Copy of HelloWorldConfiguration"/>
+            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
+               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
+            </hash>
+            <value n="programArguments" v="MAXINE_HOME=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine MX_HOME=/Users/GripGlebe/Projects/MaxineProjectNewCode/mx WORKDIR=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src MAXINE_LOG_FILE=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine/maxine.log MAXINE_TRACE_FILE=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine/maxine.trace HISTCONTROL=ignoreboth:erasedups PATH_TO_CANVAS=/Users/GripGlebe/Projects/RubyProjects/canvas"/>
+            <value n="runActiveFile" v="false"/>
+            <url n="runDirectoryURL" path="../../"/>
+            <url n="targetURL" path="src/test/output/TestAliasClass.java"/>
+         </hash>
+         <hash n="HelloWorldConfiguration">
+            <value n="compileBeforeRun" v="false"/>
+            <value n="custom" v="false"/>
+            <value n="name" v="HelloWorldConfiguration"/>
+            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
+               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
+            </hash>
+            <value n="runActiveFile" v="false"/>
+            <url n="runDirectoryURL" path="../../"/>
+            <url n="targetURL" path="src/test/output/HelloWorld.java"/>
+         </hash>
          <hash n="IFCCodeConfiguration">
             <value n="compileBeforeRun" v="false"/>
             <value n="custom" v="false"/>
@@ -218,7 +303,8 @@
          </hash>
       </hash>
       <list n="runConfigurationList">
-         <string v="Default"/>
+         <string v="Copy of HelloWorldConfiguration"/>
+         <string v="HelloWorldConfiguration"/>
          <string v="IFCCodeConfiguration"/>
       </list>
    </hash>
@@ -245,23 +331,27 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Log4j-api-2.9.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.9.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.9.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
             <value n="id" v="Org.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-api-2.14.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-core-2.14.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -314,47 +404,56 @@
             </hash>
             <hash>
                <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.9.1-bin/log4j-api-2.9.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-api-2.9.1.jar"/>
-               <value n="id" v="Log4j-api-2.9.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.9.1-bin/log4j-core-2.9.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-core-2.9.1.jar"/>
-               <value n="id" v="Log4j-core-2.9.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.9.1-bin/log4j-api-2.9.1-sources.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-api-2.9.1-sources.jar"/>
-               <value n="id" v="Log4j-api-2.9.1-sources.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.9.1-bin/log4j-core-2.9.1-sources.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-core-2.9.1-sources.jar"/>
-               <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
                   <url path="../../../../Projects/JavaJDK/src copy/org.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="Org.jar"/>
                <value n="id" v="Org.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-api-2.14.1-sources.jar"/>
+               <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-api-2.14.1.jar"/>
+               <value n="id" v="Log4j-api-2.14.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1-sources.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-core-2.14.1-sources.jar"/>
+               <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-core-2.14.1.jar"/>
+               <value n="id" v="Log4j-core-2.14.1.jar"/>
+               <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-iostreams-2.14.1.jar" jar-entry=""/>
+               </list>
+               <value n="deployedByDefault" v="true"/>
+               <value n="description" v="Log4j-iostreams-2.14.1.jar"/>
+               <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
                <value n="locked" v="true"/>
             </hash>
          </list>
@@ -386,28 +485,35 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Log4j-api-2.9.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.9.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.9.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.9.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
             <value n="id" v="Org.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-api-2.14.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-core-2.14.1.jar"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
       <url n="outputDirectory" path="classes/"/>
+   </hash>
+   <hash n="ResourceBundleOptions">
+      <list n="RegisteredResourceBundles"/>
    </hash>
 </jpr:project>

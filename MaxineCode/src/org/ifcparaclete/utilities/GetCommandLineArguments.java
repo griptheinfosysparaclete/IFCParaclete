@@ -2,10 +2,10 @@ package org.ifcparaclete.utilities;
 
 import java.util.HashMap;
 
-import org.apache.logging.log4j.Level;
+import org.ifcparaclete.IFCStatics;
 
 public class GetCommandLineArguments {
-    private static IFCLogger ifcLogger = null;
+    private static IFCLogManager ifcLogManager;
     private String commandLineArgs[] = null;
     private HashMap argsValueMap = null;
 
@@ -13,11 +13,11 @@ public class GetCommandLineArguments {
         super();
     }
 
-    public GetCommandLineArguments(String[] args, IFCLogger ifclArg) {
+    public GetCommandLineArguments(String[] args, IFCLogManager ifcLogManagerArg) {
         super();
         commandLineArgs = args;
         argsValueMap = getArgsValues();
-        ifcLogger = ifclArg;
+        ifcLogManager = ifcLogManagerArg;
     }
 
     public Object getArgValue(String argName) {
@@ -59,13 +59,13 @@ public class GetCommandLineArguments {
             parsedArg = parseArg(commandLineArgs[i]);
             msg = "commandLineArgs[" + i + "] == '" + commandLineArgs[i] + "'\n";
             System.out.print(msg);
-            ifcLogger.putLogMsg(className, msg);
+            ifcLogManager.putLogMsg(className, msg);
             msg = "parsedArg Name  == '" + parsedArg[0] + "'\n";
             System.out.print(msg);
-            ifcLogger.putLogMsg(className, msg);
+            ifcLogManager.putLogMsg(className, msg);
             msg = "parsedArg Value == '" + parsedArg[1] + "'\n";
             System.out.print(msg);
-            ifcLogger.putLogMsg(className, msg);
+            ifcLogManager.putLogMsg(className, msg);
         }
     }
 
@@ -81,14 +81,15 @@ public class GetCommandLineArguments {
 
     public static void main(String[] args) {
         String className = GetCommandLineArguments.class.getName();
-        String logFileName = "c:\\" + className + ".html";
+        
         GetCommandLineArguments getCommandLineArguments = null;
-        IFCLogger ifcLogger = new IFCLogger();
+        IFCLogManager ifcLogManager = new IFCLogManager(IFCStatics.IFC_DEFAULT_LOG_FILE);
+        String ifcClassName = ifcLogManager.getClass().getName();
 
-        ifcLogger.createActiveLogger(className, logFileName, Level.ALL);
+        ifcLogManager.getIFCLogger(ifcClassName);
 
         if (args.length > 0) {
-            getCommandLineArguments = new GetCommandLineArguments(args, ifcLogger);
+            getCommandLineArguments = new GetCommandLineArguments(args, ifcLogManager);
             getCommandLineArguments.runTest();
         } else {
             usage();

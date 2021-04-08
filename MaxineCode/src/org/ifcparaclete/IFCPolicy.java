@@ -22,7 +22,7 @@ public class IFCPolicy implements IFCStatics {
     private static HashMap ifcRunnableObjects = new HashMap();
     private static HashMap ifcRunnableObjectsKeys = new HashMap();
     private static HashMap[] ifcRunnableObjectsArray = new HashMap[2];
-    private static IFCRunnableObject ifcRunnableObject = null;
+    private static IFCOperativeObject ifcRunnableObject = null;
 
 
     @SuppressWarnings("oracle.jdeveloper.java.unused-field")
@@ -69,7 +69,7 @@ public class IFCPolicy implements IFCStatics {
 
                     nElement = (Element) nNode;
 
-                    ifcRunnableObject = new IFCRunnableObject(nElement);
+                    ifcRunnableObject = new IFCOperativeObject(nElement);
                     ifcRunnableObjects.put(ifcRunnableObject.getID(), ifcRunnableObject);
                     ifcRunnableObjectsKeys.put(ifcRunnableObject.getName(),ifcRunnableObject.getID());
                 }

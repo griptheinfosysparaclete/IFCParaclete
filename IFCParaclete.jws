@@ -25,6 +25,9 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
    <list n="listOfChildren">
+      <hash><url n="URL" path="Log4JAPI/Log4JAPI.jpr"/></hash>
+      <hash><url n="URL" path="Log4JCore/Log4JCore.jpr"/></hash>
+      <hash><url n="URL" path="Log4JIOSreams/Log4JIOSreams.jpr"/></hash>
       <hash><url n="URL" path="MaxineCode/MaxineCode.jpr"/></hash>
       <hash><url n="URL" path="W3C/W3C.jpr"/></hash>
       <hash><url n="URL" path="W3C/W3C.jpr"/></hash>

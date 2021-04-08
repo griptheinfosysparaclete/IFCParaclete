@@ -9,7 +9,11 @@ public interface IFCStatics {
 
     public static final String IFC_DEFAULT_POLICY_FILE =
         "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCPolicy.xml";
+    public static final String IFC_DEFAULT_LOG_FILE =
+        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCLogFile.log";
+    public static final String IFC_DEFAULT_LOG_LAYOUT = "[%level{lowerCase=true} %date{yyyy/MM/dd HH:mm:ss.SSS z} <%thread> tid=%tid] %message%n%throwable%n";
     public static final String IFC_DEFAULT_APPLICATION = "test.output.HelloWorld";
+    static final String IFC_DEFAULT_MESSAGE = "This is the IFC_DEFAULT_MESSAGE";     
     static final String IFC_RUNNABLE_OBJECT = "ifc:RunnableObject";
     static final String IFC_NAME = "ifc:Name";
     static final String IFC_ID = "ifc:ID";

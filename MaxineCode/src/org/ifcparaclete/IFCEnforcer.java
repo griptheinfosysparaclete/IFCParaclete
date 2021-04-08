@@ -5,47 +5,60 @@ import java.util.HashMap;
 
 public class IFCEnforcer implements IFCStatics {
 
-    
-    
+
     @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
-    public static IFCEnforcer thisIFC = new IFCEnforcer();
-    private       HashMap[] runnableObjectsArray = null;
-    private       IFCRunnableObject ifcRO = null;
-    private       IFCRunnableObject mainApplication = null;
-    
+    public static IFCEnforcer thisIFC              = new IFCEnforcer();
+    private       HashMap[]   runnableObjectsArray = null;
+    private IFCOperativeObject ifcOperativeRO       = null;
+    private IFCOperativeObject ifcTargetRO          = null;
+    private IFCOperativeObject mainApplication      = null;
+    private boolean           buildingImage;
+
     public IFCEnforcer() {
         super();
         runnableObjectsArray = IFCPolicy.loadIFCPolicy(IFCStatics.IFC_DEFAULT_POLICY_FILE);
-        
+        buildingImage = false;
     }
 
     /**
-     * @param argsIn
+     * @param ifcPolicyFileArg
+     * @param isBuildingImageArg
+     *
      */
-    public IFCEnforcer(String[] argsIn) {
+    public IFCEnforcer(String ifcPolicyFileArg, boolean isBuildingImageArg) {
         super();
 
-        runnableObjectsArray = IFCPolicy.loadIFCPolicy(argsIn[0]);
+        runnableObjectsArray = IFCPolicy.loadIFCPolicy(ifcPolicyFileArg);
+        buildingImage = isBuildingImageArg;
     }
 
 
     /**
-     * @param className
+     * @param operativeClassName
+     * @param targetClassName
      * @param ifcOp
      * @return
      */
-    public boolean ifcCheckMayOp(String className, String ifcOp) {
-  
-      boolean mayOp = false;
-     
-      if (runnableObjectsArray[0].containsKey(className)) {
-          ifcRO = (IFCRunnableObject) runnableObjectsArray[1].get(className);
-          if (((IFCRunnableObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS().containsValue(ifcOp)) {
-              mayOp = true;
-          }
-      }  
-      
-      return mayOp;
+    public boolean ifcCheckMayOp(String operativeClassName, String targetClassName, String ifcOp) {
+
+        boolean mayOp = false;
+
+        if (!buildingImage) {
+            if (runnableObjectsArray[0].containsKey(operativeClassName)) {
+                if (runnableObjectsArray[0].containsKey(targetClassName)) {
+                    ifcOperativeRO = (IFCOperativeObject) runnableObjectsArray[1].get(operativeClassName);
+                    ifcTargetRO = (IFCOperativeObject) runnableObjectsArray[1].get(operativeClassName);
+                    
+                if (((IFCOperativeObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS()
+                    .containsValue(ifcOp)) {
+                    mayOp = true;
+                }
+            }
+        } else {
+            mayOp = true;
+        }
+
+        return mayOp;
     }
 
     /**
@@ -55,14 +68,20 @@ public class IFCEnforcer implements IFCStatics {
      */
     public boolean ifcCheckMayBeOped(String className, String ifcOp) {
         boolean mayBeOped = false;
-        if (runnableObjectsArray[0].containsKey(className)) {
 
-            if (((IFCRunnableObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS().containsValue(ifcOp)) {
+        if (!buildingImage) {
+            if (runnableObjectsArray[0].containsKey(className)) {
+
+                if (((IFCOperativeObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS()
+                    .containsValue(ifcOp)) {
+                    mayBeOped = true;
+                }
+            } else {
                 mayBeOped = true;
             }
         }
-
         return mayBeOped;
+
     }
 
     /**
@@ -71,6 +90,6 @@ public class IFCEnforcer implements IFCStatics {
     public static void main(String[] args) {
 
         @SuppressWarnings("unused")
-        IFCEnforcer iFC = new IFCEnforcer(args);
+        IFCEnforcer iFC = new IFCEnforcer();
     }
 }

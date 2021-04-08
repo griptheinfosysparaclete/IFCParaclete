@@ -67,23 +67,22 @@ public abstract class HostedClassLoader extends ClassLoader {
 
     protected HostedClassLoader() {
         super(null);
-        args[0] = "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCDissertationCode";
-        args[1] = "true";
+ 
         ifcBuildingImage = true;
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFCEnforcer(args);
+        ifcEnforcer = new IFCEnforcer(IFCStatics.IFC_DEFAULT_POLICY_FILE, ifcBuildingImage);
     }
 
     protected HostedClassLoader(ClassLoader parent) {
         super(parent);
-        args[0] = "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCDissertationCode";
+        args[0] = IFCStatics.IFC_DEFAULT_POLICY_FILE;;
         if (parent.equals(HostedBootClassLoader.HOSTED_BOOT_CLASS_LOADER)) {
-            args[1] = "true";
+            ifcBuildingImage = true;
         } else {
-            args[1] = "false";
+            ifcBuildingImage = false;
         }
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFCEnforcer(args);
+        ifcEnforcer = new IFCEnforcer(IFCStatics.IFC_DEFAULT_POLICY_FILE, ifcBuildingImage);
     }
 
     /**

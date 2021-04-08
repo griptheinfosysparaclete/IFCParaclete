@@ -19,31 +19,46 @@
  */
 package test.output;
 
-import com.sun.max.vm.Log;
+import org.ifcparaclete.IFCStatics;
+import org.ifcparaclete.utilities.IFCLogManager;
+import org.ifcparaclete.utilities.IFCLogger;
+import org.ifcparaclete.utilities.IFCPrintStream;
 
 public class HelloWorld {
+    private IFCPrintStream hwPrintStream;
 
-    @SuppressWarnings("unchecked")
-    public HelloWorld() {
-
-        try {
-            System.setOut(Log.out);
-            System.out.println("Testing System Substituion");
+    public HelloWorld () {
+        
+    }
 
 
-        } catch (Exception e) {
-            e.printStackTrace(Log.out);
-        }
+    public HelloWorld(IFCLogger hwLoggerArg) {
+        hwPrintStream = hwLoggerArg.getPrintStream();
+        System.setOut(hwPrintStream);
+        System.out.println("Hello World!");
 
+    }
 
+    public void printit(String msg) {
+        System.out.println(msg);
     }
 
     public static void main(String[] args) {
         // DO NOT HACK ME!
 
-        HelloWorld hw = new HelloWorld();
-
+        
+        HelloWorld    helloWorld =    new HelloWorld();
+        String        hwClassName = helloWorld.getClass().getName();
+        IFCLogManager hwLogManager = new IFCLogManager(IFCStatics.IFC_DEFAULT_LOG_FILE);
+        IFCLogger     hwLogger;
+        
+            
+        hwLogger = hwLogManager.getIFCLogger(hwClassName);
+        
+        HelloWorld hw = new HelloWorld(hwLogger);
+        hw.printit("Test Switch of Out");
         System.out.println("Hello World!");
+        System.exit(0);
     }
 
 

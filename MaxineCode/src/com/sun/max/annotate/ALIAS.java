@@ -21,17 +21,25 @@
  * questions.
  */
 package com.sun.max.annotate;
-import java.lang.annotation.*;
-import java.util.concurrent.*;
 
-import com.sun.max.lang.*;
-import com.sun.max.vm.*;
-import com.sun.max.vm.actor.holder.*;
-import com.sun.max.vm.actor.member.*;
-import com.sun.max.vm.classfile.constant.*;
-import com.sun.max.vm.heap.*;
-import com.sun.max.vm.runtime.*;
-import com.sun.max.vm.type.*;
+import com.sun.max.lang.Classes;
+import com.sun.max.vm.MaxineVM;
+import com.sun.max.vm.actor.holder.ClassActor;
+import com.sun.max.vm.actor.member.FieldActor;
+import com.sun.max.vm.actor.member.MethodActor;
+import com.sun.max.vm.classfile.constant.SymbolTable;
+import com.sun.max.vm.heap.Heap;
+import com.sun.max.vm.runtime.FatalError;
+import com.sun.max.vm.type.JavaTypeDescriptor;
+import com.sun.max.vm.type.SignatureDescriptor;
+import com.sun.max.vm.type.TypeDescriptor;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Mechanism for referring to fields, methods and constructors otherwise inaccessible due to Java language access
@@ -198,6 +206,7 @@ public @interface ALIAS {
          * @return the method aliased by {@code method} or {@code null} if it is not an alias
          */
         public static MethodActor aliasedMethod(MethodActor method) {
+            
             if (MaxineVM.isHosted()) {
                 registerAliasedMethod(method);
                 return aliasedMethods.get(method);
@@ -209,11 +218,15 @@ public @interface ALIAS {
         }
 
         @HOSTED_ONLY
+        @SuppressWarnings("unchecked")
         private static void registerAliasedMethod(MethodActor method) {
             ALIAS alias = method.getAnnotation(ALIAS.class);
+ 
             if (alias != null) {
+                
                 MethodActor aliasedMethod = aliasedMethods.get(method);
                 if (aliasedMethod == null) {
+ 
                     Class holder;
                     try {
                         holder = declaringClass(alias);
@@ -229,8 +242,9 @@ public @interface ALIAS {
                     if (name.isEmpty()) {
                         name = method.name();
                     }
-
+                    
                     SignatureDescriptor sig = alias.descriptor().isEmpty() ? method.descriptor() : SignatureDescriptor.create(alias.descriptor());
+                    
                     aliasedMethod = ClassActor.fromJava(holder).findLocalMethodActor(SymbolTable.makeSymbol(name), sig);
                     if (aliasedMethod == null) {
                         if (alias.optional()) {
