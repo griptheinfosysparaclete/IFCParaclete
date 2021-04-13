@@ -5,18 +5,33 @@ import java.util.HashMap;
 
 public class IFCEnforcer implements IFCStatics {
 
-
     @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
-    public static IFCEnforcer thisIFC              = new IFCEnforcer();
-    private       HashMap[]   runnableObjectsArray = null;
-    private IFCOperativeObject ifcOperativeRO       = null;
-    private IFCOperativeObject ifcTargetRO          = null;
-    private IFCOperativeObject mainApplication      = null;
-    private boolean           buildingImage;
 
-    public IFCEnforcer() {
+    private HashMap[] actorObjectsArray;
+    private HashMap[] targetObjectsArray;
+    private HashMap[] ifcObjectsArray;
+    private IFCActorObject ifcActor;
+    private IFCTargetObject ifcTarget;
+
+    private boolean buildingImage;
+
+    private IFCEnforcer() {
         super();
-        runnableObjectsArray = IFCPolicy.loadIFCPolicy(IFCStatics.IFC_DEFAULT_POLICY_FILE);
+        ifcObjectsArray = IFCPolicy.loadIFCPolicy(IFCStatics.IFC_DEFAULT_POLICY_FILE);
+        actorObjectsArray[0] = ifcObjectsArray[0];
+        actorObjectsArray[1] = ifcObjectsArray[1];
+        targetObjectsArray[0] = ifcObjectsArray[2];
+        targetObjectsArray[1] = ifcObjectsArray[3];
+        buildingImage = false;
+    }
+
+    public IFCEnforcer(String mainApplicationArg) {
+        super();
+        ifcObjectsArray = IFCPolicy.loadIFCPolicy(IFCStatics.IFC_DEFAULT_POLICY_FILE);
+        actorObjectsArray[0] = ifcObjectsArray[0];
+        actorObjectsArray[1] = ifcObjectsArray[1];
+        targetObjectsArray[0] = ifcObjectsArray[2];
+        targetObjectsArray[1] = ifcObjectsArray[3];
         buildingImage = false;
     }
 
@@ -28,61 +43,77 @@ public class IFCEnforcer implements IFCStatics {
     public IFCEnforcer(String ifcPolicyFileArg, boolean isBuildingImageArg) {
         super();
 
-        runnableObjectsArray = IFCPolicy.loadIFCPolicy(ifcPolicyFileArg);
+        ifcObjectsArray = IFCPolicy.loadIFCPolicy(ifcPolicyFileArg);
+        actorObjectsArray[0] = ifcObjectsArray[0];
+        actorObjectsArray[1] = ifcObjectsArray[1];
+        targetObjectsArray[0] = ifcObjectsArray[2];
+        targetObjectsArray[1] = ifcObjectsArray[3];
         buildingImage = isBuildingImageArg;
     }
 
 
     /**
-     * @param operativeClassName
+     * @param actorClassName
      * @param targetClassName
      * @param ifcOp
      * @return
      */
-    public boolean ifcCheckMayOp(String operativeClassName, String targetClassName, String ifcOp) {
+    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp) {
 
-        boolean mayOp = false;
+        boolean allowed = false;
+        boolean inActorArray = false;
+        boolean inTargetArray = false;
 
-        if (!buildingImage) {
-            if (runnableObjectsArray[0].containsKey(operativeClassName)) {
-                if (runnableObjectsArray[0].containsKey(targetClassName)) {
-                    ifcOperativeRO = (IFCOperativeObject) runnableObjectsArray[1].get(operativeClassName);
-                    ifcTargetRO = (IFCOperativeObject) runnableObjectsArray[1].get(operativeClassName);
-                    
-                if (((IFCOperativeObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS()
-                    .containsValue(ifcOp)) {
-                    mayOp = true;
-                }
-            }
+        if (buildingImage) {
+            allowed = true;
         } else {
-            mayOp = true;
-        }
-
-        return mayOp;
-    }
-
-    /**
-     * @param className
-     * @param ifcOp
-     * @return
-     */
-    public boolean ifcCheckMayBeOped(String className, String ifcOp) {
-        boolean mayBeOped = false;
-
-        if (!buildingImage) {
-            if (runnableObjectsArray[0].containsKey(className)) {
-
-                if (((IFCOperativeObject) (runnableObjectsArray[1].get(className))).getActiveIFOPS()
-                    .containsValue(ifcOp)) {
-                    mayBeOped = true;
+            inActorArray = !actorObjectsArray[0].containsKey(actorClassName);
+            inTargetArray = !targetObjectsArray[0].containsKey(targetClassName);
+            if ((inActorArray | inTargetArray)) {
+                if ((inActorArray && inTargetArray)) {
+                    ifcActor = (IFCActorObject) actorObjectsArray[1].get(actorClassName);
+                    ifcTarget = (IFCTargetObject) targetObjectsArray[1].get(targetClassName);
+                    if (!ifcOpAllowed(ifcOp)) {
+                        exitJVM(actorClassName);
+                    } else {
+                        allowed = true;
+                    }
+                } else {
+                    exitJVM(actorClassName);
                 }
             } else {
-                mayBeOped = true;
+                exitJVM(actorClassName);
             }
         }
-        return mayBeOped;
+
+        return allowed;
 
     }
+
+    private void exitJVM(String actorClassName) {
+
+        System.out.println("Illegal Operation Attemted by: " + actorClassName);
+        System.err.println("Illegal Operation Attemted by: " + actorClassName);
+        System.console().printf("%s", "Illegal Operation Attemted by: " + actorClassName);
+        System.exit(99);
+
+    }
+
+    private boolean ifcOpAllowed(String ifcOp) {
+        boolean allowed = false;
+        if (ifcActor.getType() != IFC_TYPE_INTRANSITIVE) {
+            if (ifcActor.getSecurityLevelInt() >= ifcTarget.getSecurityLevelInt()) {
+                allowed =
+                    ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp)) &&
+                    ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp));
+            }
+
+        }
+
+        return allowed;
+
+    }
+
 
     /**
      * @param args

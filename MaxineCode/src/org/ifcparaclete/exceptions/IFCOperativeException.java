@@ -1,20 +1,18 @@
 package org.ifcparaclete.exceptions;
 
-import java.lang.Exception;
-import java.lang.System;
 
-public class IFCPropertiesException extends Exception {
+public class IFCOperativeException extends Exception {
     @SuppressWarnings("compatibility:8252828390533577979")
     private static final long serialVersionUID = 1L;
 
-    public IFCPropertiesException() {
+    public IFCOperativeException() {
         super();
     }
 
     /**
      * @param errorMessage
      */
-    public IFCPropertiesException(String errorMessage) {
+    public IFCOperativeException(String errorMessage) {
         super();
         System.err.printf(errorMessage);
         printStackTrace();
@@ -23,6 +21,6 @@ public class IFCPropertiesException extends Exception {
 
 
     public static void main(String[] args) {
-        IFCPropertiesException IFCPropertiesException = new IFCPropertiesException();
+        IFCOperativeException IFCPropertiesException = new IFCOperativeException();
     }
 }

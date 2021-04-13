@@ -380,7 +380,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             vm.phase = Phase.RUNNING;
             mainClassName = getMainClassName();
      
-            ifcEnforcer = new IFCEnforcer();
+            ifcEnforcer = new IFCEnforcer(mainClassName);
             ifcEnforcer.ifcCheckMayBeOped(mainClassName, IFCStatics.IFC_OP_LOAD);
             VMTI.handler().vmInitialized();
             VMTI.handler().threadStart(VmThread.current());

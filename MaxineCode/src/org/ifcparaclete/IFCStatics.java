@@ -14,7 +14,8 @@ public interface IFCStatics {
     public static final String IFC_DEFAULT_LOG_LAYOUT = "[%level{lowerCase=true} %date{yyyy/MM/dd HH:mm:ss.SSS z} <%thread> tid=%tid] %message%n%throwable%n";
     public static final String IFC_DEFAULT_APPLICATION = "test.output.HelloWorld";
     static final String IFC_DEFAULT_MESSAGE = "This is the IFC_DEFAULT_MESSAGE";     
-    static final String IFC_RUNNABLE_OBJECT = "ifc:RunnableObject";
+    static final String IFC_ACTOR_OBJECT = "ifc:ActorObject";
+    static final String IFC_TARGET_OBJECT = "ifc:TargetObject";
     static final String IFC_NAME = "ifc:Name";
     static final String IFC_ID = "ifc:ID";
     static final String IFC_SECURITY_LEVEL = "ifc:SecurityLevel";
@@ -23,15 +24,16 @@ public interface IFCStatics {
     static final String IFC_SL_PARTIALLY_TRUSTED = "P";
     static final String IFC_SL_UNTRUSTED = "U";
     @SuppressWarnings("unchecked")
-    static final Map<String, String> IFC_SECURITY_LEVELS = ImmutableMap.of("F", "F", "H", "H", "P", "P", "U", "U");
+    static final Map<String, Integer> IFC_SECURITY_LEVELS = ImmutableMap.of("F", 4, "H", 3, "P", 2, "U", 1);
     static final String IFC_CATEGORY = "ifc:Category";
     static final String IFC_CATEGORY_SYSTEM = "S";
     static final String IFC_CATEGORY_APPLICATION = "A";
-    static final Map<String, String> IFC_CATEGORIES = ImmutableMap.of("S", "S", "A", "A");
+    static final Map<String, Integer> IFC_CATEGORIES = ImmutableMap.of("S", 1, "A", 0);
     static final String IFC_TYPE = "ifc:Type";
     static final String IFC_TYPE_INTRANSITIVE = "I";
     static final String IFC_TYPE_TRANSITIVE = "T";
-    static final Map<String, String> IFC_TYPES = ImmutableMap.of("T", "T", "I", "I");
+    static final Map<String, Integer> IFC_TYPES = ImmutableMap.of("T", 20, "I", 9);
+    static final int    IFC_AUTHORIZATION_TYPE_FAI = 208;
     static final String IFC_OP = "ifc:Op";
     static final String IFC_OP_EXECUTE = "e";
     static final String IFC_OP_OPEN = "o";
@@ -44,16 +46,16 @@ public interface IFCStatics {
     static final String IFC_OP_ACCESS = "a";
     static final String IFC_ACTIVE_IFOPS = "ifc:ActiveIFOPS";
     static final String IFC_PASSIVE_IFOPS = "ifc:PassiveIFOPS";
-    static final Map<String, String> IFC_OPS = ImmutableMap.<String, String>builder()
-                                                           .put("e", "e")
-                                                           .put("o", "o")
-                                                           .put("c", "c")
-                                                           .put("l", "l")
-                                                           .put("w", "w")
-                                                           .put("r", "r")
-                                                           .put("d", "d")
-                                                           .put("f", "f")
-                                                           .put("a", "a")
+    static final Map<String, Integer> IFC_OPS = ImmutableMap.<String, Integer>builder()
+                                                           .put("e", 0)
+                                                           .put("o", 1)
+                                                           .put("c", 2)
+                                                           .put("l", 3)
+                                                           .put("w", 4)
+                                                           .put("r", 5)
+                                                           .put("d", 6)
+                                                           .put("f", 7)
+                                                           .put("a", 8)
                                                            .build();
 
 }

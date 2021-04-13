@@ -19,11 +19,13 @@ import org.xml.sax.SAXException;
 
 public class IFCPolicy implements IFCStatics {
 
-    private static HashMap ifcRunnableObjects = new HashMap();
-    private static HashMap ifcRunnableObjectsKeys = new HashMap();
-    private static HashMap[] ifcRunnableObjectsArray = new HashMap[2];
-    private static IFCOperativeObject ifcRunnableObject = null;
-
+    private static HashMap         ifcActorObjects = new HashMap();
+    private static HashMap         ifcActorObjectsKeys = new HashMap();
+    private static IFCActorObject  ifcActorObject = null;
+    private static HashMap         ifcTargetObjects = new HashMap();
+    private static HashMap         ifcTargetObjectsKeys = new HashMap();
+    private static HashMap[]       ifcObjectsArray = new HashMap[4];
+    private static IFCTargetObject ifcTargetObject = null;
 
     @SuppressWarnings("oracle.jdeveloper.java.unused-field")
     private static String ifcID = null;
@@ -60,7 +62,7 @@ public class IFCPolicy implements IFCStatics {
 
             doc.getDocumentElement().normalize();
 
-            nList = doc.getElementsByTagName(IFC_RUNNABLE_OBJECT);
+            nList = doc.getElementsByTagName(IFC_ACTOR_OBJECT);
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 nNode = nList.item(temp);
@@ -69,9 +71,23 @@ public class IFCPolicy implements IFCStatics {
 
                     nElement = (Element) nNode;
 
-                    ifcRunnableObject = new IFCOperativeObject(nElement);
-                    ifcRunnableObjects.put(ifcRunnableObject.getID(), ifcRunnableObject);
-                    ifcRunnableObjectsKeys.put(ifcRunnableObject.getName(),ifcRunnableObject.getID());
+                    ifcActorObject = new IFCActorObject(nElement);
+                    ifcActorObjects.put(ifcActorObject.getID(), ifcActorObject);
+                    ifcActorObjectsKeys.put(ifcActorObject.getName(),ifcActorObject.getID());
+                }
+            }
+            nList = doc.getElementsByTagName(IFC_TARGET_OBJECT);
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                nNode = nList.item(temp);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    nElement = (Element) nNode;
+
+                    ifcTargetObject = new IFCTargetObject(nElement);
+                    ifcTargetObjects.put(ifcTargetObject.getID(), ifcTargetObject);
+                    ifcTargetObjectsKeys.put(ifcTargetObject.getName(), ifcTargetObject.getID());
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
@@ -79,11 +95,15 @@ public class IFCPolicy implements IFCStatics {
             System.exit(1);
 
         }
-        ifcRunnableObjectsArray[0] = ifcRunnableObjectsKeys;
+        ifcObjectsArray[0] = ifcActorObjectsKeys;
   
-        ifcRunnableObjectsArray[1] = ifcRunnableObjects;
+        ifcObjectsArray[1] = ifcActorObjects;
         
-        return ifcRunnableObjectsArray;
+        ifcObjectsArray[2] = ifcTargetObjectsKeys;
+
+        ifcObjectsArray[3] = ifcTargetObjects;
+        
+        return ifcObjectsArray;
     }
 
     /**

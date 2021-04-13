@@ -120,7 +120,7 @@ public final class JDK_java_lang_System {
     private static void setIn0(InputStream is) {
         thisIFC.ifcCheckMayOp(Thread.currentThread()
                                     .getStackTrace()[2]
-                                    .getClassName(), IFCStatics.IFC_OP_OPEN);
+                                    .getClassName(), is.getClass().getName() ,IFCStatics.IFC_OP_OPEN);
         in = is;
     }
 
@@ -135,7 +135,7 @@ public final class JDK_java_lang_System {
 
         thisIFC.ifcCheckMayOp(Thread.currentThread()
                                     .getStackTrace()[2]
-                                    .getClassName(), IFCStatics.IFC_OP_OPEN);
+                                    .getClassName(),ps.getClass().getName(), IFCStatics.IFC_OP_OPEN);
         out = ps;
     }
 

@@ -268,7 +268,7 @@ public abstract class HostedClassLoader extends ClassLoader {
     protected synchronized Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
 
         if (!ifcBuildingImage) {
-            ifcEnforcer.ifcCheckMayBeOped(name, IFCStatics.IFC_OP_LOAD);
+            ifcEnforcer.ifcCheck(this.getClass().getName(),name, IFCStatics.IFC_OP_LOAD);
         }
 
         Class javaType = null;

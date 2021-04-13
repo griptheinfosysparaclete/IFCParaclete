@@ -6,10 +6,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class IFCTargetObject implements IFCStatics {
+class IFCActorObject implements IFCStatics {
 
-    private static BitSet  ifcActiveOPS;
-    private static BitSet  ifcPassiveOPS;
+    private static BitSet ifcActiveOPS;
+    private static BitSet ifcPassiveOPS;
     private String ifcName;
     private String ifcID;
     private String ifcSecurityLevel;
@@ -19,40 +19,42 @@ public class IFCTargetObject implements IFCStatics {
     private int    ifcCategoryInt;
     private int    ifcTypeInt;
 
-    private IFCTargetObject() {
+
+    private IFCActorObject() {
         super();
     }
 
-    public IFCTargetObject(Element ifcTargetObjectElement) {
+    public IFCActorObject(Element ifcActorObjectElement) {
         super();
         System.out.println(this.toString());
-        init(ifcTargetObjectElement);
+        init(ifcActorObjectElement);
     }
 
-    private void init(Element ifcTargetObjectElement) {
+    private void init(Element ifcActorObjectElement) {
 
-        ifcName = ifcTargetObjectElement.getElementsByTagName(IFC_NAME)
+        ifcName = ifcActorObjectElement.getElementsByTagName(IFC_NAME)
                                           .item(0)
                                           .getTextContent();
-        ifcID = ifcTargetObjectElement.getElementsByTagName(IFC_ID)
+        ifcID = ifcActorObjectElement.getElementsByTagName(IFC_ID)
                                         .item(0)
                                         .getTextContent();
-        ifcSecurityLevel = ifcTargetObjectElement.getElementsByTagName(IFC_SECURITY_LEVEL)
+        ifcSecurityLevel = ifcActorObjectElement.getElementsByTagName(IFC_SECURITY_LEVEL)
                                                    .item(0)
                                                    .getTextContent();
         ifcSecurityLevelInt = IFC_SECURITY_LEVELS.get(ifcSecurityLevel);
-        ifcCategory = ifcTargetObjectElement.getElementsByTagName(IFC_CATEGORY)
+        ifcCategory = ifcActorObjectElement.getElementsByTagName(IFC_CATEGORY)
                                               .item(0)
                                               .getTextContent();
         ifcCategoryInt = IFC_CATEGORIES.get(ifcCategory);
-        ifcType = ifcTargetObjectElement.getElementsByTagName(IFC_TYPE)
+        
+        ifcType = ifcActorObjectElement.getElementsByTagName(IFC_TYPE)
                                           .item(0)
                                           .getTextContent();
         ifcTypeInt = IFC_TYPES.get(ifcType);
-        if (ifcType == IFC_TYPE_TRANSITIVE){
-          ifcActiveOPS = initIFCOps(ifcTargetObjectElement.getElementsByTagName(IFC_ACTIVE_IFOPS));
-        }
-        ifcPassiveOPS = initIFCOps(ifcTargetObjectElement.getElementsByTagName(IFC_PASSIVE_IFOPS));
+
+        ifcActiveOPS = initIFCOps(ifcActorObjectElement.getElementsByTagName(IFC_ACTIVE_IFOPS));
+        ifcPassiveOPS = initIFCOps(ifcActorObjectElement.getElementsByTagName(IFC_PASSIVE_IFOPS));
+        
         System.out.println(this.toString());
     }
 
@@ -109,7 +111,7 @@ public class IFCTargetObject implements IFCStatics {
         return ifcSecurityLevelInt;
 
     }
-
+    
     protected String getCategory() {
 
         return ifcCategory;
@@ -147,17 +149,17 @@ public class IFCTargetObject implements IFCStatics {
     }
 
     public String toString() {
-        String ifcTargetObjectString;
-        ifcTargetObjectString =
+        String ifcActorObjectString;
+        ifcActorObjectString =
             "IFCName == " + ifcName + "\n" + "ifcID == " + ifcID + "\n" + "ifcSecurityLevel == " + ifcSecurityLevel +
             "\n" + "ifcCategory == " + ifcCategory + "\n" + "ifcType == " + ifcType + "\n" + ifcActiveOPS.toString() +
             ifcPassiveOPS.toString();
 
-        return ifcTargetObjectString;
+        return ifcActorObjectString;
 
     }
 
     public static void main(String[] args) {
-        IFCTargetObject iFCTargetObject = new IFCTargetObject();
+        IFCActorObject ifcActorObject = new IFCActorObject();
     }
 }
