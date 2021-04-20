@@ -59,7 +59,7 @@
                                                     <xsd:element name="ActiveIFOPS">
                                                         <xsd:complexType>
                                                             <xsd:sequence>
-                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="10">
                                                                     <xsd:simpleType>
                                                                         <xsd:restriction base="xsd:string">
                                                                             <xsd:enumeration value="e"/>
@@ -70,6 +70,8 @@
                                                                             <xsd:enumeration value="r"/>
                                                                             <xsd:enumeration value="d"/>
                                                                             <xsd:enumeration value="f"/>
+                                                                            <xsd:enumeration value="a"/>
+                                                                            <xsd:enumeration value="m"/>
                                                                         </xsd:restriction>
                                                                     </xsd:simpleType>
                                                                 </xsd:element>
@@ -79,7 +81,7 @@
                                                     <xsd:element name="PassiveIFOPS">
                                                         <xsd:complexType>
                                                             <xsd:sequence>
-                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="10">
                                                                     <xsd:simpleType>
                                                                         <xsd:restriction base="xsd:string">
                                                                             <xsd:enumeration value="e"/>
@@ -90,6 +92,8 @@
                                                                             <xsd:enumeration value="r"/>
                                                                             <xsd:enumeration value="d"/>
                                                                             <xsd:enumeration value="f"/>
+                                                                            <xsd:enumeration value="a"/>
+                                                                            <xsd:enumeration value="m"/>
                                                                         </xsd:restriction>
                                                                     </xsd:simpleType>
                                                                 </xsd:element>
@@ -151,7 +155,7 @@
                                                     <xsd:element name="ActiveIFOPS">
                                                         <xsd:complexType>
                                                             <xsd:sequence>
-                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="10">
                                                                     <xsd:simpleType>
                                                                         <xsd:restriction base="xsd:string">
                                                                             <xsd:enumeration value="e"/>
@@ -162,6 +166,8 @@
                                                                             <xsd:enumeration value="r"/>
                                                                             <xsd:enumeration value="d"/>
                                                                             <xsd:enumeration value="f"/>
+                                                                            <xsd:enumeration value="a"/>
+                                                                            <xsd:enumeration value="m"/>
                                                                         </xsd:restriction>
                                                                     </xsd:simpleType>
                                                                 </xsd:element>
@@ -171,7 +177,7 @@
                                                     <xsd:element name="PassiveIFOPS">
                                                         <xsd:complexType>
                                                             <xsd:sequence>
-                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="8">
+                                                                <xsd:element name="Op" minOccurs="0" maxOccurs="10">
                                                                     <xsd:simpleType>
                                                                         <xsd:restriction base="xsd:string">
                                                                             <xsd:enumeration value="e"/>
@@ -182,6 +188,8 @@
                                                                             <xsd:enumeration value="r"/>
                                                                             <xsd:enumeration value="d"/>
                                                                             <xsd:enumeration value="f"/>
+                                                                            <xsd:enumeration value="a"/>
+                                                                            <xsd:enumeration value="m"/>
                                                                         </xsd:restriction>
                                                                     </xsd:simpleType>
                                                                 </xsd:element>

@@ -19,23 +19,33 @@
  */
 package test.output;
 
-import org.ifcparaclete.IFCStatics;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+/*
+import com.sun.max.vm.Log;
 import org.ifcparaclete.utilities.IFCLogManager;
 import org.ifcparaclete.utilities.IFCLogger;
-import org.ifcparaclete.utilities.IFCPrintStream;
+import org.ifcparaclete.utilities.IFCPrintStream; */
 
 public class HelloWorld {
-    private IFCPrintStream hwPrintStream;
+    FileOutputStream fos;
+    PrintStream ps;
 
-    public HelloWorld () {
-        
-    }
+   public HelloWorld() {
+       
+       try {
+            fos = new FileOutputStream("/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCLogFile.log");
+            ps = new PrintStream(fos);
+            System.out.println("2 Hello World!");
+            System.out.println("3 " + ps.getClass().getName());
+            System.setOut(ps);
+            System.out.println("4 Hello World!");
+            System.out.println("5 " + ps.getClass().getName());
+       }
+       catch (java.io.FileNotFoundException fnfe) {
+           printit(fnfe.getMessage());
+       }
 
-
-    public HelloWorld(IFCLogger hwLoggerArg) {
-        hwPrintStream = hwLoggerArg.getPrintStream();
-        System.setOut(hwPrintStream);
-        System.out.println("Hello World!");
 
     }
 
@@ -45,19 +55,10 @@ public class HelloWorld {
 
     public static void main(String[] args) {
         // DO NOT HACK ME!
-
-        
-        HelloWorld    helloWorld =    new HelloWorld();
-        String        hwClassName = helloWorld.getClass().getName();
-        IFCLogManager hwLogManager = new IFCLogManager(IFCStatics.IFC_DEFAULT_LOG_FILE);
-        IFCLogger     hwLogger;
-        
-            
-        hwLogger = hwLogManager.getIFCLogger(hwClassName);
-        
-        HelloWorld hw = new HelloWorld(hwLogger);
-        hw.printit("Test Switch of Out");
-        System.out.println("Hello World!");
+        System.out.println("1 Hello World!");       
+        HelloWorld hw = new HelloWorld();
+        hw.printit("6 Test Switch of Out");
+        System.out.println("7 Hello World!");
         System.exit(0);
     }
 

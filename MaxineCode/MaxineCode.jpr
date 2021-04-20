@@ -145,6 +145,10 @@
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
+                  <string v="-org/ifcparaclete/OSCommands.java"/>
+                  <string v="-org/ifcparaclete/IFCTargetObject.java"/>
+                  <string v="-org/ifcparaclete/log4j.properties"/>
+                  <string v="-org/ifcparaclete/~$IFCPolicyRubric.xlsx"/>
                   <string v="-savedDeps/JavaProject/"/>
                   <string v="-savedDeps/JARDistribution/"/>
                   <string v="-org/ifcparaclete/utilities/IFCFileManager.java"/>
@@ -268,18 +272,6 @@
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">
       <hash n="runConfigurationDefinitions">
-         <hash n="Copy of HelloWorldConfiguration">
-            <value n="compileBeforeRun" v="false"/>
-            <value n="custom" v="false"/>
-            <value n="name" v="Copy of HelloWorldConfiguration"/>
-            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
-               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
-            </hash>
-            <value n="programArguments" v="MAXINE_HOME=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine MX_HOME=/Users/GripGlebe/Projects/MaxineProjectNewCode/mx WORKDIR=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src MAXINE_LOG_FILE=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine/maxine.log MAXINE_TRACE_FILE=/Users/GripGlebe/Projects/MaxineProjectNewCode/maxine-src/maxine/maxine.trace HISTCONTROL=ignoreboth:erasedups PATH_TO_CANVAS=/Users/GripGlebe/Projects/RubyProjects/canvas"/>
-            <value n="runActiveFile" v="false"/>
-            <url n="runDirectoryURL" path="../../"/>
-            <url n="targetURL" path="src/test/output/TestAliasClass.java"/>
-         </hash>
          <hash n="HelloWorldConfiguration">
             <value n="compileBeforeRun" v="false"/>
             <value n="custom" v="false"/>
@@ -303,7 +295,6 @@
          </hash>
       </hash>
       <list n="runConfigurationList">
-         <string v="Copy of HelloWorldConfiguration"/>
          <string v="HelloWorldConfiguration"/>
          <string v="IFCCodeConfiguration"/>
       </list>

@@ -2,16 +2,19 @@ package org.ifcparaclete;
 
 import java.util.HashMap;
 
+import org.ifcparaclete.exceptions.IFCOperativeException;
+
 
 public class IFCEnforcer implements IFCStatics {
 
     @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
 
-    private HashMap[] actorObjectsArray;
-    private HashMap[] targetObjectsArray;
+    private HashMap[] actorObjectsArray = new HashMap[2];
+    private HashMap[] targetObjectsArray = new HashMap[2];
     private HashMap[] ifcObjectsArray;
-    private IFCActorObject ifcActor;
-    private IFCTargetObject ifcTarget;
+    private IFCObject ifcActor;
+    private IFCObject ifcTarget;
+    private String mainApplication;
 
     private boolean buildingImage;
 
@@ -32,6 +35,7 @@ public class IFCEnforcer implements IFCStatics {
         actorObjectsArray[1] = ifcObjectsArray[1];
         targetObjectsArray[0] = ifcObjectsArray[2];
         targetObjectsArray[1] = ifcObjectsArray[3];
+        mainApplication = mainApplicationArg;
         buildingImage = false;
     }
 
@@ -44,6 +48,7 @@ public class IFCEnforcer implements IFCStatics {
         super();
 
         ifcObjectsArray = IFCPolicy.loadIFCPolicy(ifcPolicyFileArg);
+
         actorObjectsArray[0] = ifcObjectsArray[0];
         actorObjectsArray[1] = ifcObjectsArray[1];
         targetObjectsArray[0] = ifcObjectsArray[2];
@@ -58,50 +63,51 @@ public class IFCEnforcer implements IFCStatics {
      * @param ifcOp
      * @return
      */
-    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp) {
+    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp) throws IFCOperativeException {
 
         boolean allowed = false;
         boolean inActorArray = false;
         boolean inTargetArray = false;
+        String  ifcActorKey;
+        String  ifcTargetKey;
 
         if (buildingImage) {
             allowed = true;
         } else {
-            inActorArray = !actorObjectsArray[0].containsKey(actorClassName);
-            inTargetArray = !targetObjectsArray[0].containsKey(targetClassName);
-            if ((inActorArray | inTargetArray)) {
-                if ((inActorArray && inTargetArray)) {
-                    ifcActor = (IFCActorObject) actorObjectsArray[1].get(actorClassName);
-                    ifcTarget = (IFCTargetObject) targetObjectsArray[1].get(targetClassName);
-                    if (!ifcOpAllowed(ifcOp)) {
-                        exitJVM(actorClassName);
-                    } else {
-                        allowed = true;
-                    }
-                } else {
-                    exitJVM(actorClassName);
+            inActorArray = actorObjectsArray[0].containsKey(actorClassName);
+            inTargetArray = targetObjectsArray[0].containsKey(targetClassName);
+
+            if ((inActorArray && inTargetArray)) {
+                ifcActorKey = (String) actorObjectsArray[0].get(actorClassName);
+                ifcTargetKey = (String) targetObjectsArray[0].get(targetClassName);
+                ifcActor = (IFCObject) actorObjectsArray[1].get(ifcActorKey);
+                ifcTarget = (IFCObject) targetObjectsArray[1].get(ifcTargetKey);
+                try {
+                    allowed = ifcOpAllowed(ifcOp);
+                } catch (IFCOperativeException IFCOE) {
+                    throw IFCOE;
                 }
-            } else {
-                exitJVM(actorClassName);
             }
+
         }
 
+        if (!allowed) {
+            throw new IFCOperativeException("Either one or both of these classes:\n" + targetClassName + "\n" +
+                                            actorClassName + "\n is not an authorized class for this application, " +
+                                            mainApplication + "\n");
+        }
         return allowed;
 
     }
 
-    private void exitJVM(String actorClassName) {
-
-        System.out.println("Illegal Operation Attemted by: " + actorClassName);
-        System.err.println("Illegal Operation Attemted by: " + actorClassName);
-        System.console().printf("%s", "Illegal Operation Attemted by: " + actorClassName);
-        System.exit(99);
-
-    }
-
-    private boolean ifcOpAllowed(String ifcOp) {
+    private boolean ifcOpAllowed(String ifcOp) throws IFCOperativeException {
         boolean allowed = false;
-        if (ifcActor.getType() != IFC_TYPE_INTRANSITIVE) {
+        System.out.println(ifcActor.getType());
+        System.out.println(ifcActor.getSecurityLevelInt());
+        System.out.println(ifcTarget.getSecurityLevelInt());
+        System.out.println(ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp)));
+        System.out.println(ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp)));
+        if (ifcActor.getType().equals(IFC_TYPE_TRANSITIVE)) {
             if (ifcActor.getSecurityLevelInt() >= ifcTarget.getSecurityLevelInt()) {
                 allowed =
                     ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp)) &&
@@ -109,7 +115,10 @@ public class IFCEnforcer implements IFCStatics {
             }
 
         }
-
+        if (!allowed) {
+            throw new IFCOperativeException("Illegal operation, " + IFC_OPS_NAMES.get(ifcOp) + ", attemted by: " +
+                                            ifcActor.getName() + "\nOn " + ifcTarget.getName());
+        }
         return allowed;
 
     }

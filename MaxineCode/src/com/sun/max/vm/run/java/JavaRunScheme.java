@@ -86,6 +86,7 @@ import java.util.jar.Manifest;
 
 import org.ifcparaclete.IFCEnforcer;
 import org.ifcparaclete.IFCStatics;
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 import sun.misc.Launcher;
 import sun.misc.Signal;
@@ -129,7 +130,8 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
     private static String mainClassName;
     protected static String[] args = new String[2];
 
-    protected IFCEnforcer ifcEnforcer = null;
+    @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
+    public static IFCEnforcer ifcEnforcer;
 
     @HOSTED_ONLY
     public JavaRunScheme() {
@@ -381,7 +383,12 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             mainClassName = getMainClassName();
      
             ifcEnforcer = new IFCEnforcer(mainClassName);
-            ifcEnforcer.ifcCheckMayBeOped(mainClassName, IFCStatics.IFC_OP_LOAD);
+            try {
+                ifcEnforcer.ifcCheck(this.getClass().getName(), mainClassName, IFCStatics.IFC_OP_LOAD);
+            }
+            catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
             VMTI.handler().vmInitialized();
             VMTI.handler().threadStart(VmThread.current());
             // load -javaagent agents
@@ -422,6 +429,14 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                 MaxineVM.setExitCode(-1);
             }
         }
+    }
+
+    private void exitJVM(IFCOperativeException ifcOperativeException) {
+
+        Log.println(ifcOperativeException.getMessage());
+        Log.println(ifcOperativeException.fillInStackTrace());
+        MaxineVM.setExitCode(-99);
+
     }
 
     private void lookupAndInvokeMain(Class<?> mainClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {

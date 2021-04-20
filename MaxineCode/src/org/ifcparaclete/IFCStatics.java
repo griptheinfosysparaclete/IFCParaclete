@@ -58,4 +58,15 @@ public interface IFCStatics {
                                                            .put("a", 8)
                                                            .build();
 
+    static final Map<String, String> IFC_OPS_NAMES = ImmutableMap.<String, String>builder()
+                                                           .put("e", "Execute")
+                                                           .put("o", "Open")
+                                                           .put("c", "Close")
+                                                           .put("l", "Load")
+                                                           .put("w", "Write")
+                                                           .put("r", "Read")
+                                                           .put("d", "Delete")
+                                                           .put("f", "Reflection")
+                                                           .put("a", "AccessSystemInformation")
+                                                           .build();
 }

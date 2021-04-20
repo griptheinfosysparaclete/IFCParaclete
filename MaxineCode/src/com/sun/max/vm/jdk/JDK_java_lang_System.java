@@ -59,6 +59,7 @@ import com.sun.max.vm.actor.holder.Hub;
 import static com.sun.max.vm.intrinsics.MaxineIntrinsicIDs.UNSAFE_CAST;
 import com.sun.max.vm.object.ArrayAccess;
 import com.sun.max.vm.object.ObjectAccess;
+import static com.sun.max.vm.run.java.JavaRunScheme.ifcEnforcer;
 import com.sun.max.vm.runtime.FatalError;
 import com.sun.max.vm.type.BootClassLoader;
 import com.sun.max.vm.type.Kind;
@@ -74,9 +75,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import static org.ifcparaclete.IFCEnforcer.thisIFC;
-
 import org.ifcparaclete.IFCStatics;
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 import sun.misc.Launcher;
 import sun.misc.Perf;
@@ -118,10 +118,22 @@ public final class JDK_java_lang_System {
      */
     @SUBSTITUTE
     private static void setIn0(InputStream is) {
-        thisIFC.ifcCheckMayOp(Thread.currentThread()
-                                    .getStackTrace()[2]
-                                    .getClassName(), is.getClass().getName() ,IFCStatics.IFC_OP_OPEN);
+        /*       try {
+            ifcEnforcer.ifcCheck(Thread.currentThread()
+                                       .getStackTrace()[2]
+                                       .getClassName(), is.getClass().getName(), IFCStatics.IFC_OP_OPEN);
+        } catch (IFCOperativeException ifcOperativeException) {
+            exitJVM(ifcOperativeException);
+        } */
         in = is;
+    }
+
+    private static void exitJVM(IFCOperativeException ifcOperativeException) {
+
+        Log.println(ifcOperativeException.getMessage());
+        Log.println(ifcOperativeException.fillInStackTrace());
+        MaxineVM.setExitCode(-99);
+
     }
 
     /**
@@ -133,9 +145,20 @@ public final class JDK_java_lang_System {
     @SuppressWarnings("unused")
     private static void setOut0(PrintStream ps) {
 
-        thisIFC.ifcCheckMayOp(Thread.currentThread()
-                                    .getStackTrace()[2]
-                                    .getClassName(),ps.getClass().getName(), IFCStatics.IFC_OP_OPEN);
+        System.out.println("1 setOut0 " + ps.getClass().getName());
+        System.out.println("2 setOut0 " + Thread.currentThread()
+                                              .getStackTrace()[2]
+                                              .getClassName());
+        System.out.println("2 setOut0 " + Thread.currentThread()
+                                                .getStackTrace()[3]
+                                                .getClassName());
+        try {
+            ifcEnforcer.ifcCheck(Thread.currentThread()
+                                       .getStackTrace()[3]
+                                       .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_OPEN);
+        } catch (IFCOperativeException ifcOperativeException) {
+            exitJVM(ifcOperativeException);
+        } 
         out = ps;
     }
 
@@ -454,9 +477,15 @@ public final class JDK_java_lang_System {
      * @return a string representing the path of the Java home
      */
     private static String findJavaHome() {
-        thisIFC.ifcCheckMayOp(Thread.currentThread()
-                                    .getStackTrace()[2]
-                                    .getClassName(), IFCStatics.IFC_OP_ACCESS);
+        if (ifcEnforcer != null) {
+            try {
+                ifcEnforcer.ifcCheck(Thread.currentThread()
+                                           .getStackTrace()[2]
+                                           .getClassName(), "java.lang.System", IFCStatics.IFC_OP_ACCESS);
+            } catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
+        }
         switch (platform().os) {
         case MAXVE:
         case SOLARIS:

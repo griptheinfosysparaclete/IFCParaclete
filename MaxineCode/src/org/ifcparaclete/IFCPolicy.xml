@@ -5,7 +5,7 @@
     <ifc:IFCObjects>
         <ifc:ActorObjects>
             <ifc:ActorObject>
-                <ifc:Name>com.sun.max.vm.hosted.HostedClassLoader</ifc:Name>
+                <ifc:Name>com.sun.max.vm.run.java.JavaRunScheme</ifc:Name>
                 <ifc:ID>0</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>S</ifc:Category>
@@ -19,6 +19,8 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:ActiveIFOPS>
                 <ifc:PassiveIFOPS>
                     <ifc:Op>e</ifc:Op>
@@ -29,11 +31,44 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:PassiveIFOPS>
+            </ifc:ActorObject>
+            <ifc:ActorObject>
+                <ifc:Name>com.sun.max.vm.hosted.HostedClassLoader</ifc:Name>
+                <ifc:ID>1</ifc:ID>
+                <ifc:SecurityLevel>F</ifc:SecurityLevel>
+                <ifc:Category>S</ifc:Category>
+                <ifc:Type>T</ifc:Type>
+                <ifc:ActiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:ActiveIFOPS>
+                <ifc:PassiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:PassiveIFOPS>
             </ifc:ActorObject>
             <ifc:ActorObject>
                 <ifc:Name>test.output.HelloWorld</ifc:Name>
-                <ifc:ID>1</ifc:ID>
+                <ifc:ID>2</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>A</ifc:Category>
                 <ifc:Type>I</ifc:Type>
@@ -47,12 +82,14 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:PassiveIFOPS>
             </ifc:ActorObject>
         </ifc:ActorObjects>
         <ifc:TargetObjects>
             <ifc:TargetObject>
-                <ifc:Name>com.sun.max.vm.hosted.HostedClassLoader</ifc:Name>
+                <ifc:Name>com.sun.max.vm.run.java.JavaRunScheme</ifc:Name>
                 <ifc:ID>0</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>S</ifc:Category>
@@ -66,6 +103,8 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:ActiveIFOPS>
                 <ifc:PassiveIFOPS>
                     <ifc:Op>e</ifc:Op>
@@ -76,11 +115,44 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:PassiveIFOPS>
+            </ifc:TargetObject>
+            <ifc:TargetObject>
+                <ifc:Name>com.sun.max.vm.hosted.HostedClassLoader</ifc:Name>
+                <ifc:ID>1</ifc:ID>
+                <ifc:SecurityLevel>F</ifc:SecurityLevel>
+                <ifc:Category>S</ifc:Category>
+                <ifc:Type>T</ifc:Type>
+                <ifc:ActiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:ActiveIFOPS>
+                <ifc:PassiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:PassiveIFOPS>
             </ifc:TargetObject>
             <ifc:TargetObject>
                 <ifc:Name>test.output.HelloWorld</ifc:Name>
-                <ifc:ID>1</ifc:ID>
+                <ifc:ID>2</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>A</ifc:Category>
                 <ifc:Type>I</ifc:Type>
@@ -94,6 +166,28 @@
                     <ifc:Op>r</ifc:Op>
                     <ifc:Op>d</ifc:Op>
                     <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:PassiveIFOPS>
+            </ifc:TargetObject>
+            <ifc:TargetObject>
+                <ifc:Name>java.lang.System</ifc:Name>
+                <ifc:ID>3</ifc:ID>
+                <ifc:SecurityLevel>F</ifc:SecurityLevel>
+                <ifc:Category>S</ifc:Category>
+                <ifc:Type>I</ifc:Type>
+                <ifc:ActiveIFOPS/>
+                <ifc:PassiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
                 </ifc:PassiveIFOPS>
             </ifc:TargetObject>
         </ifc:TargetObjects>

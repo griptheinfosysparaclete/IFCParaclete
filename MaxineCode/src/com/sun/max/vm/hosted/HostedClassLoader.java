@@ -27,11 +27,14 @@ import com.sun.max.program.Classpath;
 import com.sun.max.program.ClasspathFile;
 import com.sun.max.program.ProgramError;
 import com.sun.max.program.ProgramWarning;
+import com.sun.max.vm.Log;
+import com.sun.max.vm.MaxineVM;
 import com.sun.max.vm.actor.holder.ArrayClassActor;
 import com.sun.max.vm.actor.holder.ClassActor;
 import com.sun.max.vm.classfile.ClassfileReader;
 import com.sun.max.vm.jdk.JDK_java_lang_reflect_Proxy;
 import com.sun.max.vm.reflection.InvocationStubGenerator;
+import static com.sun.max.vm.run.java.JavaRunScheme.ifcEnforcer;
 import com.sun.max.vm.type.ClassRegistry;
 import com.sun.max.vm.type.JavaTypeDescriptor;
 import com.sun.max.vm.type.TypeDescriptor;
@@ -41,9 +44,8 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ifcparaclete.IFCEnforcer;
 import org.ifcparaclete.IFCStatics;
-
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 /**
  * Parent hosted class loader for {@link HostedBootClassLoader} and {@link HostedVMClassLoader}.
@@ -55,7 +57,6 @@ public abstract class HostedClassLoader extends ClassLoader {
     protected Classpath classpath;
     protected static String[] args = new String[2];
 
-    protected IFCEnforcer ifcEnforcer = null;
     protected boolean ifcBuildingImage = false;
     Throwable ifcThrowable = new Throwable();
 
@@ -67,22 +68,23 @@ public abstract class HostedClassLoader extends ClassLoader {
 
     protected HostedClassLoader() {
         super(null);
- 
+
         ifcBuildingImage = true;
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFCEnforcer(IFCStatics.IFC_DEFAULT_POLICY_FILE, ifcBuildingImage);
+        
     }
 
     protected HostedClassLoader(ClassLoader parent) {
         super(parent);
-        args[0] = IFCStatics.IFC_DEFAULT_POLICY_FILE;;
+        args[0] = IFCStatics.IFC_DEFAULT_POLICY_FILE;
+        ;
         if (parent.equals(HostedBootClassLoader.HOSTED_BOOT_CLASS_LOADER)) {
             ifcBuildingImage = true;
         } else {
             ifcBuildingImage = false;
         }
         ifcThrowable.printStackTrace();
-        ifcEnforcer = new IFCEnforcer(IFCStatics.IFC_DEFAULT_POLICY_FILE, ifcBuildingImage);
+        
     }
 
     /**
@@ -268,7 +270,11 @@ public abstract class HostedClassLoader extends ClassLoader {
     protected synchronized Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
 
         if (!ifcBuildingImage) {
-            ifcEnforcer.ifcCheck(this.getClass().getName(),name, IFCStatics.IFC_OP_LOAD);
+            try {
+                ifcEnforcer.ifcCheck(this.getClass().getName(), name, IFCStatics.IFC_OP_LOAD);
+            } catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
         }
 
         Class javaType = null;
@@ -292,6 +298,14 @@ public abstract class HostedClassLoader extends ClassLoader {
         }
 
         return javaType;
+    }
+
+    private void exitJVM(IFCOperativeException ifcOperativeException) {
+
+        Log.println(ifcOperativeException.getMessage());
+        Log.println(ifcOperativeException.fillInStackTrace());
+        MaxineVM.setExitCode(-99);
+
     }
 
     /**

@@ -1,0 +1,52 @@
+/Users/GripGlebe/jdeveloper/mywork>
+/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java -server -classpath "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/.adf:/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/classes:/Users/GripGlebe/.jdeveloper/guava-30.1-jre.jar:/Users/GripGlebe/.jdeveloper/asm-6.0-maxine.jar:/Users/GripGlebe/.jdeveloper/asm-util-6.0-maxine.jar:/Users/GripGlebe/.jdeveloper/junit-4.12.jar:/Users/GripGlebe/.jdeveloper/okra-1.9.jar:/Users/GripGlebe/Projects/JavaJDK/src copy/org.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1-sources.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1-sources.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar:/Users/GripGlebe/.jdeveloper/apache-log4j-2.14.1-bin/log4j-iostreams-2.14.1.jar" -Djavax.net.ssl.trustStore=/var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/trustStore8925054218398932440.jks org.ifcparaclete.IFCPolicy
+ifc:ActorObject
+1
+IFCName == com.sun.max.vm.run.java.JavaRunScheme
+ifcID == 0
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:ActorObject
+1
+IFCName == com.sun.max.vm.hosted.HostedClassLoader
+ifcID == 1
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:ActorObject
+1
+IFCName == test.output.HelloWorld
+ifcID == 2
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:TargetObject
+1
+IFCName == com.sun.max.vm.run.java.JavaRunScheme
+ifcID == 0
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:TargetObject
+1
+IFCName == com.sun.max.vm.hosted.HostedClassLoader
+ifcID == 1
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:TargetObject
+1
+IFCName == test.output.HelloWorld
+ifcID == 2
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+ifc:TargetObject
+1
+IFCName == java.lang.System
+ifcID == 3
+ifcSecurityLevel == F
+No Active Ops for this Object
+{0, 1, 2, 3, 4, 5, 6, 7}
+Process exited with exit code 0.

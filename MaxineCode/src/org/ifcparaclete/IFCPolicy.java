@@ -19,13 +19,13 @@ import org.xml.sax.SAXException;
 
 public class IFCPolicy implements IFCStatics {
 
-    private static HashMap         ifcActorObjects = new HashMap();
-    private static HashMap         ifcActorObjectsKeys = new HashMap();
-    private static IFCActorObject  ifcActorObject = null;
-    private static HashMap         ifcTargetObjects = new HashMap();
+    private static HashMap         ifcActorObjects      = new HashMap();
+    private static HashMap         ifcActorObjectsKeys  = new HashMap();
+    private static IFCObject       ifcActorObject       = null;
+    private static HashMap         ifcTargetObjects     = new HashMap();
     private static HashMap         ifcTargetObjectsKeys = new HashMap();
-    private static HashMap[]       ifcObjectsArray = new HashMap[4];
-    private static IFCTargetObject ifcTargetObject = null;
+    private static HashMap[]       ifcObjectsArray      = new HashMap[4];
+    private static IFCObject       ifcTargetObject      = null;
 
     @SuppressWarnings("oracle.jdeveloper.java.unused-field")
     private static String ifcID = null;
@@ -66,12 +66,13 @@ public class IFCPolicy implements IFCStatics {
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 nNode = nList.item(temp);
-
+                System.out.println(nNode.getNodeName());
+                System.out.println(nNode.getNodeType());
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                     nElement = (Element) nNode;
 
-                    ifcActorObject = new IFCActorObject(nElement);
+                    ifcActorObject = new IFCObject(nElement);
                     ifcActorObjects.put(ifcActorObject.getID(), ifcActorObject);
                     ifcActorObjectsKeys.put(ifcActorObject.getName(),ifcActorObject.getID());
                 }
@@ -80,12 +81,13 @@ public class IFCPolicy implements IFCStatics {
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 nNode = nList.item(temp);
-
+                System.out.println(nNode.getNodeName());
+                System.out.println(nNode.getNodeType());
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                     nElement = (Element) nNode;
 
-                    ifcTargetObject = new IFCTargetObject(nElement);
+                    ifcTargetObject = new IFCObject(nElement);
                     ifcTargetObjects.put(ifcTargetObject.getID(), ifcTargetObject);
                     ifcTargetObjectsKeys.put(ifcTargetObject.getName(), ifcTargetObject.getID());
                 }
