@@ -1,0 +1,16 @@
+Apache Ant(TM) version 1.10.10 compiled on April 12 2021
+Buildfile: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Detected Java version: 1.8 in: /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre
+Detected OS: Mac OS X
+parsing buildfile /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml with URI = file:/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Project base dir set to: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/src
+parsing buildfile jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml with URI = jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml from a zip file
+Override ignored for property "norun"
+Build sequence for target(s) `Ajx-run' is [Ajx-run]
+Complete build sequence is [Ajx-run, init.variables, bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, tracing-lt, tjp, all, nonGui, tracing-adapter-ajc, Ajx, telecom-billing, tracing-bc, tracing-adapter, clean, info, ]
+
+Ajx-run:
+Skipped because property 'norun' set.
+
+BUILD SUCCESSFUL
+Total time: 0 seconds

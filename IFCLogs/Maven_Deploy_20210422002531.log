@@ -1,0 +1,190 @@
+
+Deploying library [JSP Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=JSP-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file javax.servlet.jsp.javax.servlet.jsp-api.jar
+Deployment of {groupId=javax.servlet.jsp, artifactId=javax.servlet.jsp-api, version=2.3.2-b02, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file org.glassfish.javax.el.jar
+Deployment of {groupId=org.glassfish, artifactId=javax.el, version=3.0.1-b11, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF DVT Faces Databinding MDS Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-DVT-Faces-Databinding-MDS-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file dvt-databindings-mds.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-databindings-mds, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Controller Schema]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Controller-Schema, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file adf-controller-schema.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-controller-schema, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Controller Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Controller-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file adf-controller.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-controller, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-controller-api.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-controller-api, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-controller-rt-common.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-controller-rt-common, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [Commons Collections 3.1]
+Deployment of {groupId=com.oracle.adf.library, artifactId=Commons-Collections, version=12.2.1-4-0, classifier=null, type=pom, scope=compile} has finished.
+Deploying jar file com.bea.core.apache.commons.collections.jar
+Deployment of {groupId=com.oracle.adf, artifactId=collections, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [JSTL 1.2]
+Deployment of {groupId=com.oracle.adf.library, artifactId=JSTL, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file org.glassfish.web.javax.servlet.jsp.jstl.jar
+Deployment of {groupId=org.glassfish.web, artifactId=javax.servlet.jsp.jstl, version=1.2.5-b02, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file javax.servlet.jsp.jstl.javax.servlet.jsp.jstl-api.jar
+Deployment of {groupId=javax.servlet.jsp.jstl, artifactId=javax.servlet.jsp.jstl-api, version=1.2.1, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Common Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Common-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file adf-controller-security.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-controller-security, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-share-security.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-share-security, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-share-base.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-share-base, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-share-ca.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-share-ca, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-share-support.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-share-support, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adflogginghandler.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adflogginghandler, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adfsharembean.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adfsharembean, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file identitystore.jar
+Deployment of {groupId=com.oracle.adf, artifactId=identitystore, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-share-multi-tenancy.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-share-multi-tenancy, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file ojdl.jar
+Deployment of {groupId=com.oracle.adf, artifactId=ojdl, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file ojdl-log4j.jar
+Deployment of {groupId=com.oracle.adf, artifactId=ojdl-log4j, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file ojdl2.jar
+Deployment of {groupId=com.oracle.adf, artifactId=ojdl2, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [JSF 2.2]
+Deployment of {groupId=com.oracle.adf.library, artifactId=JSF, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file glassfish.jsf.jar
+Deployment of {groupId=com.oracle.adf, artifactId=faces, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Page Flow Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Page-Flow-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file adf-pageflow-impl.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-pageflow-impl, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-pageflow-dtrt.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-pageflow-dtrt, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-pageflow-fwk.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-pageflow-fwk, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-pageflow-rc.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-pageflow-rc, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF DVT Faces Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-DVT-Faces-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file dvt-utils.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-utils, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-basemaps.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-basemaps, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-jclient.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-jclient, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-trinidad.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-trinidad, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-shared-js.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-shared-js, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-faces.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-faces, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file batik-all-1.11.0.0.1.jar
+Deployment of {groupId=com.oracle.adf, artifactId=batik-all, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file xml-apis-ext-1.3.04.jar
+Deployment of {groupId=com.oracle.adf, artifactId=xml-apis-ext-4, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [Commons Logging 1.0.4]
+Deployment of {groupId=com.oracle.adf.library, artifactId=Commons-Logging, version=12.2.1-4-0, classifier=null, type=pom, scope=compile} has finished.
+Deploying jar file org.apache.commons.logging_1.2.jar
+Deployment of {groupId=com.oracle.adf, artifactId=logging, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Web Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Web-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file adfmweb.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adfmweb, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF DVT Faces Databinding Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-DVT-Faces-Databinding-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=compile} has finished.
+Deploying jar file dvt-databindings.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-databindings, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dvt-facesbindings.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dvt-facesbindings, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [ADF Faces Runtime 11]
+Deployment of {groupId=com.oracle.adf.library, artifactId=ADF-Faces-Runtime-11, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file trinidad-api.jar
+Deployment of {groupId=com.oracle.adf, artifactId=trinidad-api, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file trinidad-impl.jar
+Deployment of {groupId=com.oracle.adf, artifactId=trinidad-impl, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-richclient-api-11.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-richclient-api-11, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file adf-richclient-impl-11.jar
+Deployment of {groupId=com.oracle.adf, artifactId=adf-richclient-impl-11, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [MDS Runtime Dependencies]
+Deployment of {groupId=com.oracle.adf.library, artifactId=MDS-Runtime-Dependencies, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file oramds.jar
+Deployment of {groupId=com.oracle.adf, artifactId=oramds, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file com.oracle.db.jdbc-dms.jar
+Deployment of {groupId=com.oracle.adf, artifactId=jdbc-dms, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file commons-cli_1.2.0.0.0.jar
+Deployment of {groupId=com.oracle.adf, artifactId=commons-cli, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file jakarta-commons-el.jar
+Deployment of {groupId=com.oracle.adf, artifactId=jakarta-commons-el, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file jsp-el-api.jar
+Deployment of {groupId=com.oracle.adf, artifactId=jsp-el-api, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file oracle-el.jar
+Deployment of {groupId=com.oracle.adf, artifactId=oracle-el, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file share.jar
+Deployment of {groupId=com.oracle.adf, artifactId=share, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file xmlef.jar
+Deployment of {groupId=com.oracle.adf, artifactId=xmlef, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file dms.jar
+Deployment of {groupId=com.oracle.adf, artifactId=dms, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file xml.jar
+Deployment of {groupId=com.oracle.adf, artifactId=xml, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file xmlparserv2.jar
+Deployment of {groupId=com.oracle.adf, artifactId=xmlparserv2, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file orai18n.jar
+Deployment of {groupId=com.oracle.adf, artifactId=orai18n, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file coherence.jar
+Deployment of {groupId=com.oracle.adf, artifactId=coherence, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file oracle.ucp.jar
+Deployment of {groupId=com.oracle.adf, artifactId=ucp, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file javatools-nodeps.jar
+Deployment of {groupId=com.oracle.adf, artifactId=javatools-nodeps, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file jmxframework.jar
+Deployment of {groupId=com.oracle.adf, artifactId=jmxframework, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file jmxspi.jar
+Deployment of {groupId=com.oracle.adf, artifactId=jmxspi, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file javax.management.j2ee.jar
+Deployment of {groupId=com.oracle.adf, artifactId=j2ee, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file eclipselink.jar
+Deployment of {groupId=com.oracle.adf, artifactId=eclipselink, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [Commons Beanutils 1.6]
+Deployment of {groupId=com.oracle.adf.library, artifactId=Commons-Beanutils, version=12.2.1-4-0, classifier=null, type=pom, scope=compile} has finished.
+Deploying jar file commons-beanutils-1.9.3.jar
+Deployment of {groupId=commons-beanutils, artifactId=commons-beanutils, version=1.9.3, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [MDS Runtime]
+Deployment of {groupId=com.oracle.adf.library, artifactId=MDS-Runtime, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file mdsrt.jar
+Deployment of {groupId=com.oracle.adf, artifactId=mdsrt, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+
+Deploying library [Apache Http Components]
+Deployment of {groupId=com.oracle.adf.library, artifactId=Apache-Http-Components, version=12.2.1-4-0, classifier=null, type=pom, scope=provided} has finished.
+Deploying jar file org.apache.httpcomponents.httpclient.jar
+Deployment of {groupId=com.oracle.adf, artifactId=httpclient, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file httpclient-cache.jar
+Deployment of {groupId=com.oracle.adf, artifactId=httpclient-cache, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file httpcore.jar
+Deployment of {groupId=com.oracle.adf, artifactId=httpcore, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.
+Deploying jar file httpmime_4.5.1.0.0.jar
+Deployment of {groupId=com.oracle.adf, artifactId=httpmime, version=12.2.1-4-0, classifier=null, type=jar, scope=compile} has finished.

@@ -1,4 +1,0 @@
-ServiceProcessor
-com.oracle.graal.hotspot
-com.oracle.graal.compiler.amd64
-com.oracle.graal.replacements.amd64

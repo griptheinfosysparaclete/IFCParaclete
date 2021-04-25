@@ -1,0 +1,6 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="ApplicationDB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" partial="true"
+             manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+    <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+  </Reference>
+</References>

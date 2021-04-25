@@ -1,0 +1,44 @@
+Apache Ant(TM) version 1.10.10 compiled on April 12 2021
+Buildfile: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Detected Java version: 1.8 in: /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre
+Detected OS: Mac OS X
+parsing buildfile /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml with URI = file:/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Project base dir set to: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples
+parsing buildfile jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml with URI = jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml from a zip file
+ [property] Loading /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.properties
+Override ignored for property "javac.deprecation"
+Override ignored for property "output.dir"
+Override ignored for property "oracle.commons"
+Override ignored for property "install.dir"
+Override ignored for property "norun"
+Override ignored for property "oracle.home"
+Override ignored for property "javac.debug"
+Override ignored for property "javac.nowarn"
+Build sequence for target(s) `info' is [info]
+Complete build sequence is [info, init.variables, bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, tracing-lt, tjp, all, nonGui, tracing-adapter-ajc, Ajx, telecom-billing, tracing-bc, tracing-adapter, Ajx-run, clean, ]
+
+info:
+     [echo] 
+     [echo]   This script builds the AspectJ examples.  
+     [echo] 
+     [echo]   Relevant targets:
+     [echo]      spacewar        build and run spacewar with debugging (default)
+     [echo]      all             build and run each example
+     [echo]      {example}       build and run any {example} 
+     [echo]                      (use -projecthelp to list {example} names)
+     [echo]      tracing-bc      use AspectJ 1.1 bytecode weaving to build tracing example
+     [echo] 
+     [echo]   Setup:
+     [echo]      - Run from the doc/examples directory in your AspectJ distribution.
+     [echo]        The tasks in ../../lib/aspectjtools.jar are used automatically.
+     [echo] 
+     [echo]   Variants:
+     [echo]      - To avoid running (i.e., compile only), define variable "norun"
+     [echo]      - To define a variable, use the Ant -D option - e.g., on Windows:
+     [echo]   
+     [echo]          ant -f build.xml -DJAVA_HOME=c:\jdk1.3.1 -Dnorun=skip
+     [echo] base dir = {$basedir}
+     [echo]       
+
+BUILD SUCCESSFUL
+Total time: 0 seconds

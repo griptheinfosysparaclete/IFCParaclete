@@ -117,15 +117,18 @@ public final class JDK_java_lang_System {
      * @param is the new system input stream
      */
     @SUBSTITUTE
+    @SuppressWarnings("unused")
     private static void setIn0(InputStream is) {
-        /*       try {
-            ifcEnforcer.ifcCheck(Thread.currentThread()
-                                       .getStackTrace()[2]
-                                       .getClassName(), is.getClass().getName(), IFCStatics.IFC_OP_OPEN);
-        } catch (IFCOperativeException ifcOperativeException) {
-            exitJVM(ifcOperativeException);
-        } */
-        in = is;
+        if (vm().phase == MaxineVM.Phase.RUNNING) {
+            try {
+                ifcEnforcer.ifcCheck(Thread.currentThread()
+                                           .getStackTrace()[3]
+                                           .getClassName(), is.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+            } catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
+            in = is;
+        }
     }
 
     private static void exitJVM(IFCOperativeException ifcOperativeException) {
@@ -144,22 +147,16 @@ public final class JDK_java_lang_System {
     @SUBSTITUTE
     @SuppressWarnings("unused")
     private static void setOut0(PrintStream ps) {
-
-        System.out.println("1 setOut0 " + ps.getClass().getName());
-        System.out.println("2 setOut0 " + Thread.currentThread()
-                                              .getStackTrace()[2]
-                                              .getClassName());
-        System.out.println("2 setOut0 " + Thread.currentThread()
-                                                .getStackTrace()[3]
-                                                .getClassName());
-        try {
-            ifcEnforcer.ifcCheck(Thread.currentThread()
-                                       .getStackTrace()[3]
-                                       .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_OPEN);
-        } catch (IFCOperativeException ifcOperativeException) {
-            exitJVM(ifcOperativeException);
-        } 
-        out = ps;
+        if (vm().phase == MaxineVM.Phase.RUNNING) {
+            try {
+                ifcEnforcer.ifcCheck(Thread.currentThread()
+                                           .getStackTrace()[3]
+                                           .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+            } catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
+            out = ps;
+        }
     }
 
     /**
@@ -168,8 +165,18 @@ public final class JDK_java_lang_System {
      * @param ps the new system error stream
      */
     @SUBSTITUTE
+    @SuppressWarnings("unused")
     private static void setErr0(PrintStream ps) {
-        err = ps;
+        if (vm().phase == MaxineVM.Phase.RUNNING) {
+            try {
+                ifcEnforcer.ifcCheck(Thread.currentThread()
+                                           .getStackTrace()[3]
+                                           .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+            } catch (IFCOperativeException ifcOperativeException) {
+                exitJVM(ifcOperativeException);
+            }
+            err = ps;
+        }
     }
 
     /**

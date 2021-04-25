@@ -1,0 +1,67 @@
+Apache Ant(TM) version 1.10.10 compiled on April 12 2021
+Detected Java version: 1.8 in: /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre
+Detected OS: Mac OS X
+parsing buildfile /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml with URI = file:/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Project base dir set to: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/src
+Buildfile: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+parsing buildfile jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml with URI = jar:file:/Users/GripGlebe/apache-ant-1.10.10/lib/ant.jar!/org/apache/tools/ant/antlib.xml from a zip file
+Override ignored for property "norun"
+Build sequence for target(s) `all' is [bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, tracing-lt, tjp, all]
+Complete build sequence is [bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, tracing-lt, tjp, all, nonGui, tracing-adapter-ajc, Ajx, telecom-billing, tracing-bc, tracing-adapter, Ajx-run, clean, info, ]
+
+bean:
+Project base dir set to: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/src
+  [antcall] calling target(s) [Ajx] in build file /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+parsing buildfile /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml with URI = file:/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml
+Project base dir set to: /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/src
+Override ignored for property "norun"
+Build sequence for target(s) `Ajx' is [init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, Ajx]
+Complete build sequence is [init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, Ajx, bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, tracing-lt, tjp, all, nonGui, tracing-adapter-ajc, telecom-billing, tracing-bc, tracing-adapter, Ajx-run, clean, info, ]
+  [antcall] Entering /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml...
+Build sequence for target(s) `Ajx' is [init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, Ajx]
+Complete build sequence is [init.variables, aspectjtools.jar.available, aspectjrt.jar.available, init.taskdefs, init, Ajx, bean, intro, intro-clone, intro-compare, intro-hash, observer, spacewar, spacewar-demo, telecom, telecom-timing, tracing-none, tracing-1, tracing-2, tracing-3, tracing-lt, tjp, all, nonGui, tracing-adapter-ajc, telecom-billing, tracing-bc, tracing-adapter, Ajx-run, clean, info, ]
+
+init.variables:
+[available] Unable to find /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/lib/aspectjtools.jar to set property aspectjtools.jar.available
+[available] Unable to find /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/lib/aspectjrt.jar to set property aspectjrt.jar.available
+
+aspectjtools.jar.available:
+  [antcall] Exiting /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml.
+
+BUILD FAILED
+/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml:173: The following error occurred while executing this line:
+/Users/GripGlebe/jdeveloper/mywork/AspecjExamples/AJExamples/build.xml:121: expecting aspectjtools.jar at /Users/GripGlebe/jdeveloper/mywork/AspecjExamples/lib/aspectjtools.jar
+	at org.apache.tools.ant.taskdefs.Exit.execute(Exit.java:162)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:99)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:449)
+	at org.apache.tools.ant.Target.performTasks(Target.java:470)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1401)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:36)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1264)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:437)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:106)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:99)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:449)
+	at org.apache.tools.ant.Target.performTasks(Target.java:470)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1401)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1374)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1264)
+	at org.apache.tools.ant.Main.runBuild(Main.java:827)
+	at org.apache.tools.ant.Main.startAnt(Main.java:223)
+	at org.apache.tools.ant.Main.start(Main.java:190)
+	at org.apache.tools.ant.Main.main(Main.java:274)
+
+Total time: 0 seconds
