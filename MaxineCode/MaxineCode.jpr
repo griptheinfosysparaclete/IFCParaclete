@@ -72,6 +72,9 @@
    <value n="defaultPackage" v="org.ifcparaclete"/>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
+         <string v="JAVASCRIPT"/>
+         <string v="Java"/>
+         <string v="Maven"/>
          <string v="XML"/>
          <string v="XML_SCHEMA"/>
       </list>
@@ -88,6 +91,8 @@
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
+                  <string v="-com/sun/max/vm/verifier/types/doc-files/"/>
+                  <string v="-src/org/.vscode/"/>
                   <string v="-org/ifcparaclete/IFCPolicy.xsd"/>
                   <string v="-org/ifcparaclete/IFCPolicy.xml"/>
                   <string v="-words"/>

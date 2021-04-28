@@ -34,7 +34,7 @@ public class HelloWorld {
    public HelloWorld() {
        
        try {
-            fos = new FileOutputStream("/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCLogFile.log");
+            fos = new FileOutputStream("/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCLogs/IFCLogFile.log");
             ps = new PrintStream(fos);
             System.out.println("2 Hello World!");
             System.out.println("3 " + ps.getClass().getName());

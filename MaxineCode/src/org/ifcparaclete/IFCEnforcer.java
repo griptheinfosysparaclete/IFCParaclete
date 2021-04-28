@@ -1,9 +1,10 @@
 package org.ifcparaclete;
 
+import com.sun.max.vm.Log;
+
 import java.util.HashMap;
 
 import org.ifcparaclete.exceptions.IFCOperativeException;
-
 
 public class IFCEnforcer implements IFCStatics {
 
@@ -83,6 +84,7 @@ public class IFCEnforcer implements IFCStatics {
                 actorClassPackageName = actorClassNames[i].getClass().getPackage().getName();
                
                 for (j = 0; j <=  numOfPackages;j++) {
+                   Log.println(actorClassPackageName + ": " + IFCStatics.IFC_VM_PACKAGES.get(j));
                     if (actorClassPackageName.startsWith(IFCStatics.IFC_VM_PACKAGES.get(j))) {
                         return true;
                     }
