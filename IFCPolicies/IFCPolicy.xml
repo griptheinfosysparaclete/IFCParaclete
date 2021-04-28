@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ifc:IFCPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://ifcparaclete.org file:/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCPolicy.xsd"
+               xsi:schemaLocation="http://ifcparaclete.org file:/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCPolicies/IFCPolicy.xsd"
                xmlns:ifc="http://ifcparaclete.org">
     <ifc:IFCObjects>
         <ifc:ActorObjects>
@@ -102,7 +102,7 @@
                 <ifc:ID>3</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>S</ifc:Category>
-                <ifc:Type>I</ifc:Type>
+                <ifc:Type>T</ifc:Type>
                 <ifc:ActiveIFOPS>
                     <ifc:Op>e</ifc:Op>
                     <ifc:Op>o</ifc:Op>
@@ -260,8 +260,19 @@
                 <ifc:ID>3</ifc:ID>
                 <ifc:SecurityLevel>F</ifc:SecurityLevel>
                 <ifc:Category>S</ifc:Category>
-                <ifc:Type>I</ifc:Type>
-                <ifc:ActiveIFOPS/>
+                <ifc:Type>T</ifc:Type>
+                <ifc:ActiveIFOPS>
+                    <ifc:Op>e</ifc:Op>
+                    <ifc:Op>o</ifc:Op>
+                    <ifc:Op>c</ifc:Op>
+                    <ifc:Op>l</ifc:Op>
+                    <ifc:Op>w</ifc:Op>
+                    <ifc:Op>r</ifc:Op>
+                    <ifc:Op>d</ifc:Op>
+                    <ifc:Op>f</ifc:Op>
+                    <ifc:Op>a</ifc:Op>
+                    <ifc:Op>m</ifc:Op>
+                </ifc:ActiveIFOPS>
                 <ifc:PassiveIFOPS>
                     <ifc:Op>e</ifc:Op>
                     <ifc:Op>o</ifc:Op>

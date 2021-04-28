@@ -269,11 +269,10 @@ public abstract class HostedClassLoader extends ClassLoader {
     @Override
     protected synchronized Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
 
-        if (!ifcBuildingImage) {
-            try {
-                ifcEnforcer.ifcCheck(this.getClass().getName(), name, IFCStatics.IFC_OP_LOAD);
-            } catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+        if (!ifcBuildingImage) {      
+            if(!ifcEnforcer.ifcCheck(this.getClass().getName(), name, IFCStatics.IFC_OP_LOAD)) {
+
+                exitJVM(new IFCOperativeException("Not a legal class: " + name));
             }
         }
 
@@ -329,6 +328,11 @@ public abstract class HostedClassLoader extends ClassLoader {
      * @param classfileBytes a byte array containing the encoded version of the class
      */
     public ClassActor makeClassActor(final String name, byte[] classfileBytes) {
+        try {
+        ifcEnforcer.ifcCheck(Thread.currentThread().getStackTrace(),  name, IFCStatics.IFC_OP_LOAD);
+        } catch (IFCOperativeException ifcOperativeException) {
+            exitJVM(ifcOperativeException);
+        }
         defineClass(name, classfileBytes, 0, classfileBytes.length);
         return ClassfileReader.defineClassActor(name, this, classfileBytes, null, null, false);
     }

@@ -15,6 +15,7 @@ public class IFCEnforcer implements IFCStatics {
     private IFCObject ifcActor;
     private IFCObject ifcTarget;
     private String mainApplication;
+    int numOfPackages = IFCStatics.IFC_VM_PACKAGES.size();
 
     private boolean buildingImage;
 
@@ -56,6 +57,51 @@ public class IFCEnforcer implements IFCStatics {
         buildingImage = isBuildingImageArg;
     }
 
+    /**
+     * @param actorClassNames
+     * @param targetClassName
+     * @param ifcOp
+     * @return
+     * @throws IFCOperativeException
+     */
+    public boolean ifcCheck(StackTraceElement[] actorClassNames, String targetClassName,
+                            String ifcOp) throws IFCOperativeException {
+
+        boolean allowed = false;
+        int i;
+        int j;
+        
+        int stackTraceLength;
+        String actorClassName = null;
+        String actorClassPackageName = null;
+
+        if (buildingImage) {
+            allowed = true;
+        } else {
+            stackTraceLength = actorClassNames.length - 1;
+            for (i = stackTraceLength;i >= 0; i--) {
+                actorClassPackageName = actorClassNames[i].getClass().getPackage().getName();
+               
+                for (j = 0; j <=  numOfPackages;j++) {
+                    if (actorClassPackageName.startsWith(IFCStatics.IFC_VM_PACKAGES.get(j))) {
+                        return true;
+                    }
+                }
+                    
+                actorClassName = actorClassNames[i].getClassName();
+                allowed = ifcCheck(actorClassName, targetClassName, ifcOp);
+                if (!allowed) {
+                    throw new IFCOperativeException("Either one or both of these classes:\n" + targetClassName + "\n" +
+                                                    actorClassName +
+                                                    "\n is not an authorized class for this application, " +
+                                                    mainApplication + "\n");
+                }
+            }
+        }
+        
+        return allowed;
+
+    }
 
     /**
      * @param actorClassName
@@ -63,13 +109,13 @@ public class IFCEnforcer implements IFCStatics {
      * @param ifcOp
      * @return
      */
-    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp) throws IFCOperativeException {
+    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp)  {
 
         boolean allowed = false;
         boolean inActorArray = false;
         boolean inTargetArray = false;
-        String  ifcActorKey;
-        String  ifcTargetKey;
+        String ifcActorKey;
+        String ifcTargetKey;
 
         if (buildingImage) {
             allowed = true;
@@ -82,43 +128,39 @@ public class IFCEnforcer implements IFCStatics {
                 ifcTargetKey = (String) targetObjectsArray[0].get(targetClassName);
                 ifcActor = (IFCObject) actorObjectsArray[1].get(ifcActorKey);
                 ifcTarget = (IFCObject) targetObjectsArray[1].get(ifcTargetKey);
-                try {
-                    allowed = ifcOpAllowed(ifcOp);
-                } catch (IFCOperativeException IFCOE) {
-                    throw IFCOE;
-                }
+                allowed = ifcOpAllowed(ifcOp);
             }
 
         }
 
-        if (!allowed) {
-            throw new IFCOperativeException("Either one or both of these classes:\n" + targetClassName + "\n" +
-                                            actorClassName + "\n is not an authorized class for this application, " +
-                                            mainApplication + "\n");
-        }
         return allowed;
 
     }
 
-    private boolean ifcOpAllowed(String ifcOp) throws IFCOperativeException {
+    private boolean ifcOpAllowed(String ifcOp)  {
+        
         boolean allowed = false;
-        System.out.println(ifcActor.getType());
-        System.out.println(ifcActor.getSecurityLevelInt());
-        System.out.println(ifcTarget.getSecurityLevelInt());
-        System.out.println(ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp)));
-        System.out.println(ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp)));
-        if (ifcActor.getType().equals(IFC_TYPE_TRANSITIVE)) {
-            if (ifcActor.getSecurityLevelInt() >= ifcTarget.getSecurityLevelInt()) {
-                allowed =
-                    ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp)) &&
-                    ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp));
+        String ifcActorName = ifcActor.getName();
+        String ifcTargetName = ifcTarget.getName();
+        String ifcActorType = ifcActor.getType();
+        int        ifcActorSecurityLevelInt = ifcActor.getSecurityLevelInt();
+        int        ifcTargetSecurityLevelInt = ifcTarget.getSecurityLevelInt();
+        System.out.println(ifcActorName + ": " + ifcActorType);
+        System.out.println(ifcActorName + ": " + ifcActorSecurityLevelInt);
+        System.out.println(ifcTargetName + ": " + ifcTargetSecurityLevelInt);
+        System.out.println("Hi!");
+        boolean ifcActorActiveOp = ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp));
+        boolean ifcTargetPassiveOp = ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp));
+
+        System.out.println(ifcActorName + ": " + ifcActorActiveOp);
+        System.out.println(ifcTargetName + ": " + ifcTargetPassiveOp);
+        if (ifcActorType.equals(IFCStatics.IFC_TYPE_TRANSITIVE)) {
+            if (ifcActorSecurityLevelInt >= ifcTargetSecurityLevelInt) {
+                allowed =  ifcActorActiveOp &&  ifcTargetPassiveOp;
             }
 
         }
-        if (!allowed) {
-            throw new IFCOperativeException("Illegal operation, " + IFC_OPS_NAMES.get(ifcOp) + ", attemted by: " +
-                                            ifcActor.getName() + "\nOn " + ifcTarget.getName());
-        }
+
         return allowed;
 
     }

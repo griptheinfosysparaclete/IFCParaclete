@@ -8,9 +8,9 @@ import java.util.Map;
 public interface IFCStatics {
 
     public static final String IFC_DEFAULT_POLICY_FILE =
-        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCPolicy.xml";
+        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCPolicies/IFCPolicy.xml";
     public static final String IFC_DEFAULT_LOG_FILE =
-        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/MaxineCode/src/org/ifcparaclete/IFCLogFile.log";
+        "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCLogs/IFCLogFile.log";
     public static final String IFC_DEFAULT_LOG_LAYOUT = "[%level{lowerCase=true} %date{yyyy/MM/dd HH:mm:ss.SSS z} <%thread> tid=%tid] %message%n%throwable%n";
     public static final String IFC_DEFAULT_APPLICATION = "test.output.HelloWorld";
     static final String IFC_DEFAULT_MESSAGE = "This is the IFC_DEFAULT_MESSAGE";     
@@ -72,4 +72,8 @@ public interface IFCStatics {
                                                            .put("a", "AccessSystemInformation")
                                                            .put("m", "Modify")
                                                            .build();
+    static final Map<Integer, String> IFC_VM_PACKAGES = ImmutableMap.<Integer,String>builder()
+                                                            .put(0,"com.sun")
+                                                            .put(1,"com.oracle")
+                                                            .build();
 }

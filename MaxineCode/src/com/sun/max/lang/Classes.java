@@ -22,9 +22,18 @@
  */
 package com.sun.max.lang;
 
-import java.lang.reflect.*;
+import com.sun.max.Utils;
+import com.sun.max.vm.MaxineVM;
+import static com.sun.max.vm.run.java.JavaRunScheme.ifcEnforcer;
 
-import com.sun.max.*;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
+import org.ifcparaclete.IFCStatics;
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 /**
  * Methods that might be members of java.lang.Class.
@@ -65,11 +74,20 @@ public final class Classes {
      * {@link ClassNotFoundException} occur, it is converted to {@link NoClassDefFoundError}
      */
     public static Class forName(String name, boolean initialize, ClassLoader loader) {
+
+        if (MaxineVM.vm().isRunning()) {
+
+            if (!ifcEnforcer.ifcCheck("Classes", name, IFCStatics.IFC_OP_LOAD)) {
+                MaxineVM.exitJVM(new IFCOperativeException("Illegal Class: " + name + "\n"));
+            }
+        }
         try {
             return Class.forName(name, initialize, loader);
         } catch (ClassNotFoundException e) {
             throw (NoClassDefFoundError) new NoClassDefFoundError(name).initCause(e);
         }
+
+
     }
 
     /**
@@ -131,7 +149,7 @@ public final class Classes {
      *         {@code arguments} or null if no such constructor exists
      */
     public static Constructor<?> findConstructor(Class<?> javaClass, Object... arguments) {
-    nextConstructor:
+        nextConstructor:
         for (Constructor<?> constructor : javaClass.getConstructors()) {
             final Class<?>[] parameterTypes = constructor.getParameterTypes();
             if (parameterTypes.length == arguments.length) {
@@ -157,7 +175,7 @@ public final class Classes {
      *         or null if no such method exists
      */
     public static Method findMethod(Class<?> javaClass, String name, Object... arguments) {
-    nextMethod:
+        nextMethod:
         for (Method method : javaClass.getMethods()) {
             final Class<?>[] parameterTypes = method.getParameterTypes();
             if (method.getName().equals(name) && parameterTypes.length == arguments.length) {
@@ -183,7 +201,7 @@ public final class Classes {
      *         {@code arguments} or null if no such method exists
      */
     public static Method findDeclaredMethod(Class<?> javaClass, String name, Object... arguments) {
-    nextMethod:
+        nextMethod:
         for (Method declaredMethod : javaClass.getDeclaredMethods()) {
             final Class<?>[] parameterTypes = declaredMethod.getParameterTypes();
             if (declaredMethod.getName().equals(name) && parameterTypes.length == arguments.length) {
@@ -223,7 +241,8 @@ public final class Classes {
             do {
                 try {
                     final Method method = getDeclaredMethod(declaringClass, returnType, name, parameterTypes);
-                    if (Modifier.isAbstract(method.getModifiers()) && !Modifier.isAbstract(declaringClass.getModifiers())) {
+                    if (Modifier.isAbstract(method.getModifiers()) &&
+                        !Modifier.isAbstract(declaringClass.getModifiers())) {
                         throw new AbstractMethodError();
                     }
                     return method;
@@ -232,7 +251,8 @@ public final class Classes {
                 }
             } while (declaringClass != null);
         }
-        throw new NoSuchMethodError(returnType.getName() + " " + javaClass.getName() + "." + name + "(" + Utils.toString(parameterTypes, ", ") + ")");
+        throw new NoSuchMethodError(returnType.getName() + " " + javaClass.getName() + "." + name + "(" +
+                                    Utils.toString(parameterTypes, ", ") + ")");
     }
 
     /**
@@ -365,16 +385,20 @@ public final class Classes {
      * Similar to {@link Class#getDeclaredMethod(String, Class...)} except that
      * the search takes into account the return type.
      */
-    public static Method getDeclaredMethod(Class<?> clazz, Class returnType, String name, Class... parameterTypes)  throws NoSuchMethodError {
+    public static Method getDeclaredMethod(Class<?> clazz, Class returnType, String name,
+                                           Class... parameterTypes) throws NoSuchMethodError {
         for (Method javaMethod : clazz.getDeclaredMethods()) {
             if (javaMethod.getName().equals(name) && javaMethod.getReturnType().equals(returnType)) {
                 final Class[] declaredParameterTypes = javaMethod.getParameterTypes();
-                if (java.util.Arrays.equals(declaredParameterTypes, parameterTypes)) {
+                if (java.util
+                        .Arrays
+                        .equals(declaredParameterTypes, parameterTypes)) {
                     return javaMethod;
                 }
             }
         }
-        throw new NoSuchMethodError(returnType.getName() + " " + clazz.getName() + "." + name + "(" + Utils.toString(parameterTypes, ",") + ")");
+        throw new NoSuchMethodError(returnType.getName() + " " + clazz.getName() + "." + name + "(" +
+                                    Utils.toString(parameterTypes, ",") + ")");
     }
 
     /**
@@ -384,7 +408,9 @@ public final class Classes {
         try {
             return clazz.getDeclaredMethod(name, parameterTypes);
         } catch (NoSuchMethodException noSuchMethodException) {
-            throw (NoSuchMethodError) new NoSuchMethodError(clazz.getName() + "." + name + "(" + Utils.toString(parameterTypes, ",") + ")").initCause(noSuchMethodException);
+            throw (NoSuchMethodError) new NoSuchMethodError(clazz.getName() + "." + name + "(" +
+                                                            Utils.toString(parameterTypes, ",") + ")")
+                  .initCause(noSuchMethodException);
         }
     }
 
@@ -395,7 +421,9 @@ public final class Classes {
         try {
             return clazz.getDeclaredConstructor(parameterTypes);
         } catch (NoSuchMethodException noSuchMethodException) {
-            throw (NoSuchMethodError) new NoSuchMethodError(clazz.getName() + "(" + Utils.toString(parameterTypes, ",") + ")").initCause(noSuchMethodException);
+            throw (NoSuchMethodError) new NoSuchMethodError(clazz.getName() + "(" +
+                                                            Utils.toString(parameterTypes, ",") + ")")
+                  .initCause(noSuchMethodException);
         }
     }
 

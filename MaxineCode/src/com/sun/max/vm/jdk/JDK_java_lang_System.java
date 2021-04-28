@@ -122,21 +122,12 @@ public final class JDK_java_lang_System {
         if (vm().phase == MaxineVM.Phase.RUNNING) {
             try {
                 ifcEnforcer.ifcCheck(Thread.currentThread()
-                                           .getStackTrace()[3]
-                                           .getClassName(), is.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+                                           .getStackTrace(), is.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
             } catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+                MaxineVM.exitJVM(ifcOperativeException);
             }
             in = is;
         }
-    }
-
-    private static void exitJVM(IFCOperativeException ifcOperativeException) {
-
-        Log.println(ifcOperativeException.getMessage());
-        Log.println(ifcOperativeException.fillInStackTrace());
-        MaxineVM.setExitCode(-99);
-
     }
 
     /**
@@ -149,11 +140,11 @@ public final class JDK_java_lang_System {
     private static void setOut0(PrintStream ps) {
         if (vm().phase == MaxineVM.Phase.RUNNING) {
             try {
+                
                 ifcEnforcer.ifcCheck(Thread.currentThread()
-                                           .getStackTrace()[3]
-                                           .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+                                           .getStackTrace(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
             } catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+                MaxineVM.exitJVM(ifcOperativeException);
             }
             out = ps;
         }
@@ -170,10 +161,9 @@ public final class JDK_java_lang_System {
         if (vm().phase == MaxineVM.Phase.RUNNING) {
             try {
                 ifcEnforcer.ifcCheck(Thread.currentThread()
-                                           .getStackTrace()[3]
-                                           .getClassName(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
+                                           .getStackTrace(), ps.getClass().getName(), IFCStatics.IFC_OP_MODIFY);
             } catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+                MaxineVM.exitJVM(ifcOperativeException);
             }
             err = ps;
         }
@@ -487,10 +477,9 @@ public final class JDK_java_lang_System {
         if (ifcEnforcer != null) {
             try {
                 ifcEnforcer.ifcCheck(Thread.currentThread()
-                                           .getStackTrace()[2]
-                                           .getClassName(), "java.lang.System", IFCStatics.IFC_OP_ACCESS);
+                                           .getStackTrace(), "java.lang.System", IFCStatics.IFC_OP_ACCESS);
             } catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+                MaxineVM.exitJVM(ifcOperativeException);
             }
         }
         switch (platform().os) {

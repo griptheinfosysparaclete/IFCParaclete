@@ -103,22 +103,24 @@ import sun.misc.Signal;
  */
 public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
 
-    private static final VMOption versionOption = register(new VMOption(
-        "-version", "print product version and exit"), MaxineVM.Phase.STARTING);
-    private static final VMOption showVersionOption = register(new VMOption(
-        "-showversion", "print product version and continue"), MaxineVM.Phase.STARTING);
-    private static final VMOption D64Option = register(new VMOption("-d64",
-        "Selects the 64-bit data model if available. Currently ignored."), MaxineVM.Phase.PRISTINE);
+    private static final VMOption versionOption =
+        register(new VMOption("-version", "print product version and exit"), MaxineVM.Phase.STARTING);
+    private static final VMOption showVersionOption =
+        register(new VMOption("-showversion", "print product version and continue"), MaxineVM.Phase.STARTING);
+    private static final VMOption D64Option =
+        register(new VMOption("-d64", "Selects the 64-bit data model if available. Currently ignored."),
+                 MaxineVM.Phase.PRISTINE);
     private static final JavaAgentVMOption javaagentOption = register(new JavaAgentVMOption(), MaxineVM.Phase.STARTING);
-    private static final VMExtensionVMOption vmExtensionOption = register(new VMExtensionVMOption(), MaxineVM.Phase.STARTING);
-    private static final VMStringOption cprofOption = register(new VMStringOption(
-        "-Xprof", false, null, "run CPU sampling profiler"), MaxineVM.Phase.STARTING);
-    private static final VMStringOption hprofOption = register(new VMStringOption(
-        "-Xhprof", false, null, "run heap sampling profiler"), MaxineVM.Phase.STARTING);
-    private static final VMStringOption showSettingsOption = register(new VMStringOption(
-        "-XshowSettings", false, ":all",
-        "show all settings and continue (optionally limit to vm, properties or locale settings appending :vm, :properties and :locale respectively)"),
-        MaxineVM.Phase.STARTING);
+    private static final VMExtensionVMOption vmExtensionOption =
+        register(new VMExtensionVMOption(), MaxineVM.Phase.STARTING);
+    private static final VMStringOption cprofOption =
+        register(new VMStringOption("-Xprof", false, null, "run CPU sampling profiler"), MaxineVM.Phase.STARTING);
+    private static final VMStringOption hprofOption =
+        register(new VMStringOption("-Xhprof", false, null, "run heap sampling profiler"), MaxineVM.Phase.STARTING);
+    private static final VMStringOption showSettingsOption =
+        register(new VMStringOption("-XshowSettings", false, ":all",
+                                    "show all settings and continue (optionally limit to vm, properties or locale settings appending :vm, :properties and :locale respectively)"),
+                 MaxineVM.Phase.STARTING);
 
     /**
      * List of classes to explicitly reinitialise in the {@link Phase#STARTING} phase.
@@ -149,7 +151,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
     public static void registerClassForReInit(String className) {
         CompiledPrototype.registerVMEntryPoint(className + ".<clinit>");
         MaxineVM.registerKeepClassInit(className);
-        Trace.line(2, "registering "  +  className + " for reinitialization");
+        Trace.line(2, "registering " + className + " for reinitialization");
         reinitClasses.add(className);
     }
 
@@ -160,7 +162,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
      * @return
      */
     @HOSTED_ONLY
-    public List< ? extends MethodActor> gatherNativeInitializationMethods() {
+    public List<? extends MethodActor> gatherNativeInitializationMethods() {
         final List<StaticMethodActor> methods = new LinkedList<StaticMethodActor>();
         for (ClassActor classActor : BOOT_CLASS_REGISTRY.bootImageClasses()) {
             for (StaticMethodActor method : classActor.localStaticMethodActors()) {
@@ -190,7 +192,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                 methods.add(method);
             } catch (InvocationTargetException invocationTargetException) {
                 if (invocationTargetException.getTargetException() instanceof UnsatisfiedLinkError) {
-                   // Library not present yet - try again next time:
+                    // Library not present yet - try again next time:
                     methods.add(method);
                 } else {
                     throw ProgramError.unexpected(invocationTargetException.getTargetException());
@@ -241,18 +243,20 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
      */
     @Override
     public void initialize(MaxineVM.Phase phase) {
-        
+
         switch (phase) {
-            case BOOTSTRAPPING: {
+        case BOOTSTRAPPING:
+            {
                 if (MaxineVM.isHosted()) {
                     ProfilerGCCallback.init();
                     // Make sure MaxineVM.exit is available when running the JavaRunScheme.
                     new CriticalMethod(MaxineVM.class, "exit",
-                                    SignatureDescriptor.create(void.class, int.class, boolean.class));
+                                       SignatureDescriptor.create(void.class, int.class, boolean.class));
                 }
                 break;
             }
-            case STARTING: {
+        case STARTING:
+            {
 
                 // This hack enables (platform-dependent) tracing before the eventual System properties are set:
                 System.setProperty("line.separator", "\n");
@@ -273,7 +277,8 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                 break;
             }
 
-            case RUNNING: {
+        case RUNNING:
+            {
                 // This is always the last scheme to be initialized, so now is the right time
                 // to start the profiler if requested.
                 final String cpuProfOptionValue = cprofOption.getValue();
@@ -289,22 +294,25 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                 // Initialize the NUMA Profiler
                 if (useNUMAProfiler) {
                     // Initialization is allowed only for one policy (or none).
-                    if (NUMAProfiler.NUMAProfilerFlareAllocationThresholds.equals("0") || NUMAProfiler.NUMAProfilerExplicitGCThreshold < 0) {
+                    if (NUMAProfiler.NUMAProfilerFlareAllocationThresholds.equals("0") ||
+                        NUMAProfiler.NUMAProfilerExplicitGCThreshold < 0) {
                         MaxineVM.numaProfiler = new NUMAProfiler();
                     } else {
                         throw FatalError.unexpected("Please choose only one Profiler Policy. You cannot give values for both " +
-                            "NUMAProfilerExplicitGCThreshold and NUMAProfilerFlareAllocationThresholds");
+                                                    "NUMAProfilerExplicitGCThreshold and NUMAProfilerFlareAllocationThresholds");
                     }
                 }
                 break;
             }
 
-            case TERMINATING: {
+        case TERMINATING:
+            {
                 JniFunctions.printJniFunctionTimers();
                 terminateProfilers();
                 break;
             }
-            default: {
+        default:
+            {
                 break;
             }
         }
@@ -362,11 +370,15 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             error = false;
 
             if (versionOption.isPresent()) {
-                sun.misc.Version.print();
+                sun.misc
+                   .Version
+                   .print();
                 return;
             }
             if (showVersionOption.isPresent()) {
-                sun.misc.Version.print();
+                sun.misc
+                   .Version
+                   .print();
             }
             if (showSettingsOption.isPresent()) {
                 final String showSettingsOptionValue = showSettingsOption.getValue();
@@ -381,13 +393,12 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             vmConfig().initializeSchemes(MaxineVM.Phase.RUNNING);
             vm.phase = Phase.RUNNING;
             mainClassName = getMainClassName();
-     
+
             ifcEnforcer = new IFCEnforcer(mainClassName);
-            try {
-                ifcEnforcer.ifcCheck(this.getClass().getName(), mainClassName, IFCStatics.IFC_OP_LOAD);
-            }
-            catch (IFCOperativeException ifcOperativeException) {
-                exitJVM(ifcOperativeException);
+
+            if (!ifcEnforcer.ifcCheck(this.getClass().getName(), mainClassName, IFCStatics.IFC_OP_LOAD)) {
+
+                MaxineVM.exitJVM(new IFCOperativeException("Ilegal Main Class: " + mainClassName));
             }
             VMTI.handler().vmInitialized();
             VMTI.handler().threadStart(VmThread.current());
@@ -416,7 +427,8 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             throw invocationTargetException.getCause();
         } catch (IllegalAccessException illegalAccessException) {
             error = true;
-            System.err.println("Illegal access trying to invoke " + classKindName + "method: " + illegalAccessException);
+            System.err.println("Illegal access trying to invoke " + classKindName + "method: " +
+                               illegalAccessException);
         } catch (IOException ioException) {
             error = true;
             System.err.println("error reading jar file: " + ioException);
@@ -431,15 +443,9 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
         }
     }
 
-    private void exitJVM(IFCOperativeException ifcOperativeException) {
 
-        Log.println(ifcOperativeException.getMessage());
-        Log.println(ifcOperativeException.fillInStackTrace());
-        MaxineVM.setExitCode(-99);
-
-    }
-
-    private void lookupAndInvokeMain(Class<?> mainClass) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private void lookupAndInvokeMain(Class<?> mainClass) throws InvocationTargetException, IllegalAccessException,
+                                                                NoSuchMethodException {
         final Method mainMethod = lookupMainOrAgentClass(mainClass, "main", String[].class);
         AccessController.doPrivileged(new PrivilegedAction<Object>() {
             public Object run() {
@@ -447,7 +453,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                 return null;
             }
         });
-        mainMethod.invoke(null, new Object[] {VMOptions.mainClassArguments()});
+        mainMethod.invoke(null, new Object[] { VMOptions.mainClassArguments() });
     }
 
     /**
@@ -458,10 +464,12 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
      * @return the method instance
      * @throws NoSuchMethodException if the method cannot be found
      */
-    public static Method lookupMainOrAgentClass(Class<?> mainClass, String methodName, Class<?> ...params) throws NoSuchMethodException {
+    public static Method lookupMainOrAgentClass(Class<?> mainClass, String methodName,
+                                                Class<?>... params) throws NoSuchMethodException {
         final Method mainMethod = mainClass.getDeclaredMethod(methodName, params);
         final int modifiers = mainMethod.getModifiers();
-        if ((!Modifier.isPublic(modifiers)) || (!Modifier.isStatic(modifiers)) || (mainMethod.getReturnType() != void.class)) {
+        if ((!Modifier.isPublic(modifiers)) || (!Modifier.isStatic(modifiers)) ||
+            (mainMethod.getReturnType() != void.class)) {
             throw new NoSuchMethodException(methodName);
         }
         return mainMethod;
@@ -521,7 +529,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
      * @throws IOException if error reading jar file
      */
     public static String findClassAttributeInJarFile(JarFile jarFile, String classAttribute) throws IOException {
-        final Manifest manifest =  jarFile.getManifest();
+        final Manifest manifest = jarFile.getManifest();
         if (manifest == null) {
             return null;
         }
@@ -556,9 +564,13 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
     @SuppressWarnings("oracle.jdeveloper.java.unconventional-class-modifier-order")
     private static abstract class JarFileOptionHandler {
         abstract String classNameAttribute();
+
         abstract String classPathAttribute();
-        abstract void handle(String className, URL[] urls, String agentArgs)
-            throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException;
+
+        abstract void handle(String className, URL[] urls, String agentArgs) throws IOException, ClassNotFoundException,
+                                                                                    InvocationTargetException,
+                                                                                    IllegalAccessException,
+                                                                                    NoSuchMethodException;
     }
 
     private static class JavaAgentJarFileOptionHandler extends JarFileOptionHandler {
@@ -573,25 +585,31 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
         }
 
         @Override
-        void handle(String className, URL[] urls, String agentArgs)
-            throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        void handle(String className, URL[] urls, String agentArgs) throws IOException, ClassNotFoundException,
+                                                                           InvocationTargetException,
+                                                                           IllegalAccessException,
+                                                                           NoSuchMethodException {
             for (URL url : urls) {
                 addURLToAppClassLoader.invoke(Launcher.getLauncher().getClassLoader(), url);
             }
             invokeMethod(className, urls[0], "premain", agentArgs);
         }
 
-        private void invokeMethod(String className, URL url, String methodName, String args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        private void invokeMethod(String className, URL url, String methodName,
+                                  String args) throws ClassNotFoundException, NoSuchMethodException,
+                                                      InvocationTargetException, IllegalAccessException {
             final ClassLoader appClassLoader = Launcher.getLauncher().getClassLoader();
             final Class<?> agentClass = appClassLoader.loadClass(className);
             Method method = null;
             Object[] invokeArgs = null;
             try {
-                method = lookupMainOrAgentClass(agentClass, methodName, new Class<?>[] {String.class, Instrumentation.class});
+                method =
+                    lookupMainOrAgentClass(agentClass, methodName,
+                                           new Class<?>[] { String.class, Instrumentation.class });
                 invokeArgs = new Object[2];
                 invokeArgs[1] = InstrumentationManager.createInstrumentation();
             } catch (NoSuchMethodException ex) {
-                method = lookupMainOrAgentClass(agentClass, methodName, new Class<?>[] {String.class});
+                method = lookupMainOrAgentClass(agentClass, methodName, new Class<?>[] { String.class });
                 invokeArgs = new Object[1];
             }
             invokeArgs[0] = args;
@@ -601,19 +619,23 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
 
     }
 
-    private static final JavaAgentJarFileOptionHandler javaAgentJarFileOptionHandler = new JavaAgentJarFileOptionHandler();
+    private static final JavaAgentJarFileOptionHandler javaAgentJarFileOptionHandler =
+        new JavaAgentJarFileOptionHandler();
 
-    private void loadJavaAgents()
-        throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private void loadJavaAgents() throws IOException, ClassNotFoundException, InvocationTargetException,
+                                         IllegalAccessException, NoSuchMethodException {
         loadJarFile(javaagentOption, javaAgentJarFileOptionHandler);
     }
 
-    private void loadJarFile(JarFileVMOption jarFileVMOption, JarFileOptionHandler handler)
-        throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private void loadJarFile(JarFileVMOption jarFileVMOption, JarFileOptionHandler handler) throws IOException,
+                                                                                                   ClassNotFoundException,
+                                                                                                   InvocationTargetException,
+                                                                                                   IllegalAccessException,
+                                                                                                   NoSuchMethodException {
         for (int i = 0; i < jarFileVMOption.count(); i++) {
             final String jarFileVMOptionString = jarFileVMOption.getValue(i);
             String jarPath = null;
-            String agentArgs = null;  // spec is silent, Hotspot passes null
+            String agentArgs = null; // spec is silent, Hotspot passes null
             final int cIndex = jarFileVMOptionString.indexOf(':');
             if (jarFileVMOptionString.length() > 1 && cIndex >= 0) {
                 final int eIndex = jarFileVMOptionString.indexOf('=', cIndex);
@@ -628,7 +650,8 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                     jarFile = new JarFile(jarPath);
                     final String className = findClassAttributeInJarFile(jarFile, handler.classNameAttribute());
                     if (className == null) {
-                        throw new IOException("could not find " + handler.classNameAttribute() + "in jarfile manifest: " + jarFile.getName());
+                        throw new IOException("could not find " + handler.classNameAttribute() +
+                                              "in jarfile manifest: " + jarFile.getName());
                     }
                     ArrayList<String> classPathParts = null;
                     final String classPath = findClassAttributeInJarFile(jarFile, handler.classPathAttribute());
@@ -643,6 +666,7 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
                         String absClassPathPart = classPathPart;
                         if (classPathPart.charAt(0) == '/') {
                             // absolute
+
                         } else {
                             // relative to jar
                             absClassPathPart = new File(jarAbsPath).getParent() + File.separator + classPathPart;
@@ -699,18 +723,20 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
         }
 
         @Override
-        void handle(String className, URL[] urls, String args)
-            throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        void handle(String className, URL[] urls, String args) throws IOException, ClassNotFoundException,
+                                                                      InvocationTargetException, IllegalAccessException,
+                                                                      NoSuchMethodException {
             for (URL url : urls) {
                 VMClassLoader.VM_CLASS_LOADER.addURL(url);
             }
             invokeMethod(className, args);
         }
 
-        private void invokeMethod(String className, String args)
-            throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        private void invokeMethod(String className, String args) throws ClassNotFoundException, NoSuchMethodException,
+                                                                        InvocationTargetException,
+                                                                        IllegalAccessException {
             final Class<?> klass = VMClassLoader.VM_CLASS_LOADER.loadClass(className);
-            Method method = lookupMainOrAgentClass(klass, "onLoad", new Class<?>[] {String.class});
+            Method method = lookupMainOrAgentClass(klass, "onLoad", new Class<?>[] { String.class });
             Object[] invokeArgs = new Object[1];
             invokeArgs[0] = args;
             method.invoke(null, invokeArgs);
@@ -718,10 +744,11 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
 
     }
 
-    private static final VMExtensionJarFileOptionHandler vmExtensionJarFileOptionHandler = new VMExtensionJarFileOptionHandler();
+    private static final VMExtensionJarFileOptionHandler vmExtensionJarFileOptionHandler =
+        new VMExtensionJarFileOptionHandler();
 
-    private void loadVMExtensions()
-        throws IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private void loadVMExtensions() throws IOException, ClassNotFoundException, InvocationTargetException,
+                                           IllegalAccessException, NoSuchMethodException {
         loadJarFile(vmExtensionOption, vmExtensionJarFileOptionHandler);
     }
 }

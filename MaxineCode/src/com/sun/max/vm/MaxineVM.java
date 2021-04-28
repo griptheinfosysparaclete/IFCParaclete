@@ -83,6 +83,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.ifcparaclete.exceptions.IFCOperativeException;
+
 /**
  * The global VM context. There is a {@linkplain #vm() single VM context} in existence at any time.
  * The {@linkplain VMConfiguration configuration} for a VM context can be accessed via the
@@ -341,6 +343,17 @@ public final class MaxineVM {
     @FOLD
     public static boolean isDebug() {
         return vm().config.debugging();
+    }
+
+    /**
+     * @param ifcOperativeException
+     */
+    public static void exitJVM(IFCOperativeException ifcOperativeException) {
+
+        Log.println(ifcOperativeException.getMessage());
+        Log.println(ifcOperativeException.fillInStackTrace());
+        MaxineVM.exit(-99);
+
     }
 
     /**

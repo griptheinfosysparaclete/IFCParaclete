@@ -56,429 +56,523 @@
       <value n="oracle.modeler.bmmigrate.management.Migration" v="11.1.1.1.0"/>
       <value n="oracle.toplink.workbench.addin.migration.PersistenceProjectMigrator" v="11.1.1.1.0"/>
       <value n="oracle.toplink.workbench.addin.migration.TopLinkProjectMigrator" v="11.1.1.1.0"/>
+      <value n="oracle.webcenter.internal.dt.migration.WebCenterProjectMigrator" v="12.2.1.0.0.150729.2101"/>
    </hash>
    <list n="contentSets">
-      <string v="oracle.jdeveloper.model.PathsConfiguration/javaContentSet"/>
-      <string v="oracle.ide.model.ResourcePaths/resourcesContentSet"/>
+      <string v="oracle.jdeveloper.model.J2eeSettings/webContentSet"/>
       <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
       <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
-      <string v="oracle.jdeveloper.model.J2eeSettings/webContentSet"/>
+      <string v="oracle.jdeveloper.model.PathsConfiguration/javaContentSet"/>
+      <string v="oracle.ide.model.ResourcePaths/resourcesContentSet"/>
       <string v="oracle.jdeveloper.offlinedb.model.OfflineDBProjectSettings/offlineDBContentSet"/>
-      <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
       <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
+      <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
       <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
    </list>
    <value n="defaultPackage" v="org.ifcparaclete"/>
-   <hash n="oracle.adfdtinternal.model.ide.settings.ADFMSettings">
-      <value n="hasDataControls" v="true"/>
-   </hash>
-   <hash n="oracle.adfdtinternal.view.rich.setting.ADFViewSettings">
-      <value n="ENABLE_ADF_WEBAPP_LIB_SUPPORT" v="true"/>
-   </hash>
-   <hash n="oracle.ide.model.ResourcePaths">
-      <hash n="resourcesContentSet">
-         <list n="constituent-sets"/>
-         <list n="pattern-filters">
-            <string v="-IFCStatics.java"/>
-            <string v="-exceptions/"/>
-            <string v="-utilities/"/>
-            <string v="-IFCDissertationTestMain.java"/>
-            <string v="-IFCEnforcer.java"/>
-            <string v="-IFCObject.java"/>
-            <string v="-IFCOperators.java"/>
-            <string v="-IFCPolicy.java"/>
-            <string v="+log4j.properties"/>
-            <string v="+XMLSchema.xsd"/>
-            <string v="+IFCProperities.properties"/>
-            <string v="+IFCPolicyRubric.xlsx"/>
-            <string v="+IFCPolicy.xsd"/>
-            <string v="+IFCPolicy.xml"/>
-            <string v="+IFCLogFile.log"/>
-         </list>
-         <list n="url-path">
-            <url path="src/org/ifcparaclete/"/>
-         </list>
-      </hash>
-   </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
-         <string v="ADF_FACES"/>
-         <string v="ADFc"/>
-         <string v="ADFm"/>
-         <string v="JAVASCRIPT"/>
-         <string v="JSF"/>
-         <string v="JSP"/>
-         <string v="Java"/>
-         <string v="Maven"/>
-         <string v="TRINIDAD"/>
          <string v="XML"/>
          <string v="XML_SCHEMA"/>
-         <string v="XSL"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
       <value n="webIANAEncoding" v="UTF-8"/>
    </hash>
-   <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
-      <hash n="profileDefinitions">
-         <hash n="IFC">
-            <hash n="archiveOptions">
-               <value n="hasManifest" v="true"/>
-               <value n="mainClass" v="org.ifcparaclete.IFCDissertationTestMain"/>
-            </hash>
-            <hash n="fileGroups">
-               <list n="groups">
-                  <hash>
-                     <list n="contributors">
-                        <hash>
-                           <value n="type" v="2"/>
-                        </hash>
-                        <hash>
-                           <value n="type" v="7"/>
-                        </hash>
-                     </list>
-                     <value n="displayName" v="Project Output"/>
-                     <hash n="filters">
-                        <list n="rules">
-                           <hash>
-                              <value n="pattern" v="org/"/>
-                              <value n="type" v="0"/>
-                           </hash>
-                           <hash>
-                              <value n="pattern" v="**"/>
-                              <value n="type" v="1"/>
-                           </hash>
-                        </list>
-                     </hash>
-                     <value n="internalName" v="project-output"/>
-                     <value n="type" v="1"/>
-                  </hash>
-               </list>
-            </hash>
-            <url n="jarURL" path="deploy/IFC.jar"/>
-            <hash n="libraryDependencies">
-               <list n="unselectedLibraries">
-                  <string v="Guava-30.1-jre.jar"/>
-                  <string v="Asm-6.0-maxine.jar"/>
-                  <string v="Asm-util-6.0-maxine.jar"/>
-                  <string v="Junit-4.12.jar"/>
-                  <string v="Okra-1.9.jar"/>
-                  <string v="Org.jar"/>
-                  <string v="Log4j-api-2.14.1-sources.jar"/>
-                  <string v="Log4j-core-2.14.1-sources.jar"/>
-                  <string v="Log4j-iostreams-2.14.1.jar"/>
-               </list>
-            </hash>
-            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
-            <value n="profileName" v="IFC"/>
-         </hash>
-      </hash>
-      <list n="profileList">
-         <string v="IFC"/>
-      </list>
+   <hash n="oracle.jdeveloper.model.J2eeSettings">
+      <value n="j2eeWebAppName" v="IFCParaclete-MaxineCode-webapp"/>
+      <value n="j2eeWebContextRoot" v="IFCParaclete-MaxineCode-context-root"/>
    </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
-         <list n="constituent-sets"/>
-         <list n="pattern-filters">
-            <string v="-org/ifcparaclete/IFCPolicyRubric.xlsx"/>
-            <string v="-org/ifcparaclete/OSCommands.java"/>
-            <string v="-org/ifcparaclete/IFCTargetObject.java"/>
-            <string v="-org/ifcparaclete/log4j.properties"/>
-            <string v="-org/ifcparaclete/~$IFCPolicyRubric.xlsx"/>
-            <string v="-savedDeps/JavaProject/"/>
-            <string v="-savedDeps/JARDistribution/"/>
-            <string v="-org/ifcparaclete/utilities/IFCFileManager.java"/>
-            <string v="-org/ifcparaclete/utilities/IFCFileAppender.java"/>
-            <string v="-com/oracle/graal/word/"/>
-            <string v="-com/oracle/graal/visualizer/util/"/>
-            <string v="-com/oracle/graal/visualizer/snapshots/"/>
-            <string v="-com/oracle/graal/visualizer/sharedactions/"/>
-            <string v="-com/oracle/graal/visualizer/outline/"/>
-            <string v="-com/oracle/graal/visualizer/logviewer/"/>
-            <string v="-com/oracle/graal/visualizer/editor/"/>
-            <string v="-com/oracle/graal/virtual/phases/ea/"/>
-            <string v="-com/oracle/graal/virtual/nodes/"/>
-            <string v="-com/oracle/graal/truffle/"/>
-            <string v="-com/oracle/graal/test/"/>
-            <string v="-com/oracle/graal/sparc/"/>
-            <string v="-com/oracle/graal/service/processor/"/>
-            <string v="-com/oracle/graal/replacements/"/>
-            <string v="-com/oracle/graal/ptx/"/>
-            <string v="-com/oracle/graal/printer/"/>
-            <string v="-com/oracle/graal/phases/"/>
-            <string v="-com/oracle/graal/options/"/>
-            <string v="-com/oracle/graal/nodes/"/>
-            <string v="-com/oracle/graal/loop/"/>
-            <string v="-com/oracle/graal/lir/"/>
-            <string v="-com/oracle/graal/jtt/"/>
-            <string v="-com/oracle/graal/java/"/>
-            <string v="-com/oracle/graal/hsail/"/>
-            <string v="-com/oracle/graal/hotspot/"/>
-            <string v="-com/oracle/graal/graph/"/>
-            <string v="-com/oracle/graal/debug/"/>
-            <string v="-com/oracle/graal/compiler/"/>
-            <string v="-com/oracle/graal/bytecode/"/>
-            <string v="-com/oracle/graal/asm/"/>
-            <string v="-com/oracle/graal/api/test/"/>
-            <string v="-com/oracle/graal/api/runtime/"/>
-            <string v="-com/oracle/graal/api/replacements/"/>
-            <string v="-com/oracle/graal/api/meta/"/>
-            <string v="-com/oracle/graal/api/code/"/>
-            <string v="-com/oracle/graal/amd64/"/>
-            <string v="-com/oracle/graal/alloc/"/>
-            <string v="-8001183/"/>
-            <string v="-8000311/"/>
-            <string v="-7200264/"/>
-            <string v="-7192963/"/>
-            <string v="-7170638/"/>
-            <string v="-7168848/"/>
-            <string v="-7119644/"/>
-            <string v="-7107135/"/>
-            <string v="-7072527/"/>
-            <string v="-7029152/"/>
-            <string v="-7017746/"/>
-            <string v="-6973329/"/>
-            <string v="-6958485/"/>
-            <string v="-6942326/"/>
-            <string v="-6941923/"/>
-            <string v="-6935535/"/>
-            <string v="-6912517/"/>
-            <string v="-6910618/"/>
-            <string v="-6910605/"/>
-            <string v="-6910484/"/>
-            <string v="-6901572/"/>
-            <string v="-6896727/"/>
-            <string v="-6895383/"/>
-            <string v="-6892265/"/>
-            <string v="-6877254/"/>
-            <string v="-6875866/"/>
-            <string v="-6866651/"/>
-            <string v="-6865031/"/>
-            <string v="-6863420/"/>
-            <string v="-6860469/"/>
-            <string v="-6855164/"/>
-            <string v="-6851282/"/>
-            <string v="-6849574/"/>
-            <string v="-6845368/"/>
-            <string v="-6843752/"/>
-            <string v="-6837094/"/>
-            <string v="-6833129/"/>
-            <string v="-6832293/"/>
-            <string v="-6826736/"/>
-            <string v="-6823453/"/>
-            <string v="-6799693/"/>
-            <string v="-6795161/"/>
-            <string v="-6778657/"/>
-            <string v="-6775880/"/>
-            <string v="-6741738/"/>
-            <string v="-6726999/"/>
-            <string v="-6724218/"/>
-            <string v="-6716441/"/>
-            <string v="-6714694/"/>
-            <string v="-6711117/"/>
-            <string v="-6711100/"/>
-            <string v="-6695810/"/>
-            <string v="-6689060/"/>
-            <string v="-6663848/"/>
-            <string v="-6661247/"/>
-            <string v="-6659207/"/>
-            <string v="-6646019/"/>
-            <string v="-6603011/"/>
-            <string v="-6581734/"/>
-            <string v="-6539464/"/>
-            <string v="+**"/>
-         </list>
-         <list n="url-path">
-            <url path="src/"/>
-         </list>
-      </hash>
-   </hash>
-   <hash n="oracle.jdeveloper.runner.RunConfigurations">
-      <hash n="runConfigurationDefinitions">
-         <hash n="HelloWorldConfiguration">
-            <value n="compileBeforeRun" v="false"/>
-            <value n="custom" v="false"/>
-            <value n="name" v="HelloWorldConfiguration"/>
-            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
-               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
+         <list n="constituent-sets">
+            <hash>
+               <list n="pattern-filters">
+                  <string v="-org/ifcparaclete/IFCPolicy.xsd"/>
+                  <string v="-org/ifcparaclete/IFCPolicy.xml"/>
+                  <string v="-words"/>
+                  <string v="-whitebox.hpp"/>
+                  <string v="-whitebox.cpp"/>
+                  <string v="-unsafe.cpp"/>
+                  <string v="-testcases.jar"/>
+                  <string v="-test.c"/>
+                  <string v="-suite.pyc"/>
+                  <string v="-suite.py"/>
+                  <string v="-serialvm.sh"/>
+                  <string v="-serialvm.java"/>
+                  <string v="-sasanity.sh"/>
+                  <string v="-sanitycheck.py"/>
+                  <string v="-sagtest.java"/>
+                  <string v="-sagtarg.java"/>
+                  <string v="-sagdoit.java"/>
+                  <string v="-sagclient.java"/>
+                  <string v="-runsa.sh"/>
+                  <string v="-runjpda.sh"/>
+                  <string v="-runjdb.sh"/>
+                  <string v="-privilegedStack.hpp"/>
+                  <string v="-privilegedStack.cpp"/>
+                  <string v="-perf.cpp"/>
+                  <string v="-outputparser.py"/>
+                  <string v="-output6890943.txt"/>
+                  <string v="-nativeLookup.hpp"/>
+                  <string v="-nativeLookup.cpp"/>
+                  <string v="-mx_graal.py"/>
+                  <string v="-multivm.sh"/>
+                  <string v="-multivm.java"/>
+                  <string v="-methodHandles.hpp"/>
+                  <string v="-methodHandles.cpp"/>
+                  <string v="-methodComparator.hpp"/>
+                  <string v="-methodComparator.cpp"/>
+                  <string v="-many_loader2.java.foo"/>
+                  <string v="-many_loader1.java.foo"/>
+                  <string v="-libproctest64.sh"/>
+                  <string v="-libproctest.sh"/>
+                  <string v="-jvmtiUtil.hpp"/>
+                  <string v="-jvmtiUtil.cpp"/>
+                  <string v="-jvmtiTrace.hpp"/>
+                  <string v="-jvmtiTrace.cpp"/>
+                  <string v="-jvmtiThreadState.inline.hpp"/>
+                  <string v="-jvmtiThreadState.hpp"/>
+                  <string v="-jvmtiThreadState.cpp"/>
+                  <string v="-jvmtiTagMap.hpp"/>
+                  <string v="-jvmtiTagMap.cpp"/>
+                  <string v="-jvmtiRedefineClassesTrace.hpp"/>
+                  <string v="-jvmtiRedefineClasses.hpp"/>
+                  <string v="-jvmtiRedefineClasses.cpp"/>
+                  <string v="-jvmtiRawMonitor.hpp"/>
+                  <string v="-jvmtiRawMonitor.cpp"/>
+                  <string v="-jvmtiManageCapabilities.hpp"/>
+                  <string v="-jvmtiManageCapabilities.cpp"/>
+                  <string v="-jvmtiLib.xsl"/>
+                  <string v="-jvmtiImpl.hpp"/>
+                  <string v="-jvmtiImpl.cpp"/>
+                  <string v="-jvmtiHpp.xsl"/>
+                  <string v="-jvmtiH.xsl"/>
+                  <string v="-jvmtiGetLoadedClasses.hpp"/>
+                  <string v="-jvmtiGetLoadedClasses.cpp"/>
+                  <string v="-jvmtiGen.java"/>
+                  <string v="-jvmtiExtensions.hpp"/>
+                  <string v="-jvmtiExtensions.cpp"/>
+                  <string v="-jvmtiExport.hpp"/>
+                  <string v="-jvmtiExport.cpp"/>
+                  <string v="-jvmtiEventController.inline.hpp"/>
+                  <string v="-jvmtiEventController.hpp"/>
+                  <string v="-jvmtiEventController.cpp"/>
+                  <string v="-jvmtiEnvThreadState.hpp"/>
+                  <string v="-jvmtiEnvThreadState.cpp"/>
+                  <string v="-jvmtiEnvFill.java"/>
+                  <string v="-jvmtiEnvBase.hpp"/>
+                  <string v="-jvmtiEnvBase.cpp"/>
+                  <string v="-jvmtiEnv.xsl"/>
+                  <string v="-jvmtiEnv.cpp"/>
+                  <string v="-jvmtiEnter.xsl"/>
+                  <string v="-jvmtiEnter.hpp"/>
+                  <string v="-jvmtiCodeBlobEvents.hpp"/>
+                  <string v="-jvmtiCodeBlobEvents.cpp"/>
+                  <string v="-jvmtiClassFileReconstituter.hpp"/>
+                  <string v="-jvmtiClassFileReconstituter.cpp"/>
+                  <string v="-jvmtiAgentThread.hpp"/>
+                  <string v="-jvmti.xsl"/>
+                  <string v="-jvmti.xml"/>
+                  <string v="-jvm_misc.hpp"/>
+                  <string v="-jvm.h"/>
+                  <string v="-jvm.cpp"/>
+                  <string v="-jstack64.sh"/>
+                  <string v="-jstack.sh"/>
+                  <string v="-jni_md.h"/>
+                  <string v="-jniFastGetField.hpp"/>
+                  <string v="-jniFastGetField.cpp"/>
+                  <string v="-jniExport.hpp"/>
+                  <string v="-jniCheck.hpp"/>
+                  <string v="-jniCheck.cpp"/>
+                  <string v="-jni.h"/>
+                  <string v="-jni.cpp"/>
+                  <string v="-invoke.c"/>
+                  <string v="-input6890943.txt"/>
+                  <string v="-from_loader2.java"/>
+                  <string v="-forte.hpp"/>
+                  <string v="-forte.cpp"/>
+                  <string v="-evmCompat.cpp"/>
+                  <string v="-bug_21227.java"/>
+                  <string v="-You_Have_Been_P0wned.java"/>
+                  <string v="-WinGammaPlatformVC9.java"/>
+                  <string v="-WinGammaPlatformVC8.java"/>
+                  <string v="-WinGammaPlatformVC7.java"/>
+                  <string v="-WinGammaPlatformVC10.java"/>
+                  <string v="-WinGammaPlatform.java"/>
+                  <string v="-WhiteBox.java"/>
+                  <string v="-WBApi.java"/>
+                  <string v="-VirtualAllocTestType.java"/>
+                  <string v="-VictimClassLoader.java"/>
+                  <string v="-Victim.java"/>
+                  <string v="-VMThreadDlopen.java"/>
+                  <string v="-VMConnection.java"/>
+                  <string v="-Util.java"/>
+                  <string v="-UnrecognizedVMOption.java"/>
+                  <string v="-UnloadTest.java"/>
+                  <string v="-ThreadedVirtualAllocTestType.java"/>
+                  <string v="-ThreadedMallocTestType.java"/>
+                  <string v="-Tester.java"/>
+                  <string v="-Test_ia32.java"/>
+                  <string v="-TestVerifyDuringStartup.java"/>
+                  <string v="-TestUnalignedLoad6769124.java"/>
+                  <string v="-TestShortVect.java"/>
+                  <string v="-TestShortLongVect.java"/>
+                  <string v="-TestShortIntVect.java"/>
+                  <string v="-TestShortFloatVect.java"/>
+                  <string v="-TestShortDoubleVect.java"/>
+                  <string v="-TestShortBoxing.java"/>
+                  <string v="-TestShortArraycopy.java"/>
+                  <string v="-TestScaffold.java"/>
+                  <string v="-TestRedefineObject.java"/>
+                  <string v="-TestPostFieldModification.java"/>
+                  <string v="-TestMultiplyLongHiZero.java"/>
+                  <string v="-TestMT.java"/>
+                  <string v="-TestLongVect.java"/>
+                  <string v="-TestLongFloatVect.java"/>
+                  <string v="-TestLongDoubleVect.java"/>
+                  <string v="-TestLongBoxing.java"/>
+                  <string v="-TestJNI.java"/>
+                  <string v="-TestJNI.c"/>
+                  <string v="-TestIntVect.java"/>
+                  <string v="-TestIntUnsafeVolatile.java"/>
+                  <string v="-TestIntUnsafeOrdered.java"/>
+                  <string v="-TestIntUnsafeCAS.java"/>
+                  <string v="-TestIntLongVect.java"/>
+                  <string v="-TestIntFloatVect.java"/>
+                  <string v="-TestIntDoubleVect.java"/>
+                  <string v="-TestIntBoxing.java"/>
+                  <string v="-TestIntAtomicVolatile.java"/>
+                  <string v="-TestIntAtomicOrdered.java"/>
+                  <string v="-TestIntAtomicCAS.java"/>
+                  <string v="-TestG1ZeroPGCTJcmdThreadPrint.java"/>
+                  <string v="-TestFloatVect.java"/>
+                  <string v="-TestFloatDoubleVect.java"/>
+                  <string v="-TestFloatBoxing.java"/>
+                  <string v="-TestDoubleVect.java"/>
+                  <string v="-TestDoubleBoxing.java"/>
+                  <string v="-TestDeoptInt6769124.java"/>
+                  <string v="-TestConjointAtomicArraycopy.java"/>
+                  <string v="-TestCharVect.java"/>
+                  <string v="-TestCharShortVect.java"/>
+                  <string v="-TestCharShortByteSwap.java"/>
+                  <string v="-TestByteVect.java"/>
+                  <string v="-TestByteShortVect.java"/>
+                  <string v="-TestByteLongVect.java"/>
+                  <string v="-TestByteIntVect.java"/>
+                  <string v="-TestByteFloatVect.java"/>
+                  <string v="-TestByteDoubleVect.java"/>
+                  <string v="-TestByteBoxing.java"/>
+                  <string v="-TestBootNativeLibraryPath.java"/>
+                  <string v="-TestBooleanVect.java"/>
+                  <string v="-TestArrayCopy6769124.java"/>
+                  <string v="-TestAESMain.java"/>
+                  <string v="-TestAESEncode.java"/>
+                  <string v="-TestAESDecode.java"/>
+                  <string v="-TestAESBase.java"/>
+                  <string v="-Test8020215.java"/>
+                  <string v="-Test8017498.sh"/>
+                  <string v="-Test8015436.java"/>
+                  <string v="-Test8011901.java"/>
+                  <string v="-Test8011771.java"/>
+                  <string v="-Test8011706.java"/>
+                  <string v="-Test8010927.java"/>
+                  <string v="-Test8009761.java"/>
+                  <string v="-Test8007722.java"/>
+                  <string v="-Test8007294.java"/>
+                  <string v="-Test8005419.java"/>
+                  <string v="-Test8005033.java"/>
+                  <string v="-Test8004741.java"/>
+                  <string v="-Test8003720.java"/>
+                  <string v="-Test8002069.java"/>
+                  <string v="-Test8001071.sh"/>
+                  <string v="-Test8001071.java"/>
+                  <string v="-Test8000805.java"/>
+                  <string v="-Test7200264.sh"/>
+                  <string v="-Test7199742.java"/>
+                  <string v="-Test7196199.java"/>
+                  <string v="-Test7196045.java"/>
+                  <string v="-Test7194254.java"/>
+                  <string v="-Test7190310_unsafe.java"/>
+                  <string v="-Test7190310.java"/>
+                  <string v="-Test7179138_2.java"/>
+                  <string v="-Test7179138_1.java"/>
+                  <string v="-Test7177917.java"/>
+                  <string v="-Test7174363.java"/>
+                  <string v="-Test7169782.java"/>
+                  <string v="-Test7160757.java"/>
+                  <string v="-Test7160610.java"/>
+                  <string v="-Test7125879.java"/>
+                  <string v="-Test7123108.java"/>
+                  <string v="-Test7116786.java"/>
+                  <string v="-Test7110586.java"/>
+                  <string v="-Test7107135.sh"/>
+                  <string v="-Test7103261.java"/>
+                  <string v="-Test7100757.java"/>
+                  <string v="-Test7090976.java"/>
+                  <string v="-Test7088020.java"/>
+                  <string v="-Test7082949.java"/>
+                  <string v="-Test7070134.sh"/>
+                  <string v="-Test7068051.sh"/>
+                  <string v="-Test7068051.java"/>
+                  <string v="-Test7052494.java"/>
+                  <string v="-Test7048332.java"/>
+                  <string v="-Test7047069.java"/>
+                  <string v="-Test7046096.java"/>
+                  <string v="-Test7044738.java"/>
+                  <string v="-Test7042153.java"/>
+                  <string v="-Test7041100.java"/>
+                  <string v="-Test7024475.java"/>
+                  <string v="-Test7020614.java"/>
+                  <string v="-Test7009359.java"/>
+                  <string v="-Test7009231.java"/>
+                  <string v="-Test7005594.sh"/>
+                  <string v="-Test7005594.java"/>
+                  <string v="-Test7002666.java"/>
+                  <string v="-Test6992759.java"/>
+                  <string v="-Test6990212.java"/>
+                  <string v="-Test6985295.java"/>
+                  <string v="-Test6982370.java"/>
+                  <string v="-Test6981737.java"/>
+                  <string v="-Test6968348.java"/>
+                  <string v="-Test6959129.java"/>
+                  <string v="-Test6956668.java"/>
+                  <string v="-Test6935022.java"/>
+                  <string v="-Test6932496.java"/>
+                  <string v="-Test6931567.java"/>
+                  <string v="-Test6930043.java"/>
+                  <string v="-Test6929067.sh"/>
+                  <string v="-Test6916644.java"/>
+                  <string v="-Test6909839.java"/>
+                  <string v="-Test6905845.java"/>
+                  <string v="-Test6897150.java"/>
+                  <string v="-Test6896617.java"/>
+                  <string v="-Test6894807.sh"/>
+                  <string v="-Test6891750.java"/>
+                  <string v="-Test6890943.sh"/>
+                  <string v="-Test6890943.java"/>
+                  <string v="-Test6885584.java"/>
+                  <string v="-Test6880034.java"/>
+                  <string v="-Test6879902.java"/>
+                  <string v="-Test6863155.java"/>
+                  <string v="-Test6859338.java"/>
+                  <string v="-Test6857159.sh"/>
+                  <string v="-Test6857159.java"/>
+                  <string v="-Test6855215.java"/>
+                  <string v="-Test6852078.java"/>
+                  <string v="-Test6850611.java"/>
+                  <string v="-Test6837011.java"/>
+                  <string v="-Test6823354.java"/>
+                  <string v="-Test6814842.java"/>
+                  <string v="-Test6805724.java"/>
+                  <string v="-Test6800154.java"/>
+                  <string v="-Test6797305.java"/>
+                  <string v="-Test6796786.java"/>
+                  <string v="-Test6795465.java"/>
+                  <string v="-Test6795362.java"/>
+                  <string v="-Test6792161.java"/>
+                  <string v="-Test6758234.java"/>
+                  <string v="-Test6757316.java"/>
+                  <string v="-Test6756768_2.java"/>
+                  <string v="-Test6756768.java"/>
+                  <string v="-Test6753639.java"/>
+                  <string v="-Test6732154.java"/>
+                  <string v="-Test6712835.java"/>
+                  <string v="-Test6700047.java"/>
+                  <string v="-Test6663854.java"/>
+                  <string v="-Test6626217.sh"/>
+                  <string v="-Test6579789.java"/>
+                  <string v="-Test6559156.java"/>
+                  <string v="-Test6443505.java"/>
+                  <string v="-Test6378821.java"/>
+                  <string v="-Test6357214.java"/>
+                  <string v="-Test6196102.java"/>
+                  <string v="-Test6186134.java"/>
+                  <string v="-Test5091921.java"/>
+                  <string v="-Test5057225.java"/>
+                  <string v="-Test2.java"/>
+                  <string v="-Test1.java"/>
+                  <string v="-Test.java"/>
+                  <string v="-TargetListener.java"/>
+                  <string v="-TargetAdapter.java"/>
+                  <string v="-TEST.ROOT"/>
+                  <string v="-T.java"/>
+                  <string v="-SummarySanityCheck.java"/>
+                  <string v="-SummaryAfterShutdown.java"/>
+                  <string v="-Stemmer.java"/>
+                  <string v="-StackOverflowBug.java"/>
+                  <string v="-StackOverflow.java"/>
+                  <string v="-StackMapFrameTest.java"/>
+                  <string v="-SpreadNullArg.java"/>
+                  <string v="-SourceDebugExtension.java"/>
+                  <string v="-SortMethodsTest.java"/>
+                  <string v="-ShutdownTwice.java"/>
+                  <string v="-SharedArchiveFile.java"/>
+                  <string v="-SetForceInlineMethodTest.java"/>
+                  <string v="-SetDontInlineMethodTest.java"/>
+                  <string v="-SanityTest.java"/>
+                  <string v="-SASanityChecker.java"/>
+                  <string v="-RestoreMXCSR.java"/>
+                  <string v="-ReserveMemory.java"/>
+                  <string v="-ReleaseCommittedMemory.java"/>
+                  <string v="-README.jjh"/>
+                  <string v="-README"/>
+                  <string v="-PublicStaticInterfaceMethodHandling.java"/>
+                  <string v="-ProjectCreator.java"/>
+                  <string v="-PrintNMTStatisticsWithNMTDisabled.java"/>
+                  <string v="-PrintNMTStatistics.java"/>
+                  <string v="-PrintAsFlag.java"/>
+                  <string v="-PolynomialRoot.java"/>
+                  <string v="-ParserTest.java"/>
+                  <string v="-OutputAnalyzerTest.java"/>
+                  <string v="-OopMaps.java"/>
+                  <string v="-NullCheckTest.java"/>
+                  <string v="-NonBooleanFlagWithInvalidBooleanPrefix.java"/>
+                  <string v="-MultiAllocateNullCheck.java"/>
+                  <string v="-MallocTestType.java"/>
+                  <string v="-Makefile"/>
+                  <string v="-MakeMethodNotCompilableTest.java"/>
+                  <string v="-Loader2.java"/>
+                  <string v="-ListModules.java"/>
+                  <string v="-LibprocTest.java"/>
+                  <string v="-LibprocClient.java"/>
+                  <string v="-LargeFrame.java"/>
+                  <string v="-KeepAliveSoftReference.java"/>
+                  <string v="-KeepAliveObject.java"/>
+                  <string v="-KeepAliveClassLoader.java"/>
+                  <string v="-KeepAliveClass.java"/>
+                  <string v="-JcmdWithNMTDisabled.java"/>
+                  <string v="-JcmdScale.java"/>
+                  <string v="-JUnitWrapper.java"/>
+                  <string v="-IsMethodCompilableTest.java"/>
+                  <string v="-IsInstanceTest.java"/>
+                  <string v="-InterruptedTest.java"/>
+                  <string v="-Inheritance1.java"/>
+                  <string v="-IVTest.java"/>
+                  <string v="-IFace.java"/>
+                  <string v="-HasNonStatic.java"/>
+                  <string v="-GeneratedClassLoader.java"/>
+                  <string v="-FragmentMetaspaceSimple.java"/>
+                  <string v="-FragmentMetaspace.java"/>
+                  <string v="-FlagWithInvalidValue.java"/>
+                  <string v="-FileTreeCreatorVC7.java"/>
+                  <string v="-FileTreeCreatorVC10.java"/>
+                  <string v="-FileTreeCreator.java"/>
+                  <string v="-FieldMonitor.java"/>
+                  <string v="-ExecuteInternalVMTests.java"/>
+                  <string v="-EnqueueMethodForCompilationTest.java"/>
+                  <string v="-DeoptimizeMethodTest.java"/>
+                  <string v="-DeoptimizeAllTest.java"/>
+                  <string v="-DekkerTest.java"/>
+                  <string v="-DefaultValue.java"/>
+                  <string v="-ConstMethodTest.java"/>
+                  <string v="-ConfigFileWarning.java"/>
+                  <string v="-ConfigFileParsing.java"/>
+                  <string v="-CompilerWhiteBoxTest.java"/>
+                  <string v="-CompilerConfigFileWarning.java"/>
+                  <string v="-CommandLineTurnOffNMT.java"/>
+                  <string v="-CommandLineSummary.java"/>
+                  <string v="-CommandLineInvalidArgument.java"/>
+                  <string v="-CommandLineEmptyArgument.java"/>
+                  <string v="-CommandLineDetail.java"/>
+                  <string v="-ClearMethodStateTest.java"/>
+                  <string v="-ClasspathDump.java"/>
+                  <string v="-ClassUnloadCommon.java"/>
+                  <string v="-ClassFileInstaller.java"/>
+                  <string v="-CheckUpperLimit.java"/>
+                  <string v="-CdsSameObjectAlignment.java"/>
+                  <string v="-CdsDifferentObjectAlignment.java"/>
+                  <string v="-CRCTest.java"/>
+                  <string v="-BuildConfig.java"/>
+                  <string v="-BooleanFlagWithInvalidValue.java"/>
+                  <string v="-Basic.java"/>
+                  <string v="-BaselineWithParameter.java"/>
+                  <string v="-Asmator.java"/>
+                  <string v="-ArgsParser.java"/>
+                  <string v="-Agent.java"/>
+                  <string v="-apache-log4j-2.14.0-bin/"/>
+                  <string v="-8001183/"/>
+                  <string v="-8000311/"/>
+                  <string v="-7200264/"/>
+                  <string v="-7192963/"/>
+                  <string v="-7170638/"/>
+                  <string v="-7168848/"/>
+                  <string v="-7119644/"/>
+                  <string v="-7107135/"/>
+                  <string v="-7072527/"/>
+                  <string v="-7029152/"/>
+                  <string v="-7017746/"/>
+                  <string v="-6973329/"/>
+                  <string v="-6958485/"/>
+                  <string v="-6942326/"/>
+                  <string v="-6941923/"/>
+                  <string v="-6935535/"/>
+                  <string v="-6912517/"/>
+                  <string v="-6910618/"/>
+                  <string v="-6910605/"/>
+                  <string v="-6910484/"/>
+                  <string v="-6901572/"/>
+                  <string v="-6896727/"/>
+                  <string v="-6895383/"/>
+                  <string v="-6892265/"/>
+                  <string v="-6877254/"/>
+                  <string v="-6875866/"/>
+                  <string v="-6866651/"/>
+                  <string v="-6865031/"/>
+                  <string v="-6863420/"/>
+                  <string v="-6860469/"/>
+                  <string v="-6855164/"/>
+                  <string v="-6851282/"/>
+                  <string v="-6849574/"/>
+                  <string v="-6845368/"/>
+                  <string v="-6843752/"/>
+                  <string v="-6837094/"/>
+                  <string v="-6833129/"/>
+                  <string v="-6832293/"/>
+                  <string v="-6826736/"/>
+                  <string v="-6823453/"/>
+                  <string v="-6799693/"/>
+                  <string v="-6795161/"/>
+                  <string v="-6778657/"/>
+                  <string v="-6775880/"/>
+                  <string v="-6741738/"/>
+                  <string v="-6726999/"/>
+                  <string v="-6724218/"/>
+                  <string v="-6716441/"/>
+                  <string v="-6714694/"/>
+                  <string v="-6711117/"/>
+                  <string v="-6711100/"/>
+                  <string v="-6695810/"/>
+                  <string v="-6689060/"/>
+                  <string v="-6663848/"/>
+                  <string v="-6661247/"/>
+                  <string v="-6659207/"/>
+                  <string v="-6646019/"/>
+                  <string v="-6603011/"/>
+                  <string v="-6581734/"/>
+                  <string v="-6539464/"/>
+                  <string v="+**"/>
+               </list>
+               <list n="url-path">
+                  <url path="src/"/>
+               </list>
             </hash>
-            <value n="runActiveFile" v="false"/>
-            <url n="runDirectoryURL" path="../../"/>
-            <url n="targetURL" path="src/test/output/HelloWorld.java"/>
-         </hash>
-         <hash n="IFCCodeConfiguration">
-            <value n="compileBeforeRun" v="false"/>
-            <value n="custom" v="false"/>
-            <value n="name" v="IFCCodeConfiguration"/>
-            <hash n="oracle.jdevimpl.runner.debug.DebugConfiguration">
-               <value n="tracingExclude" v="java;javax;sun;sunw;jdk;apple;com.apple;com.evermind;com.oracle;com.orionserver;EDU.oswego;oracle.as;oracle.aurora;oracle.core;oracle.dms;oracle.gss;oracle.hooks;oracle.ide;oracle.ias;oracle.j2ee;oracle.jdbc;oracle.jdevimpl;oracle.jsp;oracle.oc4j;oracle.ojc;oracle.security;oracle.sql;oracle.webservices;oracle.xml;org.omg;weblogic;org.codehaus.groovy;groovy.lang;oracle.jbo.script.groovy"/>
+            <hash>
+               <list n="pattern-filters">
+                  <string v="+**"/>
+               </list>
+               <list n="url-path">
+                  <url path="../IFCPolicies/"/>
+               </list>
             </hash>
-            <url n="runDirectoryURL" path="../../"/>
-            <url n="targetURL" path="src/org/ifcparaclete/IFCPolicy.java"/>
-         </hash>
+         </list>
+         <list n="url-path"/>
       </hash>
-      <list n="runConfigurationList">
-         <string v="HelloWorldConfiguration"/>
-         <string v="IFCCodeConfiguration"/>
-      </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
             <value n="id" v="Guava-30.1-jre.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Asm-6.0-maxine.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Asm-util-6.0-maxine.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Junit-4.12.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Okra-1.9.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Org.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF String Editor API"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF String Editor Task Flows"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjrt.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjtools.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjweaver.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Beanutils 1.6"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Collections 3.1"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Logging 1.0.4"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Trinidad Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Trinidad Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Model Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Web Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Page Flow Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Schema"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="MDS Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="MDS Runtime Dependencies"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Apache Http Components"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Databinding MDS Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Web Runtime"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -493,434 +587,16 @@
                <value n="id" v="Guava-30.1-jre.jar"/>
                <value n="locked" v="true"/>
             </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/asm-6.0-maxine.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Asm-6.0-maxine.jar"/>
-               <value n="id" v="Asm-6.0-maxine.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/asm-util-6.0-maxine.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Asm-util-6.0-maxine.jar"/>
-               <value n="id" v="Asm-util-6.0-maxine.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/junit-4.12.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Junit-4.12.jar"/>
-               <value n="id" v="Junit-4.12.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/okra-1.9.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Okra-1.9.jar"/>
-               <value n="id" v="Okra-1.9.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../Projects/JavaJDK/src copy/org.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Org.jar"/>
-               <value n="id" v="Org.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1-sources.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-api-2.14.1-sources.jar"/>
-               <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-api-2.14.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-api-2.14.1.jar"/>
-               <value n="id" v="Log4j-api-2.14.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1-sources.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-core-2.14.1-sources.jar"/>
-               <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-core-2.14.1.jar"/>
-               <value n="id" v="Log4j-core-2.14.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../.jdeveloper/apache-log4j-2.14.1-bin/log4j-iostreams-2.14.1.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Log4j-iostreams-2.14.1.jar"/>
-               <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../AOPwIFC/aspectj-1.9.6/files/lib/aspectjrt.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Aspectjrt.jar"/>
-               <value n="id" v="Aspectjrt.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../AOPwIFC/aspectj-1.9.6/files/lib/aspectjtools.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Aspectjtools.jar"/>
-               <value n="id" v="Aspectjtools.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
-            <hash>
-               <list n="classPath">
-                  <url path="../../../../AOPwIFC/aspectj-1.9.6/files/lib/aspectjweaver.jar" jar-entry=""/>
-               </list>
-               <value n="deployedByDefault" v="true"/>
-               <value n="description" v="Aspectjweaver.jar"/>
-               <value n="id" v="Aspectjweaver.jar"/>
-               <value n="locked" v="true"/>
-            </hash>
          </list>
-      </hash>
-      <hash n="jdkReference">
-         <url n="id" path="../../../../.jdeveloper/system12.2.1.4.42.190911.2248/o.jdeveloper/9.0.4.jdk"/>
-         <value n="isJDK" v="true"/>
-         <value n="jdkVersion" v="9.0.4"/>
       </hash>
       <list n="libraryReferences">
          <hash>
             <value n="id" v="Guava-30.1-jre.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
-         <hash>
-            <value n="id" v="Asm-6.0-maxine.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Asm-util-6.0-maxine.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Junit-4.12.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Okra-1.9.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Org.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.14.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-api-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.14.1-sources.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-core-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Log4j-iostreams-2.14.1.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF String Editor API"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF String Editor Task Flows"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjrt.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjtools.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Aspectjweaver.jar"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Beanutils 1.6"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Collections 3.1"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Commons Logging 1.0.4"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Trinidad Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Trinidad Databinding Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Model Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Web Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Page Flow Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Controller Schema"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Faces Runtime 11"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="MDS Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="MDS Runtime Dependencies"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Apache Http Components"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF DVT Faces Databinding MDS Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="ADF Common Web Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
       </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
       <url n="outputDirectory" path="classes/"/>
-   </hash>
-   <hash n="oracle.jdevimpl.webapp.facelets.libraries.ProjectFaceletsTagLibraries">
-      <list n="facelets-tag-libraries">
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF Core"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="JSF Core"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/facelets_jsf_core.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/core"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF HTML"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="JSF HTML"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/html_basic.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/html"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Facelets Composite"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="Facelets Composite"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/composite.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/composite"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Facelets"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="Facelets"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/ui.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsf/facelets"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="Mojarra Ext Utils"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="Mojarra Ext Utils"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/META-INF/mojarra_ext.taglib.xml"/>
-            <value n="URI" v="http://mojarra.dev.java.net/mojarra_ext"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSTL"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="JSTL"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/jstl-core.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsp/jstl/core"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSTL Functions"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="name" v="JSTL Functions"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/com/sun/faces/metadata/taglib/jstl-fn.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/jsp/jstl/functions"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="ADF Faces Components"/>
-               <value n="version" v="11"/>
-            </hash>
-            <value n="name" v="ADF Faces Components"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.adf.view/adf-richclient-impl-11.jar!/META-INF/afu.taglib.xml"/>
-            <value n="URI" v="http://xmlns.oracle.com/adf/faces/rich"/>
-            <value n="version" v="11"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF Compatibility Tags for Facelets"/>
-               <value n="version" v="11"/>
-            </hash>
-            <value n="name" v="JSF Compatibility Tags for Facelets"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.adf.view/adf-richclient-impl-11.jar!/META-INF/jsp.taglib.xml"/>
-            <value n="URI" v="http://java.sun.com/JSP/Page"/>
-            <value n="version" v="11"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="ADF Faces Component Tags"/>
-               <value n="version" v="11"/>
-            </hash>
-            <value n="name" v="ADF Faces Component Tags"/>
-            <value n="taglibURL" v="@oracle.home@../oracle_common/modules/oracle.adf.view/adf-richclient-impl-11.jar!/META-INF/component.taglib.xml"/>
-            <value n="URI" v="http://xmlns.oracle.com/adf/faces/rich/component"/>
-            <value n="version" v="11"/>
-         </hash>
-      </list>
-   </hash>
-   <hash n="oracle.jdevimpl.webapp.jsp.libraries.model.ProjectTagLibraries">
-      <list n="tag-libraries">
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF Core"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="jspVersion" v="2.1"/>
-            <value n="name" v="JSF Core"/>
-            <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/META-INF/jsf_core.tld"/>
-            <value n="URI" v="http://java.sun.com/jsf/core"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="JSF HTML"/>
-               <value n="version" v="2.2"/>
-            </hash>
-            <value n="jspVersion" v="2.1"/>
-            <value n="name" v="JSF HTML"/>
-            <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.jsf/glassfish.jsf.jar!/META-INF/html_basic.tld"/>
-            <value n="URI" v="http://java.sun.com/jsf/html"/>
-            <value n="version" v="2.2"/>
-         </hash>
-         <hash>
-            <hash n="baseLibrary">
-               <value n="name" v="ADF Faces Components"/>
-               <value n="version" v="11"/>
-            </hash>
-            <value n="jspVersion" v="1.2"/>
-            <value n="name" v="ADF Faces Components"/>
-            <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.adf.view/adf-richclient-impl-11.jar!/META-INF/afu.tld"/>
-            <value n="URI" v="http://xmlns.oracle.com/adf/faces/rich"/>
-            <value n="version" v="11"/>
-         </hash>
-      </list>
-   </hash>
-   <hash n="ResourceBundleOptions">
-      <list n="RegisteredResourceBundles"/>
    </hash>
 </jpr:project>
