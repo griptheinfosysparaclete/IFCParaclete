@@ -1,6 +1,0 @@
-/Users/GripGlebe/jdeveloper/mywork>
-/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java -server -classpath /var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/jstarter-tmp-5766429553922354199.jar -Djavax.net.ssl.trustStore=/var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/trustStore5117088092266905780.jks test.output.HelloWorld
-1 Hello World!
-2 Hello World!
-3 java.io.PrintStream
-Process exited with exit code 0.

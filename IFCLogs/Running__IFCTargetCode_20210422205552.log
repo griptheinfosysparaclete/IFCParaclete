@@ -1,5 +1,0 @@
-/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java -server -classpath /Users/GripGlebe/jdeveloper/mywork/IFCAspectJ/.adf:/Users/GripGlebe/jdeveloper/mywork/IFCAspectJ/IFCTargetCode/classes -Djavax.net.ssl.trustStore=/var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/trustStore4657952513428417451.jks test.output.HelloWorld
-1 Hello World!
-2 Hello World!
-3 java.io.PrintStream
-Process exited with exit code 0.

@@ -1,2 +1,0 @@
-/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/java -server -classpath /Users/GripGlebe/jdeveloper/mywork/TestBed/.adf:/Users/GripGlebe/jdeveloper/mywork/TestBed/TestBed/classes -Djavax.net.ssl.trustStore=/var/folders/j2/wrcj5bc56kg6lbtp7_2065t00000gp/T/trustStore5751270746756163172.jks org.ifcparaclete.TestBitSets
-Process exited with exit code 0.

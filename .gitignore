@@ -1,0 +1,9 @@
+*.DS_Store
+*.data
+*.adf
+*.jdb
+*.lck
+*.jpr
+*.dockerignore
+*.code-workspace
+*.class
