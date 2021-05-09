@@ -70,6 +70,7 @@ public abstract class HostedClassLoader extends ClassLoader {
         super(null);
 
         ifcBuildingImage = true;
+        System.out.println("HostedClassLoader()");
         ifcThrowable.printStackTrace();
         
     }
@@ -83,6 +84,7 @@ public abstract class HostedClassLoader extends ClassLoader {
         } else {
             ifcBuildingImage = false;
         }
+        System.out.println("HostedClassLoader(ClassLoader parent): ");
         ifcThrowable.printStackTrace();
         
     }

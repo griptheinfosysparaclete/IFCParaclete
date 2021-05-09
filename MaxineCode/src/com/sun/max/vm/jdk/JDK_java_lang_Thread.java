@@ -25,20 +25,31 @@
  */
 package com.sun.max.vm.jdk;
 
-import static com.sun.max.vm.actor.member.InjectedReferenceFieldActor.*;
-import static com.sun.max.vm.intrinsics.MaxineIntrinsicIDs.*;
+import com.sun.max.annotate.ALIAS;
+import com.sun.max.annotate.INLINE;
+import com.sun.max.annotate.INTRINSIC;
+import com.sun.max.annotate.METHOD_SUBSTITUTIONS;
+import com.sun.max.annotate.NEVER_INLINE;
+import com.sun.max.annotate.SUBSTITUTE;
+import com.sun.max.vm.Log;
+import com.sun.max.vm.MaxineVM;
+import static com.sun.max.vm.MaxineVM.vm;
+import static com.sun.max.vm.actor.member.InjectedReferenceFieldActor.Thread_vmThread;
+import com.sun.max.vm.heap.Heap;
+import static com.sun.max.vm.intrinsics.MaxineIntrinsicIDs.UNSAFE_CAST;
+import com.sun.max.vm.management.ThreadManagement;
+import com.sun.max.vm.monitor.Monitor;
+import static com.sun.max.vm.run.java.JavaRunScheme.ifcEnforcer;
+import com.sun.max.vm.runtime.FatalError;
+import com.sun.max.vm.thread.VmThread;
+import com.sun.max.vm.thread.VmThreadFactory;
+import com.sun.max.vm.thread.VmThreadMap;
+import com.sun.max.vm.type.ClassRegistry;
 
-import java.security.*;
+import java.security.AccessControlContext;
 
-import com.sun.max.annotate.*;
-import com.sun.max.platform.*;
-import com.sun.max.vm.*;
-import com.sun.max.vm.heap.*;
-import com.sun.max.vm.management.*;
-import com.sun.max.vm.monitor.*;
-import com.sun.max.vm.runtime.*;
-import com.sun.max.vm.thread.*;
-import com.sun.max.vm.type.*;
+import org.ifcparaclete.IFCStatics;
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 /**
  * Method substitutions for {@link java.lang.Thread java.lang.Thread}.
@@ -116,7 +127,8 @@ public final class JDK_java_lang_Thread {
         thisThread.exit();
     }
 
-    public static Thread createThreadForAttach(VmThread vmThread, String name, ThreadGroup group, boolean daemon) throws Throwable {
+    public static Thread createThreadForAttach(VmThread vmThread, String name, ThreadGroup group,
+                                               boolean daemon) throws Throwable {
         FatalError.check(group != null, "ThreadGroup for attaching thread cannot be null");
 
         final Thread javaThread = (Thread) Heap.createTuple(ClassRegistry.THREAD.dynamicHub());
@@ -145,7 +157,29 @@ public final class JDK_java_lang_Thread {
      */
     @SUBSTITUTE
     public static Thread currentThread() {
+
         return VmThread.current().javaThread();
+    }
+
+    /**
+     * Prints a stack trace of the current thread to the standard error stream.
+     * This method is used only for debugging.
+     *
+     * @see     Throwable#printStackTrace()
+     */
+    @SUBSTITUTE
+    public static void dumpStack() {
+        if (vm().phase == MaxineVM.Phase.RUNNING) {
+            Log.println("In: " + Thread.class.getName());
+            try {
+                Log.println("Still in: " + Thread.class.getName());
+                ifcEnforcer.ifcCheck(Thread.currentThread().getStackTrace(), "java.lang.Thread",
+                                     IFCStatics.IFC_OP_ACCESS);
+            } catch (IFCOperativeException ifcOperativeException) {
+                MaxineVM.exitJVM(ifcOperativeException);
+            }
+        }
+        new Exception("Stack trace").printStackTrace();
     }
 
     /**

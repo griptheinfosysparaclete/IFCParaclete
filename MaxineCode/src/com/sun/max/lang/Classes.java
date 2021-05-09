@@ -23,7 +23,6 @@
 package com.sun.max.lang;
 
 import com.sun.max.Utils;
-import com.sun.max.vm.MaxineVM;
 import static com.sun.max.vm.run.java.JavaRunScheme.ifcEnforcer;
 
 import java.lang.reflect.AccessibleObject;
@@ -75,10 +74,10 @@ public final class Classes {
      */
     public static Class forName(String name, boolean initialize, ClassLoader loader) {
 
-        if (MaxineVM.vm().isRunning()) {
+        if ((com.sun.max.vm.MaxineVM.vm()).isRunning()) {
 
             if (!ifcEnforcer.ifcCheck("Classes", name, IFCStatics.IFC_OP_LOAD)) {
-                MaxineVM.exitJVM(new IFCOperativeException("Illegal Class: " + name + "\n"));
+               com.sun.max.vm.MaxineVM.exitJVM(new IFCOperativeException("Illegal Class: " + name + "\n"));
             }
         }
         try {

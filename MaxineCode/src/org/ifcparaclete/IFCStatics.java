@@ -11,9 +11,10 @@ public interface IFCStatics {
         "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCPolicies/IFCPolicy.xml";
     public static final String IFC_DEFAULT_LOG_FILE =
         "/Users/GripGlebe/jdeveloper/mywork/IFCParaclete/IFCLogs/IFCLogFile.log";
-    public static final String IFC_DEFAULT_LOG_LAYOUT = "[%level{lowerCase=true} %date{yyyy/MM/dd HH:mm:ss.SSS z} <%thread> tid=%tid] %message%n%throwable%n";
+    public static final String IFC_DEFAULT_LOG_LAYOUT =
+        "[%level{lowerCase=true} %date{yyyy/MM/dd HH:mm:ss.SSS z} <%thread> tid=%tid] %message%n%throwable%n";
     public static final String IFC_DEFAULT_APPLICATION = "test.output.HelloWorld";
-    static final String IFC_DEFAULT_MESSAGE = "This is the IFC_DEFAULT_MESSAGE";     
+    static final String IFC_DEFAULT_MESSAGE = "This is the IFC_DEFAULT_MESSAGE";
     static final String IFC_ACTOR_OBJECT = "ifc:ActorObject";
     static final String IFC_TARGET_OBJECT = "ifc:TargetObject";
     static final String IFC_NAME = "ifc:Name";
@@ -33,7 +34,7 @@ public interface IFCStatics {
     static final String IFC_TYPE_INTRANSITIVE = "I";
     static final String IFC_TYPE_TRANSITIVE = "T";
     static final Map<String, Integer> IFC_TYPES = ImmutableMap.of("T", 20, "I", 9);
-    static final int    IFC_AUTHORIZATION_TYPE_FAI = 208;
+    static final int IFC_AUTHORIZATION_TYPE_FAI = 208;
     static final String IFC_OP = "ifc:Op";
     static final String IFC_OP_EXECUTE = "e";
     static final String IFC_OP_OPEN = "o";
@@ -47,33 +48,39 @@ public interface IFCStatics {
     static final String IFC_OP_MODIFY = "m";
     static final String IFC_ACTIVE_IFOPS = "ifc:ActiveIFOPS";
     static final String IFC_PASSIVE_IFOPS = "ifc:PassiveIFOPS";
+    static final int IFC_VM_PACKAGES_INT = 3;
     static final Map<String, Integer> IFC_OPS = ImmutableMap.<String, Integer>builder()
-                                                           .put("e", 0)
-                                                           .put("o", 1)
-                                                           .put("c", 2)
-                                                           .put("l", 3)
-                                                           .put("w", 4)
-                                                           .put("r", 5)
-                                                           .put("d", 6)
-                                                           .put("f", 7)
-                                                           .put("a", 8)
-                                                           .put("m", 9)
-                                                           .build();
+                                                            .put("e", 0)
+                                                            .put("o", 1)
+                                                            .put("c", 2)
+                                                            .put("l", 3)
+                                                            .put("w", 4)
+                                                            .put("r", 5)
+                                                            .put("d", 6)
+                                                            .put("f", 7)
+                                                            .put("a", 8)
+                                                            .put("m", 9)
+                                                            .build();
 
     static final Map<String, String> IFC_OPS_NAMES = ImmutableMap.<String, String>builder()
-                                                           .put("e", "Execute")
-                                                           .put("o", "Open")
-                                                           .put("c", "Close")
-                                                           .put("l", "Load")
-                                                           .put("w", "Write")
-                                                           .put("r", "Read")
-                                                           .put("d", "Delete")
-                                                           .put("f", "Reflection")
-                                                           .put("a", "AccessSystemInformation")
-                                                           .put("m", "Modify")
-                                                           .build();
-    static final Map<Integer, String> IFC_VM_PACKAGES = ImmutableMap.<Integer,String>builder()
-                                                            .put(0,"com.sun")
-                                                            .put(1,"com.oracle")
-                                                            .build();
+                                                                 .put("e", "Execute")
+                                                                 .put("o", "Open")
+                                                                 .put("c", "Close")
+                                                                 .put("l", "Load")
+                                                                 .put("w", "Write")
+                                                                 .put("r", "Read")
+                                                                 .put("d", "Delete")
+                                                                 .put("f", "Reflection")
+                                                                 .put("a", "AccessSystemInformation")
+                                                                 .put("m", "Modify")
+                                                                 .build();
+    static final Map<Integer, String> IFC_VM_PACKAGES = ImmutableMap.<Integer, String>builder()
+                                                                    .put(0, "com.sun")
+                                                                    .put(1, "com.oracle")
+                                                                    .put(2, "java.")
+                                                                    .put(3, "$INVOKE_STUB$")
+                                                                    .put(4, "jdk.")
+                                                                    .put(5, "javax.")
+                                                                    .put(6,"org.w3c.")
+                                                                    .build();
 }

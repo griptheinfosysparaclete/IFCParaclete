@@ -1,6 +1,7 @@
 package org.ifcparaclete;
 
-import com.sun.max.vm.Log;
+import com.sun.max.vm.MaxineVM;
+import static com.sun.max.vm.MaxineVM.vm;
 
 import java.util.HashMap;
 
@@ -8,9 +9,11 @@ import org.ifcparaclete.exceptions.IFCOperativeException;
 
 public class IFCEnforcer implements IFCStatics {
 
+    private static int numberOfVMPackages = IFC_VM_PACKAGES.size() - 1;
+
     @SuppressWarnings("oracle.jdeveloper.java.unrestricted-field-access")
 
-    private HashMap[] actorObjectsArray = new HashMap[2];
+    private static HashMap[] actorObjectsArray = new HashMap[2];
     private HashMap[] targetObjectsArray = new HashMap[2];
     private HashMap[] ifcObjectsArray;
     private IFCObject ifcActor;
@@ -18,7 +21,6 @@ public class IFCEnforcer implements IFCStatics {
     private String mainApplication;
     int numOfPackages = IFCStatics.IFC_VM_PACKAGES.size();
 
-    private boolean buildingImage;
 
     private IFCEnforcer() {
         super();
@@ -27,7 +29,7 @@ public class IFCEnforcer implements IFCStatics {
         actorObjectsArray[1] = ifcObjectsArray[1];
         targetObjectsArray[0] = ifcObjectsArray[2];
         targetObjectsArray[1] = ifcObjectsArray[3];
-        buildingImage = false;
+
     }
 
     public IFCEnforcer(String mainApplicationArg) {
@@ -38,24 +40,59 @@ public class IFCEnforcer implements IFCStatics {
         targetObjectsArray[0] = ifcObjectsArray[2];
         targetObjectsArray[1] = ifcObjectsArray[3];
         mainApplication = mainApplicationArg;
-        buildingImage = false;
+
     }
 
-    /**
-     * @param ifcPolicyFileArg
-     * @param isBuildingImageArg
-     *
-     */
-    public IFCEnforcer(String ifcPolicyFileArg, boolean isBuildingImageArg) {
-        super();
+    public static boolean isUnknownClass(String classNameArg) {
 
-        ifcObjectsArray = IFCPolicy.loadIFCPolicy(ifcPolicyFileArg);
+        boolean isUnknown;
+        int getThis;
+        getThis = 0;
+        isUnknown = false;
+        String className;
+        className = classNameArg;
 
-        actorObjectsArray[0] = ifcObjectsArray[0];
-        actorObjectsArray[1] = ifcObjectsArray[1];
-        targetObjectsArray[0] = ifcObjectsArray[2];
-        targetObjectsArray[1] = ifcObjectsArray[3];
-        buildingImage = isBuildingImageArg;
+        System.out.println("className: '" + className + "'");
+        System.out.println("numberOfVMPackages: " + numberOfVMPackages);
+
+        if (isVMPackage(className, getThis)) {
+            isUnknown = false;
+        } else {
+            if (actorObjectsArray[0].containsKey(className)) {
+                isUnknown = false;
+            } else {
+                isUnknown = true;
+            }
+        }
+
+        System.out.println("Return 'isUnknown': " + isUnknown);
+        return isUnknown;
+    }
+
+    private static boolean isVMPackage(String classNameArg, int getThisArg) {
+        boolean match;
+        match = false;
+        int getThis = getThisArg;
+        String packageName;
+
+        System.out.println(getThis + ": getThis");
+        if (getThis > numberOfVMPackages) {
+            return match;
+        }
+        packageName = IFC_VM_PACKAGES.get(getThis);
+        System.out.println(getThis + ": packageName: " + packageName);
+        match = classNameArg.startsWith(packageName);
+        System.out.println(getThis + ": match: " + match);
+        if (!match) {
+            if (getThis < numberOfVMPackages) {
+                getThis++;
+                match = isVMPackage(classNameArg, getThis);
+                System.out.println(getThis + ": match: " + match);
+            }
+        } else {
+            return match;
+        }
+        return match;
     }
 
     /**
@@ -68,39 +105,48 @@ public class IFCEnforcer implements IFCStatics {
     public boolean ifcCheck(StackTraceElement[] actorClassNames, String targetClassName,
                             String ifcOp) throws IFCOperativeException {
 
-        boolean allowed = false;
+
+        boolean allowed;
+        allowed = false;
         int i;
+        i = -1;
         int j;
-        
+        j = -1;
+
         int stackTraceLength;
         String actorClassName = null;
         String actorClassPackageName = null;
-
-        if (buildingImage) {
+        stackTraceLength = actorClassNames.length - 1;
+        if (vm().phase != MaxineVM.Phase.RUNNING) {
             allowed = true;
         } else {
-            stackTraceLength = actorClassNames.length - 1;
-            for (i = stackTraceLength;i >= 0; i--) {
-                actorClassPackageName = actorClassNames[i].getClass().getPackage().getName();
-               
-                for (j = 0; j <=  numOfPackages;j++) {
-                   Log.println(actorClassPackageName + ": " + IFCStatics.IFC_VM_PACKAGES.get(j));
-                    if (actorClassPackageName.startsWith(IFCStatics.IFC_VM_PACKAGES.get(j))) {
-                        return true;
+            if (isNotVMActor(actorClassNames)) {
+                for (i = stackTraceLength; i >= 0; i--) {
+                    actorClassPackageName = actorClassNames[i].getClass()
+                                                              .getPackage()
+                                                              .getName();
+                    actorClassName = actorClassNames[i].getClassName();
+                    allowed = ifcCheck(actorClassName, targetClassName, ifcOp);
+                    if (!allowed) {
+                        throw new IFCOperativeException("Either one or both of these classes:\n" + targetClassName +
+                                                        "\n" + actorClassName +
+                                                        "\n is not an authorized class for this application, " +
+                                                        mainApplication + "\n");
                     }
-                }
-                    
-                actorClassName = actorClassNames[i].getClassName();
-                allowed = ifcCheck(actorClassName, targetClassName, ifcOp);
-                if (!allowed) {
-                    throw new IFCOperativeException("Either one or both of these classes:\n" + targetClassName + "\n" +
-                                                    actorClassName +
-                                                    "\n is not an authorized class for this application, " +
-                                                    mainApplication + "\n");
                 }
             }
         }
-        
+
+        return allowed;
+
+    }
+
+    private boolean isNotVMActor(StackTraceElement[] actorClassNames) {
+
+        boolean allowed;
+        allowed = false;
+
+
         return allowed;
 
     }
@@ -111,7 +157,7 @@ public class IFCEnforcer implements IFCStatics {
      * @param ifcOp
      * @return
      */
-    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp)  {
+    public boolean ifcCheck(String actorClassName, String targetClassName, String ifcOp) {
 
         boolean allowed = false;
         boolean inActorArray = false;
@@ -119,7 +165,7 @@ public class IFCEnforcer implements IFCStatics {
         String ifcActorKey;
         String ifcTargetKey;
 
-        if (buildingImage) {
+        if (vm().phase != MaxineVM.Phase.RUNNING) {
             allowed = true;
         } else {
             inActorArray = actorObjectsArray[0].containsKey(actorClassName);
@@ -139,30 +185,30 @@ public class IFCEnforcer implements IFCStatics {
 
     }
 
-    private boolean ifcOpAllowed(String ifcOp)  {
-        
+    private boolean ifcOpAllowed(String ifcOp) {
+
         boolean allowed = false;
         String ifcActorName = ifcActor.getName();
         String ifcTargetName = ifcTarget.getName();
         String ifcActorType = ifcActor.getType();
-        int        ifcActorSecurityLevelInt = ifcActor.getSecurityLevelInt();
-        int        ifcTargetSecurityLevelInt = ifcTarget.getSecurityLevelInt();
-        System.out.println(ifcActorName + ": " + ifcActorType);
-        System.out.println(ifcActorName + ": " + ifcActorSecurityLevelInt);
-        System.out.println(ifcTargetName + ": " + ifcTargetSecurityLevelInt);
-        System.out.println("Hi!");
+        int ifcActorSecurityLevelInt = ifcActor.getSecurityLevelInt();
+        int ifcTargetSecurityLevelInt = ifcTarget.getSecurityLevelInt();
+        System.out.println("ifcOpAllowed: " + ifcActorName + ": " + ifcActorType);
+        System.out.println("ifcOpAllowed: " + ifcActorName + ": " + ifcActorSecurityLevelInt);
+        System.out.println("ifcOpAllowed: " + ifcTargetName + ": " + ifcTargetSecurityLevelInt);
+        System.out.println("ifcOpAllowed: " + "Hi!");
         boolean ifcActorActiveOp = ifcActor.getActiveOPS().get(IFC_OPS.get(ifcOp));
         boolean ifcTargetPassiveOp = ifcTarget.getPassiveOPS().get(IFC_OPS.get(ifcOp));
 
-        System.out.println(ifcActorName + ": " + ifcActorActiveOp);
-        System.out.println(ifcTargetName + ": " + ifcTargetPassiveOp);
+        System.out.println("ifcOpAllowed: " + ifcActorName + ": " + ifcActorActiveOp);
+        System.out.println("ifcOpAllowed: " + ifcTargetName + ": " + ifcTargetPassiveOp);
         if (ifcActorType.equals(IFCStatics.IFC_TYPE_TRANSITIVE)) {
             if (ifcActorSecurityLevelInt >= ifcTargetSecurityLevelInt) {
-                allowed =  ifcActorActiveOp &&  ifcTargetPassiveOp;
+                allowed = ifcActorActiveOp && ifcTargetPassiveOp;
             }
 
         }
-
+        System.out.println("ifcOpAllowed: " + allowed);
         return allowed;
 
     }
@@ -177,3 +223,4 @@ public class IFCEnforcer implements IFCStatics {
         IFCEnforcer iFC = new IFCEnforcer();
     }
 }
+

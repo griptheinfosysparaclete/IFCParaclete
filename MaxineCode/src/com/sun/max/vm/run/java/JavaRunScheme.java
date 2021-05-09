@@ -392,8 +392,9 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
             MaxineVM vm = vm();
             vmConfig().initializeSchemes(MaxineVM.Phase.RUNNING);
             vm.phase = Phase.RUNNING;
+            System.out.println("1 mainClassName: " + mainClassName);
             mainClassName = getMainClassName();
-
+            System.out.println("2 mainClassName: " + mainClassName);
             ifcEnforcer = new IFCEnforcer(mainClassName);
 
             if (!ifcEnforcer.ifcCheck(this.getClass().getName(), mainClassName, IFCStatics.IFC_OP_LOAD)) {
@@ -446,7 +447,8 @@ public class JavaRunScheme extends AbstractVMScheme implements RunScheme {
 
     private void lookupAndInvokeMain(Class<?> mainClass) throws InvocationTargetException, IllegalAccessException,
                                                                 NoSuchMethodException {
-        final Method mainMethod = lookupMainOrAgentClass(mainClass, "main", String[].class);
+        final Method mainMethod;
+        mainMethod = lookupMainOrAgentClass(mainClass, "main", String[].class);
         AccessController.doPrivileged(new PrivilegedAction<Object>() {
             public Object run() {
                 mainMethod.setAccessible(true);

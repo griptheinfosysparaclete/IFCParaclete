@@ -20,46 +20,109 @@
  */
 package com.sun.max.vm.actor.holder;
 
-import static com.sun.max.vm.MaxineVM.*;
-import static com.sun.max.vm.actor.holder.ClassIDManager.*;
-import static com.sun.max.vm.actor.member.InjectedReferenceFieldActor.*;
-import static com.sun.max.vm.classfile.ErrorContext.*;
-import static com.sun.max.vm.compiler.deps.DependenciesManager.*;
-import static com.sun.max.vm.type.ClassRegistry.*;
-import static com.sun.max.vm.type.ClassRegistry.Property.*;
-
-import java.io.*;
-import java.lang.annotation.*;
-import java.lang.reflect.*;
-import java.security.*;
-import java.util.*;
-
-import com.sun.cri.ci.*;
-import com.sun.cri.ri.*;
-import com.sun.max.annotate.*;
-import com.sun.max.collect.*;
+import com.sun.cri.ci.CiConstant;
+import com.sun.cri.ci.CiKind;
+import com.sun.cri.ri.RiMethod;
+import com.sun.cri.ri.RiResolvedField;
+import com.sun.cri.ri.RiResolvedMethod;
+import com.sun.cri.ri.RiResolvedType;
+import com.sun.max.annotate.CONSTANT;
+import com.sun.max.annotate.CONSTANT_WHEN_NOT_ZERO;
+import com.sun.max.annotate.HOSTED_ONLY;
+import com.sun.max.annotate.INLINE;
+import com.sun.max.annotate.INSPECTED;
+import com.sun.max.annotate.NEVER_INLINE;
+import com.sun.max.annotate.SNIPPET_SLOWPATH;
+import com.sun.max.collect.ChainedHashMapping;
 import com.sun.max.collect.Mapping;
-import com.sun.max.lang.*;
-import com.sun.max.program.*;
-import com.sun.max.unsafe.*;
-import com.sun.max.util.*;
-import com.sun.max.vm.*;
-import com.sun.max.vm.actor.*;
-import com.sun.max.vm.actor.member.*;
-import com.sun.max.vm.classfile.*;
-import com.sun.max.vm.classfile.constant.*;
-import com.sun.max.vm.compiler.*;
-import com.sun.max.vm.compiler.deps.*;
-import com.sun.max.vm.heap.*;
-import com.sun.max.vm.heap.gcx.*;
-import com.sun.max.vm.hosted.*;
-import com.sun.max.vm.layout.*;
-import com.sun.max.vm.object.*;
-import com.sun.max.vm.reference.*;
-import com.sun.max.vm.runtime.*;
-import com.sun.max.vm.type.*;
-import com.sun.max.vm.value.*;
-import com.sun.max.vm.verifier.*;
+import com.sun.max.lang.Classes;
+import com.sun.max.lang.Ints;
+import com.sun.max.program.ProgramError;
+import com.sun.max.unsafe.Size;
+import com.sun.max.unsafe.UnsafeCast;
+import com.sun.max.util.Deferrable;
+import com.sun.max.vm.Log;
+import com.sun.max.vm.MaxineVM;
+import static com.sun.max.vm.MaxineVM.isHosted;
+import static com.sun.max.vm.MaxineVM.vm;
+import com.sun.max.vm.VMOptions;
+import com.sun.max.vm.actor.Actor;
+import static com.sun.max.vm.actor.holder.ClassIDManager.NULL_CLASS_ID;
+import com.sun.max.vm.actor.member.ClassMethodActor;
+import com.sun.max.vm.actor.member.FieldActor;
+import com.sun.max.vm.actor.member.InjectedFieldActor;
+import static com.sun.max.vm.actor.member.InjectedReferenceFieldActor.Class_classActor;
+import com.sun.max.vm.actor.member.InterfaceMethodActor;
+import com.sun.max.vm.actor.member.MemberActor;
+import com.sun.max.vm.actor.member.MethodActor;
+import com.sun.max.vm.actor.member.MirandaMethodActor;
+import com.sun.max.vm.actor.member.ProxyToDefaultMethodActor;
+import com.sun.max.vm.actor.member.StaticMethodActor;
+import com.sun.max.vm.actor.member.VirtualMethodActor;
+import com.sun.max.vm.classfile.BootstrapMethod;
+import static com.sun.max.vm.classfile.ErrorContext.verifyError;
+import com.sun.max.vm.classfile.constant.ConstantPool;
+import com.sun.max.vm.classfile.constant.SymbolTable;
+import com.sun.max.vm.classfile.constant.Utf8Constant;
+import com.sun.max.vm.compiler.WordUtil;
+import com.sun.max.vm.compiler.deps.ConcreteMethodDependencyProcessor;
+import com.sun.max.vm.compiler.deps.ConcreteTypeDependencyProcessor;
+import com.sun.max.vm.compiler.deps.DependenciesManager;
+import static com.sun.max.vm.compiler.deps.DependenciesManager.classHierarchyLock;
+import com.sun.max.vm.heap.Heap;
+import com.sun.max.vm.heap.TupleReferenceMap;
+import com.sun.max.vm.heap.gcx.DarkMatter;
+import com.sun.max.vm.hosted.HostedVMClassLoader;
+import com.sun.max.vm.hosted.JavaPrototype;
+import com.sun.max.vm.layout.Layout;
+import com.sun.max.vm.layout.SpecificLayout;
+import com.sun.max.vm.object.ObjectAccess;
+import com.sun.max.vm.reference.Reference;
+import com.sun.max.vm.runtime.FatalError;
+import com.sun.max.vm.runtime.VmOperation;
+import com.sun.max.vm.type.ClassRegistry;
+import static com.sun.max.vm.type.ClassRegistry.ClassActor_javaClass;
+import static com.sun.max.vm.type.ClassRegistry.OBJECT;
+import static com.sun.max.vm.type.ClassRegistry.Property.BOOTSTRAP_METHODS;
+import static com.sun.max.vm.type.ClassRegistry.Property.ENCLOSING_METHOD_INFO;
+import static com.sun.max.vm.type.ClassRegistry.Property.GENERIC_SIGNATURE;
+import static com.sun.max.vm.type.ClassRegistry.Property.INNER_CLASSES;
+import static com.sun.max.vm.type.ClassRegistry.Property.OUTER_CLASS;
+import static com.sun.max.vm.type.ClassRegistry.Property.RUNTIME_VISIBLE_ANNOTATION_BYTES;
+import com.sun.max.vm.type.Descriptor;
+import com.sun.max.vm.type.JavaTypeDescriptor;
+import com.sun.max.vm.type.Kind;
+import com.sun.max.vm.type.SignatureDescriptor;
+import com.sun.max.vm.type.TypeDescriptor;
+import com.sun.max.vm.type.VMClassLoader;
+import com.sun.max.vm.value.Value;
+import com.sun.max.vm.verifier.ClassVerifier;
+import com.sun.max.vm.verifier.Verifier;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+
+import java.security.ProtectionDomain;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.ifcparaclete.IFCEnforcer;
+import org.ifcparaclete.exceptions.IFCOperativeException;
 
 /**
  * Internal representation of anything that has an associated instance of 'java.lang.Class'.
@@ -216,27 +279,20 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
     public final Kind kind;
 
-    protected ClassActor(Kind kind,
-                         final SpecificLayout specificLayout,
-                         ClassLoader classLoader,
-                         Utf8Constant name,
-                         char majorVersion,
-                         char minorVersion,
-                         int flags,
-                         TypeDescriptor typeDescriptor,
-                         ClassActor superClassActor,
-                         ClassActor componentClassActor,
-                         InterfaceActor[] interfaceActors,
-                         FieldActor[] fieldActors,
-                         MethodActor[] methodActors,
-                         Utf8Constant genericSignature,
-                         byte[] runtimeVisibleAnnotationsBytes,
-                         BootstrapMethod[] bootstrapMethods,
-                         String sourceFileName,
-                         TypeDescriptor[] innerClasses,
-                         TypeDescriptor outerClass,
+    protected ClassActor(Kind kind, final SpecificLayout specificLayout, ClassLoader classLoader, Utf8Constant name,
+                         char majorVersion, char minorVersion, int flags, TypeDescriptor typeDescriptor,
+                         ClassActor superClassActor, ClassActor componentClassActor, InterfaceActor[] interfaceActors,
+                         FieldActor[] fieldActors, MethodActor[] methodActors, Utf8Constant genericSignature,
+                         byte[] runtimeVisibleAnnotationsBytes, BootstrapMethod[] bootstrapMethods,
+                         String sourceFileName, TypeDescriptor[] innerClasses, TypeDescriptor outerClass,
                          EnclosingMethodInfo enclosingMethodInfo) {
+
         super(name, flags);
+        if (vm().phase == MaxineVM.Phase.RUNNING) {
+            if (IFCEnforcer.isUnknownClass(name.toString())) {
+                MaxineVM.exitJVM(new IFCOperativeException("Unknown Class: " + name + "\n"));          
+            }
+        }
         assert kind == typeDescriptor.toKind();
         if (isHosted()) {
             // All boot image classes are initialized
@@ -249,7 +305,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         this.minorVersion = minorVersion;
         this.kind = kind;
         this.componentClassActor = componentClassActor;
-        if (isHosted() && componentClassActor != null && componentClassActor.kind == Kind.LONG && componentClassActor.arrayClassIDs != null) {
+        if (isHosted() && componentClassActor != null && componentClassActor.kind == Kind.LONG &&
+            componentClassActor.arrayClassIDs != null) {
             assert name.equals(DarkMatter.DARK_MATTER_CLASS_NAME);
             // Special case Dark Matter class.
             this.id = ClassIDManager.allocate();
@@ -340,22 +397,26 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
         // A map for matching methods based on their name and descriptor (and not holder)
         final int maxVtableSize = computeMaxVTableSize(superClassActor, localVirtualMethodActors);
-        final Mapping<MethodActor, VirtualMethodActor> methodLookup = new ChainedHashMapping<MethodActor, VirtualMethodActor>(maxVtableSize) {
-            @Override
-            public boolean equivalent(MethodActor methodActor1, MethodActor methodActor2) {
-                return methodActor1.matchesNameAndType(methodActor2.name, methodActor2.descriptor());
-            }
-            @Override
-            public int hashCode(MethodActor methodActor) {
-                return methodActor.name.hashCode() ^ methodActor.descriptor().hashCode();
-            }
-        };
+        final Mapping<MethodActor, VirtualMethodActor> methodLookup =
+            new ChainedHashMapping<MethodActor, VirtualMethodActor>(maxVtableSize) {
+                @Override
+                public boolean equivalent(MethodActor methodActor1, MethodActor methodActor2) {
+                    return methodActor1.matchesNameAndType(methodActor2.name, methodActor2.descriptor());
+                }
+
+                @Override
+                public int hashCode(MethodActor methodActor) {
+                    return methodActor.name.hashCode() ^ methodActor.descriptor().hashCode();
+                }
+            };
 
         new Deferrable(DEFERRABLE_QUEUE_1) {
             public void run() {
                 final LinkedHashSet<InterfaceActor> allInterfaceActors = getAllInterfaceActors();
-                List<VirtualMethodActor> virtualMethodActors = gatherVirtualMethodActors(allInterfaceActors, methodLookup);
-                ClassActor.this.allVirtualMethodActors = virtualMethodActors.toArray(new VirtualMethodActor[virtualMethodActors.size()]);
+                List<VirtualMethodActor> virtualMethodActors =
+                    gatherVirtualMethodActors(allInterfaceActors, methodLookup);
+                ClassActor.this.allVirtualMethodActors =
+                    virtualMethodActors.toArray(new VirtualMethodActor[virtualMethodActors.size()]);
                 assignHolderToLocalMethodActors();
                 if (isReferenceClassActor() || isInterface()) {
                     final Size dynamicTupleSize = layoutFields(specificLayout);
@@ -379,16 +440,12 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
                         vTableLength = 0;
                     }
 
-                    final DynamicHub dHub = new DynamicHub(
-                                    dynamicTupleSize,
-                                    specificLayout,
-                                    ClassActor.this,
-                                    superClassActorIds,
-                                    allInterfaceActors,
-                                    vTableLength,
-                                    dynamicReferenceMap);
+                    final DynamicHub dHub =
+                        new DynamicHub(dynamicTupleSize, specificLayout, ClassActor.this, superClassActorIds,
+                                       allInterfaceActors, vTableLength, dynamicReferenceMap);
                     ClassActor.this.iToV = new int[dHub.iTableLength];
-                    ClassActor.this.dynamicHub = dHub.expand(superClassActorIds, allInterfaceActors, methodLookup, iToV, dynamicReferenceMap);
+                    ClassActor.this.dynamicHub =
+                        dHub.expand(superClassActorIds, allInterfaceActors, methodLookup, iToV, dynamicReferenceMap);
 
                     if (isReferenceClassActor()) {
                         dynamicHub.initializeVTable(allVirtualMethodActors);
@@ -396,9 +453,12 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
                     }
                 }
 
-                final Size staticTupleSize = Layout.tupleLayout().layoutFields(NO_SUPER_CLASS_ACTOR, localStaticFieldActors);
+                final Size staticTupleSize =
+                    Layout.tupleLayout().layoutFields(NO_SUPER_CLASS_ACTOR, localStaticFieldActors);
                 final TupleReferenceMap staticReferenceMap = new TupleReferenceMap(localStaticFieldActors);
-                final StaticHub sHub = new StaticHub(staticTupleSize, ClassActor.this, staticReferenceMap, OBJECT.allVirtualMethodActors().length);
+                final StaticHub sHub =
+                    new StaticHub(staticTupleSize, ClassActor.this, staticReferenceMap,
+                                  OBJECT.allVirtualMethodActors().length);
                 ClassActor.this.staticHub = sHub.expand(staticReferenceMap, getRootClassActorId());
                 staticHub.initializeVTable(OBJECT.allVirtualMethodActors());
                 ClassActor.this.staticTuple = ClassActor.create(ClassActor.this);
@@ -408,7 +468,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
                         for (VirtualMethodActor vma : OBJECT.allVirtualMethodActors()) {
                             ClassMethodActor local = findLocalClassMethodActor(vma.name, vma.descriptor());
                             if (local != null) {
-                                throw FatalError.unexpected("Word types cannot override methods in java.lang.Object: " + local);
+                                throw FatalError.unexpected("Word types cannot override methods in java.lang.Object: " +
+                                                            local);
                             }
                         }
                     }
@@ -467,7 +528,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
      *         the traversal prematurely
      */
     public boolean allSubclassesDo(Closure c) {
-        FatalError.check(classHierarchyLock.isWriteLockedByCurrentThread() || VmOperation.atSafepoint(), "Class hierarchy traversal require class hierarchy to be stable");
+        FatalError.check(classHierarchyLock.isWriteLockedByCurrentThread() || VmOperation.atSafepoint(),
+                         "Class hierarchy traversal require class hierarchy to be stable");
         boolean cont = true;
         if (hasSubclass()) {
             int classId = firstSubclassActorId;
@@ -551,7 +613,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
     }
 
     public final boolean isVM() {
-        return classLoader == (MaxineVM.isHosted() ? HostedVMClassLoader.HOSTED_VM_CLASS_LOADER : VMClassLoader.VM_CLASS_LOADER);
+        return classLoader ==
+               (MaxineVM.isHosted() ? HostedVMClassLoader.HOSTED_VM_CLASS_LOADER : VMClassLoader.VM_CLASS_LOADER);
     }
 
     public boolean isPrimitiveClassActor() {
@@ -730,7 +793,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
     public final FieldActor findLocalStaticFieldActor(String name) {
         for (FieldActor fieldActor : localStaticFieldActors) {
-            if (fieldActor.name.toString().equals(name)) {
+            if (fieldActor.name
+                          .toString()
+                          .equals(name)) {
                 return fieldActor;
             }
         }
@@ -745,7 +810,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
      *            based on {@code name} is returned.
      * @return the matching member or {@code null} in none is found
      */
-    private static <MemberActor_Type extends MemberActor> MemberActor_Type findMemberActor(MemberActor_Type[] memberActors, Utf8Constant name, Descriptor descriptor) {
+    private static <MemberActor_Type extends MemberActor> MemberActor_Type findMemberActor(MemberActor_Type[] memberActors,
+                                                                                           Utf8Constant name,
+                                                                                           Descriptor descriptor) {
         for (MemberActor_Type memberActor : memberActors) {
             if (descriptor == null) {
                 if (memberActor.name == name) {
@@ -792,7 +859,7 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         return null;
     }
 
-//    @HOSTED_ONLY
+    //    @HOSTED_ONLY
     public final FieldActor findStaticFieldActor(int offset) {
         ClassActor holder = this;
         do {
@@ -826,7 +893,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
     public final FieldActor findLocalInstanceFieldActor(String name) {
         for (FieldActor fieldActor : localInstanceFieldActors()) {
-            if (fieldActor.name.toString().equals(name)) {
+            if (fieldActor.name
+                          .toString()
+                          .equals(name)) {
                 return fieldActor;
             }
         }
@@ -866,7 +935,7 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         return null;
     }
 
-//    @HOSTED_ONLY
+    //    @HOSTED_ONLY
     public final FieldActor findInstanceFieldActor(int offset) {
         ClassActor holder = this;
         do {
@@ -979,7 +1048,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
     public final VirtualMethodActor getVirtualMethodActorByVTableIndex(int vTableIndex) {
         int index = vTableIndex - DynamicHub.vTableStartIndex();
-        assert index >= 0 && index < allVirtualMethodActors.length : "vtable index " + vTableIndex + " out of range for " + this;
+        assert index >= 0 && index < allVirtualMethodActors.length :
+               "vtable index " + vTableIndex + " out of range for " + this;
         return allVirtualMethodActors[index];
     }
 
@@ -1114,7 +1184,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         System.arraycopy(localInstanceFieldActors, 0, result, cursor, localInstanceFieldActors.length);
         cursor += localInstanceFieldActors.length;
         System.arraycopy(localStaticFieldActors, 0, result, cursor, localStaticFieldActors.length);
-        return java.util.Arrays.asList(result);
+        return java.util
+                   .Arrays
+                   .asList(result);
 
     }
 
@@ -1137,7 +1209,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         return null;
     }
 
-    private List<VirtualMethodActor> gatherVirtualMethodActors(LinkedHashSet<InterfaceActor> allInterfaceActors, Mapping<MethodActor, VirtualMethodActor> lookup) {
+    private List<VirtualMethodActor> gatherVirtualMethodActors(LinkedHashSet<InterfaceActor> allInterfaceActors,
+                                                               Mapping<MethodActor, VirtualMethodActor> lookup) {
         if (!isReferenceClassActor()) {
             return Collections.emptyList();
         }
@@ -1169,7 +1242,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
                     vTableIndex++;
                 } else {
                     if (superMethod.isFinal() && superMethod.isAccessibleBy(this)) {
-                        throw verifyError("Class " + name + " overrides final method: " + superMethod.format("%r %H.%n(%p)"));
+                        throw verifyError("Class " + name + " overrides final method: " +
+                                          superMethod.format("%r %H.%n(%p)"));
                     }
                     result.set(superMethod.vTableIndex() - Hub.vTableStartIndex(), virtualMethodActor);
                     virtualMethodActor.setVTableIndex(superMethod.vTableIndex());
@@ -1188,9 +1262,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
                     if (interfaceMethodActor.codeAttribute() != null) {
                         numberOfLocalMirandaMethods++;
                         final ProxyToDefaultMethodActor proxyToDefaultMethodActor =
-                                new ProxyToDefaultMethodActor(interfaceMethodActor);
+                            new ProxyToDefaultMethodActor(interfaceMethodActor);
                         proxyToDefaultMethodActor.assignHolder(interfaceMethodActor.holder(),
-                                                              interfaceMethodActor.memberIndex());
+                                                               interfaceMethodActor.memberIndex());
                         memberIndex++;
                         lookup.put(proxyToDefaultMethodActor, proxyToDefaultMethodActor);
 
@@ -1214,8 +1288,10 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
         // Update local virtual methods with local Miranda methods (if any)
         if (numberOfLocalMirandaMethods != 0) {
-            final VirtualMethodActor[] newLocalVirtualMethodActors = new VirtualMethodActor[localVirtualMethodActors.length + numberOfLocalMirandaMethods];
-            System.arraycopy(localVirtualMethodActors, 0, newLocalVirtualMethodActors, 0, localVirtualMethodActors.length);
+            final VirtualMethodActor[] newLocalVirtualMethodActors =
+                new VirtualMethodActor[localVirtualMethodActors.length + numberOfLocalMirandaMethods];
+            System.arraycopy(localVirtualMethodActors, 0, newLocalVirtualMethodActors, 0,
+                             localVirtualMethodActors.length);
             int resultIndex = result.size() - numberOfLocalMirandaMethods;
             memberIndex = localVirtualMethodActors().length;
             for (int i = 0; i != numberOfLocalMirandaMethods; ++i) {
@@ -1299,7 +1375,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         String sourceFile = this.sourceFileName;
         if (sourceFile == null) {
             Class topLevelClass = toJava();
-            for (Class enclosingClass = topLevelClass.getEnclosingClass(); enclosingClass != null; enclosingClass = enclosingClass.getEnclosingClass()) {
+            for (Class enclosingClass = topLevelClass.getEnclosingClass(); enclosingClass != null;
+                 enclosingClass = enclosingClass.getEnclosingClass()) {
                 topLevelClass = enclosingClass;
             }
             sourceFile = topLevelClass.getSimpleName() + ".java";
@@ -1418,8 +1495,7 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         do {
             list.addAll(Arrays.asList(holder.getLocalMethodActorsArray(interfaces)));
             holder = holder.superClassActor;
-        }
-        while (supers && holder != null);
+        } while (supers && holder != null);
         return list;
     }
 
@@ -1427,7 +1503,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
      * Get all the interfaces implemented by this class or extended by this interface.
      */
     public final List<InterfaceActor> getLocalInterfaceActors() {
-        return java.util.Arrays.asList(localInterfaceActors);
+        return java.util
+                   .Arrays
+                   .asList(localInterfaceActors);
     }
 
     /**
@@ -1443,7 +1521,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
      * Gets all the methods declared by this class actor.
      */
     public MethodActor[] getLocalMethodActorsArray() {
-        MethodActor[] result = new MethodActor[localVirtualMethodActors.length + localStaticMethodActors.length + localInterfaceMethodActors.length];
+        MethodActor[] result =
+            new MethodActor[localVirtualMethodActors.length + localStaticMethodActors.length +
+            localInterfaceMethodActors.length];
         int cursor = 0;
         System.arraycopy(localVirtualMethodActors, 0, result, cursor, localVirtualMethodActors.length);
         cursor += localVirtualMethodActors.length;
@@ -1458,8 +1538,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
      * methods too.
      */
     public MethodActor[] getLocalMethodActorsArray(boolean interfaces) {
-        MethodActor[] result = new MethodActor[localVirtualMethodActors.length + localStaticMethodActors.length
-                                               + (interfaces ? localInterfaceMethodActors.length : 0)];
+        MethodActor[] result =
+            new MethodActor[localVirtualMethodActors.length + localStaticMethodActors.length +
+            (interfaces ? localInterfaceMethodActors.length : 0)];
         int cursor = 0;
         System.arraycopy(localVirtualMethodActors, 0, result, cursor, localVirtualMethodActors.length);
         cursor += localVirtualMethodActors.length;
@@ -1472,9 +1553,10 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
     }
 
 
-
     public List<MethodActor> getLocalMethodActors() {
-        return java.util.Arrays.asList(getLocalMethodActorsArray());
+        return java.util
+                   .Arrays
+                   .asList(getLocalMethodActorsArray());
     }
 
     public final boolean hasSuperClass(ClassActor superClass) {
@@ -1515,7 +1597,9 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         // This could lead to some extra Class objects being created that become garbage, but should be harmless.
         final Class newJavaClass = UnsafeCast.asClass(Heap.createTuple(ClassRegistry.CLASS.dynamicHub()));
         Class_classActor.setObject(newJavaClass, this);
-        final Reference oldValue = Reference.fromJava(this).compareAndSwapReference(ClassActor_javaClass.offset(), null,  Reference.fromJava(newJavaClass));
+        final Reference oldValue =
+            Reference.fromJava(this)
+            .compareAndSwapReference(ClassActor_javaClass.offset(), null, Reference.fromJava(newJavaClass));
         if (oldValue == null) {
             return newJavaClass;
         }
@@ -1528,7 +1612,8 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
             this.javaClass = javaClass;
         } else {
             if (this.javaClass != javaClass) {
-                throw ProgramError.unexpected("setMirror called with different value, old=" + this.javaClass + ", new=" + javaClass);
+                throw ProgramError.unexpected("setMirror called with different value, old=" + this.javaClass +
+                                              ", new=" + javaClass);
             }
         }
     }
@@ -1599,6 +1684,7 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
     private void verify() {
         if (isReflectionStub() || !ClassVerifier.shouldBeVerified(classLoader, isRemote())) {
             // generated stubs do not necessarily pass the verifier, even if they work as intended
+
         } else {
             Verifier.verifierFor(this).verify();
         }
@@ -1855,16 +1941,16 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
 
     public final CiConstant getEncoding(Representation r) {
         switch (r) {
-            case StaticFields:
-                return CiConstant.forObject(staticTuple);
-            case JavaClass:
-                return CiConstant.forObject(javaClass());
-            case ObjectHub:
-                return CiConstant.forObject(dynamicHub());
-            case TypeInfo:
-                return CiConstant.forObject(this);
-            default:
-                throw ProgramError.unknownCase(r.toString());
+        case StaticFields:
+            return CiConstant.forObject(staticTuple);
+        case JavaClass:
+            return CiConstant.forObject(javaClass());
+        case ObjectHub:
+            return CiConstant.forObject(dynamicHub());
+        case TypeInfo:
+            return CiConstant.forObject(this);
+        default:
+            throw ProgramError.unknownCase(r.toString());
         }
     }
 
@@ -1909,8 +1995,10 @@ public abstract class ClassActor extends Actor implements RiResolvedType {
         final MethodActor methodActor = (MethodActor) method;
         if (methodActor instanceof InterfaceMethodActor) {
             InterfaceMethodActor interfaceActor = (InterfaceMethodActor) methodActor;
-            final int interfaceIIndex = dynamicHub().getITableIndex(interfaceActor.holder().id) - dynamicHub().iTableStartIndex;
-            final VirtualMethodActor implementation = getVirtualMethodActorByIIndex(interfaceIIndex + interfaceActor.iIndexInInterface());
+            final int interfaceIIndex =
+                dynamicHub().getITableIndex(interfaceActor.holder().id) - dynamicHub().iTableStartIndex;
+            final VirtualMethodActor implementation =
+                getVirtualMethodActorByIIndex(interfaceIIndex + interfaceActor.iIndexInInterface());
             return implementation;
         } else if (methodActor instanceof VirtualMethodActor) {
             ClassActor receiverType = this;
